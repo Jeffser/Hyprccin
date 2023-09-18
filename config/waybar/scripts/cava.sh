@@ -15,7 +15,7 @@ done
 config_file="/home/tentri/.config/cava/config2"
 echo "
 [general]
-bars = 10
+bars = 16
 
 [input]
 method = pipewire

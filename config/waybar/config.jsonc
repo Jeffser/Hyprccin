@@ -33,7 +33,8 @@
     
     "custom/cava": {
 	"format": "{}",
-	"exec": "~/.config/waybar/scripts/cava.sh"
+	"exec": "~/.config/waybar/scripts/cava.sh",
+    	"return-type": "text"
     },
 
     "custom/power_profile":{
@@ -116,10 +117,10 @@
     },
     
     "temperature": {
-        "thermal-zone": 1,
+        "thermal-zone": 2,
         "format": "{temperatureC}°C ",
         "critical-threshold": 80,
-        "format-critical": "{temperatureF}°F "
+        "format-critical": "{temperatureC}°C "
     },
 
     "network": {
@@ -145,6 +146,7 @@
         "format" : "{}",
         "interval" : 1,
         "exec" : "~/.config/waybar/scripts/ytmv.py",
+	"on-click" : "playerctl play-pause",
         "return-type" : "json"
     },
 
