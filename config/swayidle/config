@@ -1,7 +1,0 @@
-timeout 15 'hyprctl notify 5 2000 "rgb(956D85)" "bruh"'
-timeout 1800 'playerctl pause'
-timeout 1800 'swaylock'
-timeout 900 'hyprctl dispatch dpms off'
-timeout 15 'if pgrep -x swaylock; then $(hyprctl dispatch dpms off); fi'
-after-resume 'hyprctl dispatch dpms on'
-before-sleep 'swaylock'
