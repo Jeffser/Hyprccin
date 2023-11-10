@@ -37,10 +37,29 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 echo -e "${COLOR_INFO}Enabling ly...${COLOR_RESET}"
 sudo systemctl enable ly || { echo "${COLOR_ERROR}Failed to enable ly${COLOR_RESET}"; exit 1; }
 
+# Enable bluetooth
+echo -e "${COLOR_INFO}Enabling bluetooth...${COLOR_RESET}"
+sudo systemctl enable bluetooth || { echo "${COLOR_ERROR}Failed to enable bluetooth${COLOR_RESET}"; exit 1; }
+
 # Copy config files and bashrc
 echo -e "${COLOR_INFO}Copying config files and bashrc...${COLOR_RESET}"
 cp -f -r config/* ~/.config/ || { echo "${COLOR_ERROR}Failed to copy config files${COLOR_RESET}"; exit 1; }
 cp -f bashrc ~/.bashrc || { echo "${COLOR_ERROR}Failed to copy bashrc${COLOR_RESET}"; exit 1; }
+
+# Modify settings depending on device
+echo -e "Select your device type:\n1) Laptop\n2) Desktop"
+read -p "Enter your choice (default: 2): " choice
+
+if [ "$choice" == "1" ]; then
+    DEVICE_MONITOR="eDP-1"
+    DEVICE="laptop"
+else
+    DEVICE_MONITOR="DP-1"
+    DEVICE="desktop"
+fi
+
+sed -i "s/#source = ~\/.config\/hypr\/profiles\//#source = ~\/.config\/hypr\/profiles\/${DEVICE}.conf/g" ~/.config/hypr/hyprland.conf || { echo -e "${COLOR_ERROR}Failed to modify hyprland settings, you'll have to change it manually${COLOR_RESET}"; }
+sed -i "s/\"output\": \"[^\"]*\"/\"output\": \"${DEVICE_MONITOR}\"/g" ~/.config/waybar/config.jsonc || { echo -e "${COLOR_ERROR}Failed to modify waybar settings, you'll have to change it manually${COLOR_RESET}"; }
 
 # Making scripts executable
 echo -e "${COLOR_INFO}Making scripts executable...${COLOR_RESET}"

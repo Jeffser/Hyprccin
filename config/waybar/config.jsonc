@@ -1,5 +1,5 @@
 {
-    "output": "DP-1",
+    "output": "...",
     "layer": "top",
     "position": "top",
     "mod": "dock",
@@ -116,8 +116,8 @@
 
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": " {signalStrength}%",
-        "format-ethernet": "󰈀 {ipaddr}",
+        "format-wifi": "  {signalStrength}%",
+        "format-ethernet": "󰈀  {ipaddr}",
         "tooltip-format": "{essid} - {ifname} via {gwaddr}",
         "format-linked": "{ifname} (No IP)",
         "format-disconnected": "Disconnected ⚠",
