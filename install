@@ -20,14 +20,14 @@ sudo pacman -S git base-devel || { echo "${COLOR_ERROR}Failed to install git and
 
 # Install yay
 echo -e "${COLOR_INFO}Installing yay...${COLOR_RESET}"
-git clone https://aur.archlinux.org/yay-git.git
+git clone https://aur.archlinux.org/yay-git.git || { echo "${COLOR_ERROR}Failed to clone yay${COLOR_RESET}"; exit 1; }
 cd yay-git/
 makepkg -si || { echo "${COLOR_ERROR}Failed to install yay${COLOR_RESET}"; exit 1; }
 cd ..
 
 # Install required packages
 echo -e "${COLOR_INFO}Installing required packages...${COLOR_RESET}"
-yay -S hyprland kitty cava neofetch uwufetch ly waybar-hyprland hyprpaper swaylock-effects swayidle wofi wlogout mako thunar thunar-archive-plugin plymouth ttf-jetbrains-mono-nerd noto-fonts-emoji polkit-gnome python-requests starship swappy grim slurp pamixer gvfs bluez bluez-utils lxappearance xfce4-settings nwg-look-bin xdg-desktop-portal-hyprland noto-fonts-cjk noto-fonts-emoji noto-fonts wl-clipboard nano inotify-tools hyprpicker xdg-user-dirs flatpak || { echo "${COLOR_ERROR}Failed to install required packages${COLOR_RESET}"; exit 1; }
+yay -S hyprland kitty cava neofetch uwufetch ly waybar-hyprland hyprpaper swaylock-effects swayidle wofi wlogout mako thunar thunar-archive-plugin plymouth ttf-jetbrains-mono-nerd noto-fonts-emoji polkit-gnome python-requests starship swappy grim slurp pamixer gvfs bluez bluez-utils lxappearance xfce4-settings nwg-look-bin xdg-desktop-portal-hyprland noto-fonts-cjk noto-fonts-emoji noto-fonts wl-clipboard nano inotify-tools hyprpicker xdg-user-dirs flatpak firefox || { echo "${COLOR_ERROR}Failed to install required packages${COLOR_RESET}"; exit 1; }
 
 # Enable Flathub
 echo -e "${COLOR_INFO}Enabling Flathub${COLOR_RESET}"
@@ -46,6 +46,11 @@ cp -f bashrc ~/.bashrc || { echo "${COLOR_ERROR}Failed to copy bashrc${COLOR_RES
 echo -e "${COLOR_INFO}Making scripts executable...${COLOR_RESET}"
 chmod u+rwx .config/waybar/scripts/* || { echo "${COLOR_ERROR}Failed to change permissions for .config/waybar/scripts/*${COLOR_RESET}"; exit 1; }
 chmod u+rwx .config/hypr/xdg-portal-hyprland || { echo "${COLOR_ERROR}Failed to change permissions for .config/hypr/xdg-portal-hyprland${COLOR_RESET}"; exit 1; }
+
+# Removing desktop entries that I don't use
+echo -e "${COLOR_INFO}Removing desktop entries...${COLOR_RESET}"
+cd /usr/share/applications
+sudo rm avahi-discover.desktop bssh.desktop bvnc.desktop lstopo.desktop qv4l2.desktop qvidcap.desktop
 
 # Final message
 echo -e "${COLOR_INFO}You can now restart your computer or manually start Hyprland via \"Hyprland\"${COLOR_RESET}"
