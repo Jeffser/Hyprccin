@@ -1,0 +1,6 @@
+[Default Applications]
+inode/directory=thunar.desktop
+application/x-zerosize=code.desktop
+
+[Added Associations]
+application/x-zerosize=code.desktop;
