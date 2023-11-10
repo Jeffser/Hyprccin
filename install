@@ -42,6 +42,11 @@ echo -e "${COLOR_INFO}Copying config files and bashrc...${COLOR_RESET}"
 cp -f -r config/* ~/.config/ || { echo "${COLOR_ERROR}Failed to copy config files${COLOR_RESET}"; exit 1; }
 cp -f bashrc ~/.bashrc || { echo "${COLOR_ERROR}Failed to copy bashrc${COLOR_RESET}"; exit 1; }
 
+# Making scripts executable
+echo -e "${COLOR_INFO}Making scripts executable...${COLOR_RESET}"
+chmod u+rwx .config/waybar/scripts/* || { echo "${COLOR_ERROR}Failed to change permissions for .config/waybar/scripts/*${COLOR_RESET}"; exit 1; }
+chmod u+rwx .config/hypr/xdg-portal-hyprland || { echo "${COLOR_ERROR}Failed to change permissions for .config/hypr/xdg-portal-hyprland${COLOR_RESET}"; exit 1; }
+
 # Final message
 echo -e "${COLOR_INFO}You can now restart your computer or manually start Hyprland via \"Hyprland\"${COLOR_RESET}"
 echo -e "${COLOR_INFO}Enjoy your new system $USER!${COLOR_RESET}"
