@@ -19,6 +19,5 @@ This script does the following:
 4) Enable `ly` (terminal display manager)
 5) Enable `bluetooth`
 6) Copy [.config](.config) and [.bashrc](.bashrc)
-7) Modify `.config/hypr/hyprland.conf` and `.config/waybar/config.jsonc` depending on device profile
-8) Make `waybar` scripts and `.config/hypr/xdg-portal-hyprland` executable
-9) Remove desktop entries I don't use
+7) Make `waybar` scripts and `.config/hypr/xdg-portal-hyprland` executable
+8) Remove desktop entries I don't use
