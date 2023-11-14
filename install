@@ -43,8 +43,8 @@ sudo systemctl enable bluetooth || { echo "${COLOR_ERROR}Failed to enable blueto
 
 # Copy config files and bashrc
 echo -e "${COLOR_INFO}Copying config files and bashrc...${COLOR_RESET}"
-cp -f -r config/* ~/.config/ || { echo "${COLOR_ERROR}Failed to copy config files${COLOR_RESET}"; exit 1; }
-cp -f bashrc ~/.bashrc || { echo "${COLOR_ERROR}Failed to copy bashrc${COLOR_RESET}"; exit 1; }
+cp -f -r .config/* ~/.config/ || { echo "${COLOR_ERROR}Failed to copy config files${COLOR_RESET}"; exit 1; }
+cp -f .bashrc ~/.bashrc || { echo "${COLOR_ERROR}Failed to copy bashrc${COLOR_RESET}"; exit 1; }
 
 # Modify settings depending on device
 echo -e "Select your device type:\n1) Laptop\n2) Desktop"
