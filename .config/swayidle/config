@@ -1,0 +1,4 @@
+timeout 300 'if [ ! "$(playerctl status)" == "Playing" ] ; then swaylock; fi'
+timeout 600 'if pgrep -x swaylock; then $(hyprctl dispatch dpms off); fi' resume 'hyprctl dispatch dpms on'
+timeout 1000 'if pgrep -x swaylock; then $(systemctl suspend); fi'
+before-sleep 'swaylock'
