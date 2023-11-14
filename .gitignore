@@ -1,4 +1,5 @@
 .config/cef_user_data
+.config/Code
 .config/JetBrains
 .config/kdeconnect
 .config/QtProject.config
