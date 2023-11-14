@@ -5,7 +5,7 @@
 
 ## Install Script
 
-This script is meant to be run once you installed Arch, if you already have Waybar installed just copy the dotfiles and make sure you have all the [packages](packages)
+This script is meant to be run once you installed Arch, if you already have Hyprland installed just copy the dotfiles and make sure you have all the [packages](packages)
 
 This script does the following:
 
