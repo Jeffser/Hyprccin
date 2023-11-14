@@ -27,7 +27,7 @@ cd ..
 
 # Install required packages
 echo -e "${COLOR_INFO}Installing required packages...${COLOR_RESET}"
-yay -S hyprland kitty cava neofetch uwufetch ly waybar-hyprland cliphist hyprpaper swaylock-effects swayidle wofi wlogout mako thunar thunar-archive-plugin plymouth ttf-jetbrains-mono-nerd noto-fonts-emoji polkit-gnome python-requests starship swappy grim slurp pamixer gvfs bluez bluez-utils lxappearance xfce4-settings nwg-look-bin xdg-desktop-portal-hyprland noto-fonts-cjk noto-fonts-emoji noto-fonts wl-clipboard nano inotify-tools hyprpicker xdg-user-dirs flatpak firefox || { echo "${COLOR_ERROR}Failed to install required packages${COLOR_RESET}"; exit 1; }
+yay -S - < packages || { echo "${COLOR_ERROR}Failed to install required packages${COLOR_RESET}"; exit 1; }
 
 # Enable Flathub
 echo -e "${COLOR_INFO}Enabling Flathub${COLOR_RESET}"
