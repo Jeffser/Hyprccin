@@ -27,7 +27,7 @@ cd ..
 
 # Install required packages
 echo -e "${COLOR_INFO}Installing required packages...${COLOR_RESET}"
-yay -S - < packages || { echo "${COLOR_ERROR}Failed to install required packages${COLOR_RESET}"; exit 1; }
+yay -S - < ./packages || { echo "${COLOR_ERROR}Failed to install required packages${COLOR_RESET}"; exit 1; }
 
 # Enable Flathub
 echo -e "${COLOR_INFO}Enabling Flathub${COLOR_RESET}"
