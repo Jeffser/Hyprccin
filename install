@@ -14,10 +14,6 @@ if [ "$(id -u)" -eq "0" ]; then
     exit
 fi
 
-# Install git and base-devel
-echo -e "${COLOR_INFO}Installing git and base-devel${COLOR_RESET}"
-sudo pacman -S git base-devel || { echo "${COLOR_ERROR}Failed to install git and base-devel${COLOR_RESET}"; exit 1; }
-
 # Install yay
 echo -e "${COLOR_INFO}Installing yay...${COLOR_RESET}"
 git clone https://aur.archlinux.org/yay-git.git || { echo "${COLOR_ERROR}Failed to clone yay${COLOR_RESET}"; exit 1; }
