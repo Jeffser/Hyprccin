@@ -49,6 +49,10 @@ chmod u+rwx .config/hypr/xdg-portal-hyprland || { echo "${COLOR_ERROR}Failed to 
 echo -e "${COLOR_INFO}Removing desktop entries...${COLOR_RESET}"
 (cd /usr/share/applications && sudo rm avahi-discover.desktop bssh.desktop bvnc.desktop lstopo.desktop qv4l2.desktop qvidcap.desktop)
 
+# Creating default directories
+echo -e "${COLOR_INFO}Creating default user directories...${COLOR_RESET}"
+xdg-user-dirs-update --force
+
 # Final message
 echo -e "${COLOR_INFO}You can now restart your computer or manually start Hyprland via \"Hyprland\"${COLOR_RESET}"
 echo -e "${COLOR_INFO}Enjoy your new system $USER!${COLOR_RESET}"
