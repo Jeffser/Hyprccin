@@ -2,7 +2,7 @@
 .config/Code
 .config/JetBrains
 .config/kdeconnect
-.config/QtProject.config
+.config/QtProject.conf
 .config/teams-for-linux
 .config/procps
 .config/pulse
