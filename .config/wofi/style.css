@@ -1,65 +1,37 @@
-/* ::root{ */
-/*     --accent: #5291e2; */
-/*     --dark: #383C4A; */
-/*     --light: #7C818C; */
-/*     --ld: #404552; */
-/*     --dl: #4B5162 */
-/*     --white: white; */
-/* } */
-
-*{
-    font-family: "JetBrains Mono Nerd";
-}
+@define-color background #1e1e2e;
+@define-color highlight #11111b;
 
 window {
-    background: transparent;
+  opacity: 0.9;
+  font-family: "jetbrains mono nerd font";
+  border-radius: 20px;
+  background-color: @background;
 }
-
 #input {
-    border-radius: 10px;
-    border: solid 2px #ABB2CE;
-    padding: 5px;
-    margin-bottom: 20px;
-    background-color: #404552;
-    color: white;
+  border-radius: 10px;
+  font-size: 22px;
+  padding: 5px 10px;
+  margin: 0 0 10px 0;
+  background-color: @highlight;
 }
-
 #inner-box {
-    background-color: #383C4A;
-    
+  
 }
-
 #outer-box {
-    margin: 5px;
-    padding:20px;
-    background-color: #383C4A;
-    border-radius: 20px;
-    border: solid 2px #ABB2CE;
+  padding: 10px;
 }
-
-#scroll {
-}
-
-#text {
-padding: 5px;
-color: white;
-}
-
-#entry:nth-child(even){
-    background-color: #404552;
-}
-
 #entry {
   border-radius: 10px;
+  padding: 10px;
 }
-
 #entry:selected {
-    background-color: #5291e2;
+  border: none;
+  padding: 10px;
+  background-color: @highlight;
 }
-
-#text:selected {
-    background-color: transparent;
+#text {
+  padding-left: 10px;
 }
-#img:selected {
-    background-color: transparent;
+#selected {
+  background-color: @highlight;
 }
