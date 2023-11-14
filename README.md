@@ -21,3 +21,7 @@ This script does the following:
 6) Copy [.config](.config) and [.bashrc](.bashrc)
 7) Make `waybar` scripts and `.config/hypr/xdg-portal-hyprland` executable
 8) Remove desktop entries I don't use
+
+## Notes
+
+- `nvim` configurations are just [nvchad](https://github.com/NvChad/NvChad)
