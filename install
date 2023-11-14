@@ -54,7 +54,7 @@ else
     DEVICE="desktop"
 fi
 
-sed -i "s/#source = ~\/.config\/hypr\/profiles\//#source = ~\/.config\/hypr\/profiles\/${DEVICE}.conf/g" ~/.config/hypr/hyprland.conf || { echo -e "${COLOR_ERROR}Failed to modify hyprland settings, you'll have to change it manually${COLOR_RESET}"; }
+sed -i "s/#source = ~\/.config\/hypr\/profiles\//source = ~\/.config\/hypr\/profiles\/${DEVICE}.conf/g" ~/.config/hypr/hyprland.conf || { echo -e "${COLOR_ERROR}Failed to modify hyprland settings, you'll have to change it manually${COLOR_RESET}"; }
 sed -i "s/\"output\": \"[^\"]*\"/\"output\": \"${DEVICE_MONITOR}\"/g" ~/.config/waybar/config.jsonc || { echo -e "${COLOR_ERROR}Failed to modify waybar settings, you'll have to change it manually${COLOR_RESET}"; }
 
 # Making scripts executable
