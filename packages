@@ -17,7 +17,7 @@ thunar-archive-plugin
 plymouth
 ttf-jetbrains-mono-nerd
 noto-fonts-emoji
-polkit-gnome
+polkit
 python-requests
 starship
 swappy
