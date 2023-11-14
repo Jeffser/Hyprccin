@@ -35,6 +35,7 @@ noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts
 wl-clipboard
+neovim
 nano
 inotify-tools
 hyprpicker
