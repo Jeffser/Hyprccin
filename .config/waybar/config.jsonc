@@ -137,7 +137,10 @@
         "format" : "{}",
         "interval" : 1,
         "exec" : "~/.config/waybar/scripts/playerctl.py",
-	"on-click" : "playerctl play-pause",
+	      "on-click" : "playerctl play-pause",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "scroll-step": 5,
         "return-type" : "json"
     },
 
