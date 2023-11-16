@@ -1,4 +1,4 @@
-# Hyprland-dotfiles
+# Hyprccin
 
 ## Screenie
 ![1700112805_grim](https://github.com/Jeffser/Hyprland-dotfiles/assets/69224322/26e1e34b-db50-41a5-9070-8030a334f4fd)
@@ -27,6 +27,7 @@ This script does the following:
 7) Make `waybar` scripts and `.config/hypr/xdg-portal-hyprland` executable
 8) Remove desktop entries I don't use
 9) Creates default directories `xdg-user-dirs-update`
+10) Applies a GTK Catppuccin theme
 
 ## Notes
 
