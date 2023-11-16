@@ -36,6 +36,7 @@ noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts
 wl-clipboard
+wl-clip-persist
 neovim
 nano
 hyprpicker
