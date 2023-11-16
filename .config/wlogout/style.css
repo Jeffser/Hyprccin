@@ -1,45 +1,60 @@
+@define-color LIME #a6e3a1;
+@define-color STRAWBERRY #FF3040;
+@define-color BLUEBERRY #89b4fa;
+@define-color BANANA  #f9e2af;
+@define-color ORANGE  #fab387;
+
 * {
+  font-family: "JetBrainsMono Nerd Font";
 	background-image: none;
 }
 window {
 	background-color: rgba(12, 12, 12, 0.8);
 }
 button {
-  color: #FFFFFF;
-	background-color: #1E1E1E;
+  color: @theme_fg_color;
+	background-color: @theme_bg_color;
 	border-radius: 20px;
+  opacity: 0.9;
   margin: 10px;
-  border: none;
+  border: 5px solid;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 25%;
 }
 
-button:focus, button:active, button:hover {
-	background-color: #11111b;
-	outline-style: none;
-}
-
 #lock {
+    border-color: mix(@theme_fg_color, @BLUEBERRY, .9);
     background-image: image(url("/usr/share/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
 }
 
 #logout {
+    border-color: mix(@theme_fg_color, @BANANA, .9);
     background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
 }
 
 #suspend {
+    border-color: mix(@theme_fg_color, @ORANGE, .9);
     background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
 }
 
 #hibernate {
+    border-color: mix(@theme_fg_color, @LIME, .9);
     background-image: image(url("/usr/share/wlogout/icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));
 }
 
 #shutdown {
+    border-color: mix(@theme_fg_color, @STRAWBERRY, .9);
     background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
 }
 
 #reboot {
+    border-color: mix(@theme_fg_color, @BLUEBERRY, .9);
     background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
+}
+
+button:focus, button:active, button:hover {
+	background-color: mix(@theme_fg_color, @theme_bg_color, .1);
+  color: mix(@theme_fg_color, @theme_bg_color, .9);
+	outline-style: none;
 }
