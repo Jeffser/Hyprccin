@@ -9,7 +9,7 @@
 	background-image: none;
 }
 window {
-	background-color: rgba(12, 12, 12, 0.8);
+	background-color: mix(@theme_bg_color, rgba(0, 0, 0, 0.7), 0.5);
 }
 button {
   color: @theme_fg_color;
