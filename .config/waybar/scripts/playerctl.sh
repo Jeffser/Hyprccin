@@ -12,7 +12,5 @@ if [ ${#title} -gt 30 ]; then
 fi
 
 if [ ! -z "$title" ]; then
-    echo "{\"text\": \"${icons[$status]} $title\"}"
-else
-    echo "{}"
+    echo ${icons[$status]} $title
 fi

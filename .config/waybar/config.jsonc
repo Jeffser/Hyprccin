@@ -2,11 +2,14 @@
     "output": "DP-1",
     "layer": "top",
     "position": "top",
-    "mod": "dock",
+    "mode": "dock",
     "exclusive": true,
     "passthrough": false,
     "gtk-layer-shell": true,
-    "height": 50,
+    "height": 40,
+    "margin-top": 10,
+    "margin-left": 10,
+    "margin-right": 10,
     "modules-left": [
         "custom/wofi",
         "clock",
@@ -156,14 +159,12 @@
         "tooltip-format-enumerate-connected": "{device_alias}"
     },
     "custom/playerctl": {
-        "format": "{}",
         "interval": 1,
         "exec": "~/.config/waybar/scripts/playerctl.sh",
         "on-click": "playerctl play-pause",
         "on-scroll-up": "playerctl next",
         "on-scroll-down": "playerctl previous",
-        "scroll-step": 5,
-        "return-type": "json"
+        "scroll-step": 10
     },
     "custom/powermenu": {
         "exec": "echo  ${USER^}",

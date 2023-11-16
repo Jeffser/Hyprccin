@@ -3,7 +3,6 @@
 bar="▁▂▃▄▅▆▇█"
 dict="s/;//g;"
 
-# creating "dictionary" to replace char with bar
 i=0
 while [ $i -lt ${#bar} ]
 do
@@ -11,8 +10,6 @@ do
     i=$((i=i+1))
 done
 
-# read stdout from cava
 cava -p ~/.config/cava/config-waybar | while read -r line; do
-    #echo $line	
     echo $line | sed $dict
 done
