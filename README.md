@@ -1,7 +1,12 @@
 # Hyprland-dotfiles
 
 ## Screenie
-![swappy-20230917_191558](https://github.com/Jeffser/Hyprland-dotfiles/assets/69224322/b9a1010f-6d0e-4740-8511-ae96bdae5df1)
+![1700112805_grim](https://github.com/Jeffser/Hyprland-dotfiles/assets/69224322/26e1e34b-db50-41a5-9070-8030a334f4fd)
+
+# Features
+- **GTK implementation!** Wofi, Wlogout, Waybar, Gtklock (duh) and more will follow your gtk theme
+- **Easily modifiable** I didn't do anything too crazy, you can figure out the config files easily
+- **Install script avaible** There's a script meant to be run once you install Arch, that way you can have a nice Hyprland session as soon as you install Arch
 
 ## Requirements for Script
 - `git`
