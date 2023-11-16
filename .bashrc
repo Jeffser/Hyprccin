@@ -11,7 +11,7 @@ alias grep='grep --color=auto'
 alias cs='
 COLOR_INFO="\e[0;32m";
 COLOR_RESET="\e[0m";
-echo -e "${COLOR_INFO}pulsemixer${COLOR_RESET}\tAudio mixer and source selector
+echo -e "${COLOR_INFO}pulsemixer${COLOR_RESET}\tAudio mixer and source selector (also works with pipewire)
 ${COLOR_INFO}bluetoothctl${COLOR_RESET}\tDiscover and connect bluetooth devices
 ${COLOR_INFO}nmtui-connect${COLOR_RESET}\tDiscover and connect to wifi networks
 ${COLOR_INFO}cava${COLOR_RESET}\t\tAudio visualizer
