@@ -32,9 +32,7 @@
     },
     
     "custom/cava": {
-        "format": "{}",
-        "exec": "~/.config/waybar/scripts/cava.sh",
-    	"return-type": "text"
+        "exec": "~/.config/waybar/scripts/cava.sh"
     },
 
    "custom/weather" : {
@@ -128,7 +126,7 @@
 	    "format": "",
 	    "format-disabled": "󰂲", // an empty format will hide the module
 	    "format-connected": " {num_connections}",
-      "tooltip-format": "{device_alias}",
+        "tooltip-format": "{device_alias}",
 	    "tooltip-format-connected": " {device_enumerate}",
 	    "tooltip-format-enumerate-connected": "{device_alias}"
     },
@@ -136,7 +134,7 @@
     "custom/playerctl": {
         "format" : "{}",
         "interval" : 1,
-        "exec" : "~/.config/waybar/scripts/playerctl.py",
+        "exec" : "~/.config/waybar/scripts/playerctl.sh",
         "on-click" : "playerctl play-pause",
         "on-scroll-up" : "playerctl next",
         "on-scroll-down" : "playerctl previous",

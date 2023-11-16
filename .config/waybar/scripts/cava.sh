@@ -11,12 +11,8 @@ do
     i=$((i=i+1))
 done
 
-# write cava config
-config_file="/home/tentri/.config/cava/cava-waybar"
-
-
 # read stdout from cava
-cava -p $config_file | while read -r line; do
+cava -p ~/.config/cava/config-waybar | while read -r line; do
     #echo $line	
     echo $line | sed $dict
 done
