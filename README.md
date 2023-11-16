@@ -1,7 +1,7 @@
 # Hyprland-dotfiles
 
 ## Screenie
-![swappy-20230917_191558](https://github.com/Jeffser/Hyprland-dotfiles/assets/69224322/b9a1010f-6d0e-4740-8511-ae96bdae5df1)
+![1700112805_grim](https://github.com/Jeffser/Hyprland-dotfiles/assets/69224322/26e1e34b-db50-41a5-9070-8030a334f4fd)
 
 ## Requirements for Script
 - `git`
