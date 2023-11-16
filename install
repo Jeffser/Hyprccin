@@ -47,7 +47,7 @@ chmod u+rwx .config/hypr/xdg-portal-hyprland || { echo "${COLOR_ERROR}Failed to 
 
 # Removing desktop entries that I don't use
 echo -e "${COLOR_INFO}Removing desktop entries...${COLOR_RESET}"
-(cd /usr/share/applications && sudo rm avahi-discover.desktop bssh.desktop bvnc.desktop lstopo.desktop qv4l2.desktop qvidcap.desktop)
+(cd /usr/share/applications && sudo rm avahi-discover.desktop bssh.desktop bvnc.desktop lstopo.desktop qv4l2.desktop qvidcap.desktop thunar-bulk-rename.desktop thunar-settings.desktop thunar-volman-settings.desktop)
 
 # Creating default directories
 echo -e "${COLOR_INFO}Creating default user directories...${COLOR_RESET}"
