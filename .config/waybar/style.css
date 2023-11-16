@@ -14,7 +14,7 @@
 }
 
 window#waybar {
-    background: rgba(21, 18, 27, 0);
+    background: transparent;
     color: @theme_fg_color;
 }
 

@@ -7,9 +7,27 @@
     "passthrough": false,
     "gtk-layer-shell": true,
     "height": 50,
-    "modules-left": ["custom/wofi","clock","custom/weather","hyprland/workspaces","custom/cava"],
-    "modules-center": ["hyprland/window"],
-    "modules-right": ["custom/playerctl","pulseaudio","pulseaudio#microphone","tray","temperature","battery","network","bluetooth","custom/powermenu"],
+    "modules-left": [
+        "custom/wofi",
+        "clock",
+        "custom/weather",
+        "hyprland/workspaces",
+        "custom/cava"
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "custom/playerctl",
+        "pulseaudio",
+        "pulseaudio#microphone",
+        "tray",
+        "temperature",
+        "battery",
+        "network",
+        "bluetooth",
+        "custom/powermenu"
+    ],
     "hyprland/window": {
         "format": "{}"
     },
@@ -30,39 +48,36 @@
             "10": []
         }
     },
-    
     "custom/cava": {
         "exec": "~/.config/waybar/scripts/cava.sh"
     },
-
-   "custom/weather" : {
-        //shows the current weather and forecast
-        "tooltip" : true,
-        "format" : "{}",
-        "interval" : 30,
-        "exec" : "~/.config/waybar/scripts/waybar-wttr.py",
-        "return-type" : "json"
+    "custom/weather": {
+        "tooltip": true,
+        "format": "{}",
+        "interval": 30,
+        "exec": "~/.config/waybar/scripts/waybar-wttr.py",
+        "return-type": "json"
     },
-
     "tray": {
         "icon-size": 18,
         "spacing": 10
     },
-
     "clock": {
         "format": "{: %I:%M %p   %a, %b %e}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
-
     "backlight": {
         "device": "intel_backlight",
         "format": "{icon} {percent}%",
-        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "format-icons": [
+            "󰃞",
+            "󰃟",
+            "󰃠"
+        ],
         "on-scroll-up": "brightnessctl set 1%+",
         "on-scroll-down": "brightnessctl set 1%-",
         "min-length": 6
     },
-
     "battery": {
         "states": {
             "good": 95,
@@ -73,9 +88,20 @@
         "format-charging": " {capacity}%",
         "format-plugged": " {capacity}%",
         "format-alt": "{time} {icon}",
-        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+        "format-icons": [
+            "󰂎",
+            "󰁺",
+            "󰁻",
+            "󰁼",
+            "󰁽",
+            "󰁾",
+            "󰁿",
+            "󰂀",
+            "󰂁",
+            "󰂂",
+            "󰁹"
+        ]
     },
-
     "pulseaudio": {
         "format": "{icon} {volume}%",
         "tooltip": false,
@@ -91,10 +117,13 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": [
+                "",
+                "",
+                ""
+            ]
         }
     },
-
     "pulseaudio#microphone": {
         "format": "{format_source}",
         "format-source": " {volume}%",
@@ -104,16 +133,13 @@
         "on-scroll-down": "pamixer --default-source -d 5",
         "scroll-step": 5
     },
-    
     "temperature": {
         "thermal-zone": 2,
         "format": " {temperatureC}°C",
         "critical-threshold": 80,
         "format-critical": " {temperatureC}°C"
     },
-
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": " {signalStrength}%",
         "format-ethernet": "󰈀 {ipaddr}",
         "tooltip-format": "{essid} - {ifname} via {gwaddr}",
@@ -121,34 +147,30 @@
         "format-disconnected": "⚠ Disconnected",
         "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}"
     },
-
     "bluetooth": {
-	    "format": "",
-	    "format-disabled": "󰂲", // an empty format will hide the module
-	    "format-connected": " {num_connections}",
+        "format": " on",
+        "format-disabled": "󰂲 off",
+        "format-connected": " {num_connections}",
         "tooltip-format": "{device_alias}",
-	    "tooltip-format-connected": " {device_enumerate}",
-	    "tooltip-format-enumerate-connected": "{device_alias}"
+        "tooltip-format-connected": " {device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}"
     },
-
     "custom/playerctl": {
-        "format" : "{}",
-        "interval" : 1,
-        "exec" : "~/.config/waybar/scripts/playerctl.sh",
-        "on-click" : "playerctl play-pause",
-        "on-scroll-up" : "playerctl next",
-        "on-scroll-down" : "playerctl previous",
-        "scroll-step" : 5,
-        "return-type" : "json"
+        "format": "{}",
+        "interval": 1,
+        "exec": "~/.config/waybar/scripts/playerctl.sh",
+        "on-click": "playerctl play-pause",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "scroll-step": 5,
+        "return-type": "json"
     },
-
     "custom/powermenu": {
-        "exec" : "echo  ${USER^}",
-        "on-click" : "wlogout --protocol layer-shell"
+        "exec": "echo  ${USER^}",
+        "on-click": "wlogout --protocol layer-shell"
     },
-
     "custom/wofi": {
-    	"format": "󰣇 Arch Linux",
-	    "on-click": "wofi"
+        "format": "󰣇 Arch Linux",
+        "on-click": "wofi"
     }
 }
