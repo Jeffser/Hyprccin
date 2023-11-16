@@ -26,7 +26,7 @@ tooltip {
 }
 
 #workspaces button {
-    margin-right: 5px;
+    margin-right: 0px;
     color: mix(@theme_fg_color,@theme_bg_color,0.5);
     border-radius: 10px;
 }
@@ -68,7 +68,7 @@ tooltip {
 #custom-wofi,
 #backlight {
     background: @theme_bg_color;
-    padding: 10px 10px;
+    padding: 0 10px;
     border: none;
 }
 
@@ -92,7 +92,7 @@ tooltip {
 #workspaces {
     border-radius: 10px;
     margin-left: 10px;
-    padding: 5px;
+    padding: 0px;
     padding-right: 0px;
 }
 
