@@ -25,32 +25,32 @@ button {
 
 #lock {
     border-color: mix(@theme_fg_color, @BLUEBERRY, .9);
-    background-image: image(url("/usr/share/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
+    background-image: image(url("./lock.svg"));
 }
 
 #logout {
     border-color: mix(@theme_fg_color, @BANANA, .9);
-    background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
+    background-image: image(url("./logout.svg"));
 }
 
 #suspend {
     border-color: mix(@theme_fg_color, @ORANGE, .9);
-    background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
+    background-image: image(url("./suspend.svg"));
 }
 
 #hibernate {
     border-color: mix(@theme_fg_color, @LIME, .9);
-    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));
+    background-image: image(url("./hibernate.svg"));
 }
 
 #shutdown {
     border-color: mix(@theme_fg_color, @STRAWBERRY, .9);
-    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
+    background-image: image(url("./shutdown.svg"));
 }
 
 #reboot {
     border-color: mix(@theme_fg_color, @BLUEBERRY, .9);
-    background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
+    background-image: image(url("./reboot.svg"));
 }
 
 button:focus, button:active, button:hover {
