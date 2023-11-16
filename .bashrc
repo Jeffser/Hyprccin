@@ -9,13 +9,13 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 alias cs='
-COLOR_INFO="\e[47;32m";
+COLOR_INFO="\e[0;32m";
 COLOR_RESET="\e[0m";
-echo -e "${COLOR_INFO}pulsemixer${COLOR_RESET} Audio mixer and source selector
-${COLOR_INFO}bluetoothctl${COLOR_RESET} Discover and connect bluetooth devices
-${COLOR_INFO}nmtui-connect${COLOR_RESET} Discover and connect to wifi networks
-${COLOR_INFO}cava${COLOR_RESET} Audio visualizer
-${COLOR_INFO}nwg-look${COLOR_RESET} Modify GTK appearance settings via gui"'
+echo -e "${COLOR_INFO}pulsemixer${COLOR_RESET}\tAudio mixer and source selector
+${COLOR_INFO}bluetoothctl${COLOR_RESET}\tDiscover and connect bluetooth devices
+${COLOR_INFO}nmtui-connect${COLOR_RESET}\tDiscover and connect to wifi networks
+${COLOR_INFO}cava${COLOR_RESET}\t\tAudio visualizer
+${COLOR_INFO}nwg-look${COLOR_RESET}\tModify GTK appearance settings via gui"'
 
 PS1='[\u@\h \W]\$ '
 
