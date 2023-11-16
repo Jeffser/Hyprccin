@@ -25,33 +25,37 @@ yay -S - < ./packages || { echo "${COLOR_ERROR}Failed to install required packag
 
 # Enable Flathub
 echo -e "${COLOR_INFO}Enabling Flathub...${COLOR_RESET}"
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || { echo "${COLOR_ERROR}Failed to enable Flathub${COLOR_RESET}"; exit 1; }
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || { echo "${COLOR_ERROR}Failed to enable Flathub${COLOR_RESET}"; }
 
 # Enable ly
 echo -e "${COLOR_INFO}Enabling ly...${COLOR_RESET}"
-sudo systemctl enable ly || { echo "${COLOR_ERROR}Failed to enable ly${COLOR_RESET}"; exit 1; }
+sudo systemctl enable ly || { echo "${COLOR_ERROR}Failed to enable ly${COLOR_RESET}"; }
 
 # Enable bluetooth
 echo -e "${COLOR_INFO}Enabling bluetooth...${COLOR_RESET}"
-sudo systemctl enable bluetooth || { echo "${COLOR_ERROR}Failed to enable bluetooth${COLOR_RESET}"; exit 1; }
+sudo systemctl enable bluetooth || { echo "${COLOR_ERROR}Failed to enable bluetooth${COLOR_RESET}"; }
 
 # Copy config files and bashrc
 echo -e "${COLOR_INFO}Copying config files and bashrc...${COLOR_RESET}"
-cp -f -r .config/* ~/.config/ || { echo "${COLOR_ERROR}Failed to copy config files${COLOR_RESET}"; exit 1; }
-cp -f .bashrc ~/.bashrc || { echo "${COLOR_ERROR}Failed to copy bashrc${COLOR_RESET}"; exit 1; }
+cp -f -r .config/* ~/.config/ || { echo "${COLOR_ERROR}Failed to copy config files${COLOR_RESET}"; }
+cp -f .bashrc ~/.bashrc || { echo "${COLOR_ERROR}Failed to copy bashrc${COLOR_RESET}"; }
 
 # Making scripts executable
 echo -e "${COLOR_INFO}Making scripts executable...${COLOR_RESET}"
-chmod u+rwx .config/waybar/scripts/* || { echo "${COLOR_ERROR}Failed to change permissions for .config/waybar/scripts/*${COLOR_RESET}"; exit 1; }
-chmod u+rwx .config/hypr/xdg-portal-hyprland || { echo "${COLOR_ERROR}Failed to change permissions for .config/hypr/xdg-portal-hyprland${COLOR_RESET}"; exit 1; }
+chmod u+rwx .config/waybar/scripts/* || { echo "${COLOR_ERROR}Failed to change permissions for .config/waybar/scripts/*${COLOR_RESET}"; }
+chmod u+rwx .config/hypr/xdg-portal-hyprland || { echo "${COLOR_ERROR}Failed to change permissions for .config/hypr/xdg-portal-hyprland${COLOR_RESET}"; }
 
 # Removing desktop entries that I don't use
 echo -e "${COLOR_INFO}Removing desktop entries...${COLOR_RESET}"
-(cd /usr/share/applications && sudo rm avahi-discover.desktop bssh.desktop bvnc.desktop lstopo.desktop qv4l2.desktop qvidcap.desktop thunar-bulk-rename.desktop thunar-settings.desktop thunar-volman-settings.desktop)
+(cd /usr/share/applications && sudo rm avahi-discover.desktop bssh.desktop bvnc.desktop lstopo.desktop qv4l2.desktop qvidcap.desktop thunar-bulk-rename.desktop thunar-settings.desktop thunar-volman-settings.desktop) || { echo "${COLOR_ERROR}Failed to remove desktop unnecesary desktop entries${COLOR_RESET}"}
 
 # Creating default directories
 echo -e "${COLOR_INFO}Creating default user directories...${COLOR_RESET}"
-xdg-user-dirs-update --force
+xdg-user-dirs-update --force || { echo "${COLOR_ERROR}Failed to create default user directories${COLOR_RESET}"}
+
+# Applying default Catppuccin-Mocha-Standard-Blue-Dark Theme
+echo -e "${COLOR_INFO}Applying default theme (Catppuccin-Mocha-Standard-Blue-Dark) you can change the theme later graphically with nwg-look...${COLOR_RESET}"
+gsettings set org.gnome.desktop.interface gtk-theme "Catppuccin-Mocha-Standard-Blue-Dark" || { echo "${COLOR_ERROR}Failed to apply default theme${COLOR_RESET}"}
 
 # Final message
 echo -e "${COLOR_INFO}You can now restart your computer or manually start Hyprland via \"Hyprland\"${COLOR_RESET}"
