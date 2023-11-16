@@ -1,3 +1,9 @@
+@define-color LIME #a6e3a1;
+@define-color STRAWBERRY #FF0000;
+@define-color BLUEBERRY #89b4fa;
+@define-color BANANA  #f9e2af;
+@define-color ORANGE  #fab387;
+
 * {
     border: none;
     border-radius: 0;
@@ -9,30 +15,29 @@
 
 window#waybar {
     background: rgba(21, 18, 27, 0);
-    color: #cdd6f4;
+    color: @theme_fg_color;
 }
 
 tooltip {
-    background: #1e1e2e;
+    background: @theme_bg_color;
     border-radius: 10px;
     border-width: 2px;
     border-style: solid;
-    border-color: #11111b;
-    
 }
 
 #workspaces button {
     padding: 5px;
-    color: #313244;
     margin-right: 5px;
+    color: mix(@theme_fg_color,@theme_bg_color,0.5);
+    border-radius: 10px;
 }
 
 #workspaces button.active {
-    color: #a6adc8;
+    color: @theme_fg_color;
 }
 
 #workspaces button.focused {
-    color: #a6adc8;
+    color: @theme_fg_color;
     background: #eba0ac;
     border-radius: 10px;
 }
@@ -44,9 +49,8 @@ tooltip {
 }
 
 #workspaces button:hover {
-    background: #11111b;
-    color: #cdd6f4;
-    border-radius: 10px;
+    background: @theme_fg_color;
+    color: @theme_bg_color;
 }
 
 #custom-power_profile,
@@ -65,8 +69,7 @@ tooltip {
 #custom-powermenu,
 #custom-wofi,
 #backlight {
-    background: #1e1e2e;
-    opacity: 0.8;
+    background: @theme_bg_color;
     padding: 0px 10px;
     margin: 3px 0px;
     margin-top: 10px;
@@ -91,7 +94,6 @@ tooltip {
 }
 
 #workspaces {
-    background: #1e1e2e;
     border-radius: 10px;
     margin-left: 10px;
     padding-right: 0px;
@@ -99,10 +101,10 @@ tooltip {
 }
 
 #custom-cava {
-    color: #a6e3a1;
+    color: mix(@LIME, @theme_fg_color, 0.5);
 }
 
-#custom-cava, #custom-playerctl, #custom-powermenu {
+#custom-cava, #custom-playerctl{
     padding-right: 10px;
     padding-left: 10px;
     margin-right: 10px;
@@ -111,7 +113,7 @@ tooltip {
 }
 
 #custom-power_profile {
-    color: #a6e3a1;
+    color: mix(@LIME, @theme_fg_color, 0.5);
     border-left: 0px;
     border-right: 0px;
 }
@@ -123,38 +125,42 @@ tooltip {
 }
 
 #clock {
-    color: #fab387;
+    color: mix(@ORANGE, @theme_fg_color, 0.3);
     border-radius: 10px 0px 0px 10px;
     margin-left: 10px;
     border-right: 0px;
 }
+#custom-powermenu,
 #custom-wofi {
     border-radius: 10px;
     margin-left: 10px;
-    color: #89b4fa;
+    color: mix(@BLUEBERRY, @theme_fg_color, 0.6);
+}
+#custom-powermenu {
+    margin-right: 10px;
 }
 #network {
-    color: #f9e2af;
+    color: mix(@BANANA, @theme_fg_color, 0.4);
     border-radius: 0px 0px 0px 0px;
     border-left: 0px;
     border-right: 0px;
 }
 
 #bluetooth {
-    color: #89b4fa;
+    color: mix(@BLUEBERRY, @theme_fg_color, 0.3);
     border-radius: 0px 10px 10px 0px;
     margin-right: 0px
 } 
 
 #pulseaudio {
-    color: #89b4fa;
+    color: mix(@BLUEBERRY, @theme_fg_color, 0.9);
     border-left: 0px;
     border-right: 0px;
     border-radius: 10px 0px 0px 10px;
 }
 
 #pulseaudio.microphone {
-    color: #cba6f7;
+    color: mix(@STRAWBERRY, @theme_fg_color, 0.5);
     border-left: 0px;
     border-right: 0px;
     border-radius: 0px 10px 10px 0px;
@@ -162,7 +168,7 @@ tooltip {
 }
 
 #battery {
-    color: #a6e3a1;
+    color: mix(@LIME, @theme_fg_color, 0.5);
     border-radius: 10px 0px 0px 10px;
     margin-right: 0px;
     border-left: 10px;

@@ -1,18 +1,15 @@
-@define-color background #1e1e2e;
-@define-color highlight #11111b;
-
 window {
   opacity: 0.9;
   font-family: "jetbrains mono nerd font";
   border-radius: 20px;
-  background-color: @background;
+  background-color: @theme_bg_color;
 }
 #input {
   border-radius: 10px;
   font-size: 22px;
   padding: 5px 10px;
   margin: 0 0 10px 0;
-  background-color: @highlight;
+  background-color: mix(@theme_bg_color, @theme_fg_color, 0.1);
 }
 #inner-box {
   
@@ -25,13 +22,13 @@ window {
   padding: 10px;
 }
 #entry:selected {
-  border: none;
   padding: 10px;
-  background-color: @highlight;
+  border: /*@theme_selected_bg_color 2px solid;*/ none;
+  background-color: mix(@theme_bg_color, @theme_fg_color, 0.7);
 }
 #text {
   padding-left: 10px;
 }
 #selected {
-  background-color: @highlight;
+  background-color: transparent;
 }
