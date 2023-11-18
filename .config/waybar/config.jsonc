@@ -1,5 +1,5 @@
 {
-    "output": "eDP-1",
+    "output": ["DP-1"],
     "layer": "top",
     "position": "top",
     "mode": "dock",
@@ -32,13 +32,17 @@
         "custom/powermenu"
     ],
     "hyprland/window": {
-        "format": "{}"
+        "format" : "{}",
+        "on-click-right" : "hyprctl dispatch killactive",
+        "max-length" : 200
     },
     "hyprland/workspaces": {
-        "disable-scroll": false,
-        "all-outputs": true,
-        "on-click": "activate",
-        "persistent_workspaces": {
+        "disable-scroll" : false,
+        "on-scroll-up" : "hyprctl dispatch workspace e+1",
+        "on-scroll-down" : "hyprctl dispatch workspace e-1",
+        "all-outputs" : true,
+        "on-click" : "activate",
+        "persistent_workspaces" : {
             "1": [],
             "2": [],
             "3": [],
