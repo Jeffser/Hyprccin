@@ -172,6 +172,7 @@
     },
     "custom/arch": {
         "format": "󰣇 Arch Linux",
-        "on-click": "wofi"
+        "on-click": "wofi",
+        "on-click-right": "wlogout --protocol layer-shell"
     }
 }
