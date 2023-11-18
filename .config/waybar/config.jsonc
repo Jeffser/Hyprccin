@@ -1,5 +1,5 @@
 {
-    "output": ["DP-1"],
+    "output": ["DP-1", "eDP-1"],
     "layer": "top",
     "position": "top",
     "mode": "dock",
