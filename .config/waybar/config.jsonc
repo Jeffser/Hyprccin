@@ -168,7 +168,8 @@
         "on-click": "playerctl play-pause",
         "on-scroll-up": "playerctl next",
         "on-scroll-down": "playerctl previous",
-        "scroll-step": 10
+        "scroll-step": 10,
+        "secundary": true
     },
     "custom/powermenu": {
         "exec": "echo  ${USER^}",
