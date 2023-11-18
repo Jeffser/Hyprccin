@@ -11,7 +11,7 @@
     "margin-left": 10,
     "margin-right": 10,
     "modules-left": [
-        "custom/wofi",
+        "custom/arch",
         "clock",
         "custom/weather",
         "hyprland/workspaces",
@@ -28,8 +28,7 @@
         "temperature",
         "battery",
         "network",
-        "bluetooth",
-        "custom/powermenu"
+        "bluetooth"
     ],
     "hyprland/window": {
         "format" : "{}",
@@ -171,11 +170,7 @@
         "scroll-step": 10,
         "secundary": true
     },
-    "custom/powermenu": {
-        "exec": "echo  ${USER^}",
-        "on-click": "wlogout --protocol layer-shell"
-    },
-    "custom/wofi": {
+    "custom/arch": {
         "format": "󰣇 Arch Linux",
         "on-click": "wofi"
     }
