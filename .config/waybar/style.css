@@ -23,6 +23,7 @@ tooltip {
     border-radius: 10px;
     border-width: 2px;
     border-style: solid;
+    border-color: @theme_fg_color;
 }
 
 #workspaces button {
@@ -117,6 +118,7 @@ tooltip {
     border-radius: 10px;
     margin-left: 60px;
     margin-right: 60px;
+    color: @theme_fg_color;
 }
 
 #clock {
