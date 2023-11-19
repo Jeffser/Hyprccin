@@ -10,6 +10,7 @@ do
     i=$((i=i+1))
 done
 
+killall cava
 cava -p ~/.config/cava/config-waybar | while read -r line; do
     echo $line | sed $dict
 done

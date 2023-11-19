@@ -1,8 +1,8 @@
 @define-color LIME #a6e3a1;
 @define-color STRAWBERRY #FF3040;
 @define-color BLUEBERRY #89b4fa;
-@define-color BANANA  #f9e2af;
-@define-color ORANGE  #fab387;
+@define-color BANANA #f9e2af;
+@define-color ORANGE #fab387;
 
 * {
     border: none;
@@ -20,7 +20,7 @@ window#waybar {
 
 tooltip {
     background: @theme_bg_color;
-    border-radius: 10px;
+    border-radius: 5px;
     border-width: 2px;
     border-style: solid;
     border-color: @theme_fg_color;
@@ -28,7 +28,7 @@ tooltip {
 
 #workspaces button {
     margin-right: 0px;
-    color: mix(@theme_fg_color,@theme_bg_color,0.5);
+    color: mix(@theme_fg_color, @theme_bg_color, 0.5);
     border-radius: 10px;
 }
 
@@ -38,13 +38,11 @@ tooltip {
 
 #workspaces button.focused {
     color: @theme_fg_color;
-    border-radius: 10px;
 }
 
 #workspaces button.urgent {
     color: @theme_fg_color;
     background: @LIME;
-    border-radius: 10px;
 }
 
 #workspaces button:hover {
@@ -66,13 +64,29 @@ tooltip {
 #workspaces,
 #tray,
 #custom-arch,
+#language,
 #backlight {
     background: @theme_bg_color;
     padding: 0 10px;
     border: none;
+    border-radius: 10px;
+}
+
+.modules-left>*>* {
+    margin-left: 10px;
+}
+
+.modules-right>*>* {
+    margin-right: 10px;
+}
+
+.modules-center {
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 #temperature {
+    margin-right: 0px;
     border-radius: 10px 0px 0px 10px;
 }
 
@@ -84,92 +98,79 @@ tooltip {
     border-radius: 10px 0px 0px 10px;
 }
 
-#tray {
-    border-radius: 10px;
-    margin-right: 10px;
-}
+#tray {}
 
 #workspaces {
-    border-radius: 10px;
-    margin-left: 10px;
     padding: 0px;
-    padding-right: 0px;
 }
 
 #custom-cava {
     color: mix(@LIME, @theme_fg_color, 0.5);
 }
 
-#custom-cava, #custom-playerctl{
-    padding-right: 10px;
-    padding-left: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
-    border-radius: 10px;
-}
-
 #custom-power_profile {
     color: mix(@LIME, @theme_fg_color, 0.5);
-    border-left: 0px;
-    border-right: 0px;
 }
 
 #window {
     border-radius: 10px;
-    margin-left: 60px;
-    margin-right: 60px;
     color: @theme_fg_color;
 }
 
 #clock {
     color: mix(@ORANGE, @theme_fg_color, 0.3);
     border-radius: 10px 0px 0px 10px;
-    margin-left: 10px;
-    border-right: 0px;
 }
+
 #custom-arch {
+    margin-left: 0px;
     border-radius: 10px;
     color: mix(@BLUEBERRY, @theme_fg_color, 0.6);
 }
 
 #network {
     color: mix(@BANANA, @theme_fg_color, 0.4);
-    border-radius: 0px 0px 0px 0px;
-    border-left: 0px;
+    border-radius: 0px;
     border-right: 0px;
+    margin-right: 0px;
 }
 
 #bluetooth {
     color: mix(@BLUEBERRY, @theme_fg_color, 0.3);
     border-radius: 0px 10px 10px 0px;
     margin-right: 0px
-} 
+}
 
-#pulseaudio {
-    color: mix(@BLUEBERRY, @theme_fg_color, 0.9);
-    border-left: 0px;
-    border-right: 0px;
+#pulseaudio:not(.microphone) {
+    color: mix(@BANANA, @theme_fg_color, 0.5);
     border-radius: 10px 0px 0px 10px;
+    margin-right: 0px;
 }
 
 #pulseaudio.microphone {
-    color: mix(@STRAWBERRY, @theme_fg_color, 0.5);
-    border-left: 0px;
-    border-right: 0px;
+    color: mix(@LIME, @theme_fg_color, 0.5);
     border-radius: 0px 10px 10px 0px;
-    margin-right: 10px;
+}
+
+#pulseaudio.bluetooth:not(.microphone) {
+    color: mix(@BLUEBERRY, @theme_fg_color, 0.5);
+}
+
+#pulseaudio.muted:not(.microphone) {
+    color: mix(@STRAWBERRY, @theme_fg_color, 0.5);
+}
+
+#pulseaudio.microphone.source-muted {
+    color: mix(@STRAWBERRY, @theme_fg_color, 0.5);
 }
 
 #battery {
     color: mix(@LIME, @theme_fg_color, 0.5);
     border-radius: 10px 0px 0px 10px;
-    margin-right: 0px;
-    border-left: 10px;
 }
 
 #custom-weather {
     color: mix(@ORANGE, @theme_fg_color, 0.5);
     border-radius: 0px 10px 10px 0px;
-    border-right: 0px;
     margin-left: 0px;
 }
