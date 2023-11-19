@@ -33,8 +33,7 @@
             "custom/arch",
             "clock",
             "custom/weather",
-            "hyprland/workspaces",
-            "backlight"
+            "hyprland/workspaces"
         ],
         "modules-center": [
             "hyprland/window"
@@ -45,6 +44,7 @@
             "tray",
             "hyprland/language",
             "battery",
+            "backlight",
             "network",
             "bluetooth"
         ],
