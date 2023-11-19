@@ -21,6 +21,9 @@
             "temperature",
             "network",
             "bluetooth"
+        ],
+        "include": [
+            "~/.config/waybar/default-modules.jsonc"
         ]
     },
     {
@@ -44,6 +47,9 @@
             "battery",
             "network",
             "bluetooth"
+        ],
+        "include": [
+            "~/.config/waybar/default-modules.jsonc"
         ]
     }
 ]

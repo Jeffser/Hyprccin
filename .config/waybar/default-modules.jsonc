@@ -44,10 +44,19 @@
     },
     "custom/weather": {
         "tooltip": true,
-        "format": "{}",
+        "format": "{icon} {}",
         "interval": 30,
         "exec": "~/.config/waybar/scripts/waybar-wttr.py",
-        "return-type": "json"
+        "return-type": "json",
+        "format-icons": {
+            "sunny" : "󰖙",
+            "partly_cloudy" : "󰖕",
+            "cloudy" : "󰖐",
+            "rainy" : "󰖗",
+            "thundershower" : "󰖓",
+            "snowy" : "󰖘",
+            "snowstorm" : "󰼶"
+        }
     },
     "tray": {
         "icon-size": 18,
