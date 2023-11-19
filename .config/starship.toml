@@ -1,0 +1,8 @@
+[username]
+show_always = true
+
+[cmd_duration]
+show_milliseconds = false
+
+[hostname]
+ssh_only = false
