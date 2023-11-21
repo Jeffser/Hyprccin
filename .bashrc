@@ -17,6 +17,12 @@ ${COLOR_INFO}nmtui-connect${COLOR_RESET}\tDiscover and connect to wifi networks
 ${COLOR_INFO}cava${COLOR_RESET}\t\tAudio visualizer
 ${COLOR_INFO}nwg-look${COLOR_RESET}\tModify GTK appearance settings via gui"'
 
+alias reload='
+hyprctl reload;
+killall waybar && waybar &
+killall hyprpaper && hyprpaper &
+'
+
 PS1='[\u@\h \W]\$ '
 
 eval "$(starship init bash)"
