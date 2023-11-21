@@ -18,9 +18,13 @@ ${COLOR_INFO}cava${COLOR_RESET}\t\tAudio visualizer
 ${COLOR_INFO}nwg-look${COLOR_RESET}\tModify GTK appearance settings via gui"'
 
 alias reload='
-hyprctl reload;
-killall waybar && waybar &
-killall hyprpaper && hyprpaper &
+hyprctl reload
+killall waybar
+waybar &
+killall hyprpaper
+hyprpaper &
+exit
+exit
 '
 
 PS1='[\u@\h \W]\$ '
