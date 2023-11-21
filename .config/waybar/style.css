@@ -24,6 +24,7 @@ tooltip {
     border-width: 2px;
     border-style: solid;
     border-color: @theme_fg_color;
+    color: @theme_fg_color;
 }
 
 #workspaces button {

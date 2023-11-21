@@ -1,4 +1,4 @@
-timeout 300 'if [ ! "$(playerctl status)" == "Playing" ] ; then gtklock; fi'
+timeout 300 'gtklock'
 timeout 600 'if pgrep -x gtklock; then $(hyprctl dispatch dpms off); fi' resume 'hyprctl dispatch dpms on'
 timeout 1000 'if pgrep -x gtklock; then $(systemctl suspend); fi'
 before-sleep 'gtklock'
