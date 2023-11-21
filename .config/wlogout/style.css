@@ -12,49 +12,48 @@ window {
 	background-color: mix(@theme_bg_color, rgba(0, 0, 0, 0.7), 0.5);
 }
 button {
-  color: @theme_fg_color;
-	background-color: @theme_bg_color;
 	border-radius: 20px;
   opacity: 0.7;
   margin: 10px;
-  border: 5px solid;
+  border-bottom: 5px solid;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 25%;
+  font-size: 2000%;
 }
 
 #lock {
     border-color: mix(@theme_fg_color, @BLUEBERRY, .9);
-    background-image: image(url("./lock.svg"));
+    color: mix(@theme_fg_color, @BLUEBERRY, .9);
 }
 
 #logout {
     border-color: mix(@theme_fg_color, @BANANA, .9);
-    background-image: image(url("./logout.svg"));
+    color: mix(@theme_fg_color, @BANANA, .9);
 }
 
 #suspend {
     border-color: mix(@theme_fg_color, @ORANGE, .9);
-    background-image: image(url("./suspend.svg"));
+    color: mix(@theme_fg_color, @ORANGE, .9);
 }
 
 #hibernate {
     border-color: mix(@theme_fg_color, @LIME, .9);
-    background-image: image(url("./hibernate.svg"));
+    color: mix(@theme_fg_color, @LIME, .9);
 }
 
 #shutdown {
     border-color: mix(@theme_fg_color, @STRAWBERRY, .9);
-    background-image: image(url("./shutdown.svg"));
+    color: mix(@theme_fg_color, @STRAWBERRY, .9);
+
 }
 
 #reboot {
     border-color: mix(@theme_fg_color, @BLUEBERRY, .9);
-    background-image: image(url("./reboot.svg"));
+    color: mix(@theme_fg_color, @BLUEBERRY, .9);
 }
 
 button:focus, button:active, button:hover {
-	background-color: mix(@theme_bg_color, @theme_fg_color, .1);
-  color: mix(@theme_fg_color, @theme_bg_color, .1);
+	background-color: mix(@theme_bg_color, @theme_fg_color, .5);
 	outline-style: none;
 }
