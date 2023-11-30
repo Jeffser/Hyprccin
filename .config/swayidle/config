@@ -1,4 +1,4 @@
 timeout 300 'gtklock'
 timeout 330 'if pgrep -x gtklock; then hyprctl dispatch dpms off; fi' resume 'hyprctl dispatch dpms on'
 timeout 420 'if pgrep -x gtklock; then systemctl suspend; fi'
-before-sleep 'gtklock'
+before-sleep 'if ! pgrep -x gtklock ; then gtklock; fi'
