@@ -33,7 +33,7 @@
             "custom/cava"
         ],
         "modules-center": [
-            "hyprland/window"
+            
         ],
         "modules-right": [
             "custom/playerctl",
