@@ -5,7 +5,6 @@
         "modules-left": [
             "custom/arch",
             "clock",
-            "custom/weather",
             "hyprland/workspaces",
             "custom/cava"
         ],
@@ -16,8 +15,6 @@
             "custom/playerctl",
             "pulseaudio",
             "pulseaudio#microphone",
-            "tray",
-            "hyprland/language",
             "temperature",
             "network",
             "bluetooth"
@@ -32,17 +29,16 @@
         "modules-left": [
             "custom/arch",
             "clock",
-            "custom/weather",
-            "hyprland/workspaces"
+            "hyprland/workspaces",
+            "custom/cava"
         ],
         "modules-center": [
             "hyprland/window"
         ],
         "modules-right": [
+            "custom/playerctl",
             "pulseaudio",
             "pulseaudio#microphone",
-            "tray",
-            "hyprland/language",
             "battery",
             "backlight",
             "network",

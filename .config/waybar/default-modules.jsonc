@@ -42,30 +42,14 @@
         "exec": "~/.config/waybar/scripts/waybar-cava.sh",
         "return-type": "text"
     },
-    "custom/weather": {
-        "tooltip": true,
-        "format": "{icon} {}",
-        "interval": 30,
-        "exec": "~/.config/waybar/scripts/waybar-wttr.py",
-        "return-type": "json",
-        "format-icons": {
-            "sunny" : "󰖙",
-            "partly_cloudy" : "󰖕",
-            "cloudy" : "󰖐",
-            "rainy" : "󰖗",
-            "thundershower" : "󰖓",
-            "snowy" : "󰖘",
-            "snowstorm" : "󰼶"
-        }
-    },
     "tray": {
         "icon-size": 18,
         "spacing": 10
     },
     "clock": {
-        "format": "{: %I:%M %p   %a, %b %e}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-    },
+        "format": "{: %I:%M %p}",
+        "tooltip-format": "<big> {:%Y/%m/%d}</big>\n<tt><small>{calendar}</small></tt>"
+    }, 
     "backlight": {
         "device": "intel_backlight",
         "format": "{icon} {percent}%",
@@ -76,7 +60,8 @@
         ],
         "on-scroll-up": "brightnessctl set 1%+",
         "on-scroll-down": "brightnessctl set 1%-",
-        "min-length": 6
+        "min-length": 6,
+        "tooltip": false
     },
     "battery": {
         "states": {
