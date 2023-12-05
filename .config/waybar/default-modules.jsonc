@@ -17,19 +17,7 @@
         "on-scroll-up": "hyprctl dispatch workspace e+1",
         "on-scroll-down": "hyprctl dispatch workspace e-1",
         "all-outputs": true,
-        "on-click": "activate",
-        "persistent_workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": [],
-            "6": [],
-            "7": [],
-            "8": [],
-            "9": [],
-            "10": []
-        }
+        "on-click": "activate"
     },
     "hyprland/language": {
         "format": " {}",
@@ -88,8 +76,8 @@
         ]
     },
     "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "tooltip-format": "{}",
+        "format": "{icon}",
+        "tooltip-format": "{} | {volume}%",
         "tooltip": true,
         "format-muted": "󰖁 Muted",
         "on-click": "pamixer -t",
@@ -112,8 +100,8 @@
     },
     "pulseaudio#microphone": {
         "format": "{format_source}",
-        "format-source": " {volume}%",
-        "format-source-muted": " Muted",
+        "format-source": "",
+        "format-source-muted": "",
         "on-click": "pamixer --default-source -t",
         "on-scroll-up": "pamixer --default-source -i 5",
         "on-scroll-down": "pamixer --default-source -d 5",
@@ -156,10 +144,76 @@
             "Paused": "󰏤"
         }
     },
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
+    },
+    //FOR POWER GROUP
     "custom/arch": {
-        "format": "󰣇 Arch Linux",
-        "on-click": "wofi",
+        "format": "󰣇",
         "tooltip": false,
-        "on-click-right": "wlogout --protocol layer-shell"
+        "on-click": "wofi"
+    },
+    "custom/quit": {
+        "format": "󰍃",
+        "tooltip": false,
+        "on-click": "hyprctl dispatch exit"
+    },
+    "custom/lock": {
+        "format": "󰌾",
+        "tooltip": false,
+        "on-click": "gtklock"
+    },
+    "custom/reboot": {
+        "format": "󰜉",
+        "tooltip": false,
+        "on-click": "(sleep 10 && reboot) & (notify-send --urgency=critical --expire-time=20000 --wait 'System Reboot' 'The system will reboot in 10 seconds, click to cancel' && killall sleep)",
+        "on-click-right": "reboot"
+    },
+    "custom/shutdown": {
+        "format": "󰐥",
+        "tooltip": false,
+        "on-click": "(sleep 10 && shutdown now) & (notify-send --urgency=critical --expire-time=20000 --wait 'System Shutdown' 'The system will shutdown in 10 seconds, click to cancel' && killall sleep)",
+        "on-click-right": "shutdown now"
+    },
+    "custom/sleep": {
+        "format": "󰒲",
+        "tooltip": false,
+        "on-click": "systemctl suspend"
+    },
+    //GROUP CONFIGURATIONS
+    "group/audioSpeaker": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "pulseaudio",
+            "pulseaudio/slider"
+        ]
+    },
+    "group/audio": {
+        "orientation": "inherit",
+        "modules": [
+            "group/audioSpeaker",
+            "pulseaudio#microphone"
+        ]
+    },
+    "group/power": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/arch",
+            "custom/quit",
+            "custom/lock",
+            "custom/sleep",
+            "custom/reboot",
+            "custom/shutdown"
+        ]
     }
 }

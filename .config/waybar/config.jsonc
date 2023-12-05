@@ -2,8 +2,17 @@
     {
         "output": ["DP-1"],
         "position": "top",
+        "group/system": {
+            "orientation": "inherit",
+            "modules": [
+                "tray",
+                "temperature",
+                "network",
+                "bluetooth"
+            ]
+        },
         "modules-left": [
-            "custom/arch",
+            "group/power",
             "clock",
             "hyprland/workspaces",
             "custom/cava"
@@ -12,13 +21,9 @@
             "hyprland/window"
         ],
         "modules-right": [
-            "tray",
             "custom/playerctl",
-            "pulseaudio",
-            "pulseaudio#microphone",
-            "temperature",
-            "network",
-            "bluetooth"
+            "group/audio",
+            "group/system"
         ],
         "include": [
             "~/.config/waybar/default-modules.jsonc"
@@ -27,6 +32,16 @@
     {
         "output": ["eDP-1"],
         "position": "top",
+        "group/system": {
+            "orientation": "inherit",
+            "modules": [
+                "tray",
+                "battery",
+                "backlight",
+                "network",
+                "bluetooth"
+            ]
+        },
         "modules-left": [
             "custom/arch",
             "clock",
@@ -37,14 +52,9 @@
             
         ],
         "modules-right": [
-            "tray",
             "custom/playerctl",
-            "pulseaudio",
-            "pulseaudio#microphone",
-            "battery",
-            "backlight",
-            "network",
-            "bluetooth"
+            "group/audio",
+            "group/system"
         ],
         "include": [
             "~/.config/waybar/default-modules.jsonc"
