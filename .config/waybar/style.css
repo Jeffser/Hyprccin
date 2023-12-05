@@ -16,6 +16,7 @@ window#waybar {
     background: mix(@theme_bg_color, transparent, 0.1);
     color: @theme_fg_color;
     border-radius: 10px;
+    padding: 0px;
 }
 
 tooltip {
@@ -47,8 +48,8 @@ tooltip {
 }
 
 #workspaces button:hover {
-    background: @theme_fg_color;
-    color: @theme_bg_color;
+  color: @theme_bg_color;
+  background-color: mix(@theme_selected_bg_color, @theme_fg_color, 0.5);
 }
 
 #temperature {
@@ -63,7 +64,7 @@ tooltip {
     color: mix(@BANANA, @theme_fg_color, 0.5);
 }
 
-#workspaces {
+#workspaces { 
     padding: 0px;
 }
 
@@ -85,6 +86,13 @@ tooltip {
 
 #clock {
     color: mix(@ORANGE, @theme_fg_color, 0.3);
+}
+
+/*Cool background for groups and widgets*/
+#workspaces,
+#light,
+#audio {
+  background: mix(@theme_selected_bg_color, @theme_bg_color, 0.8);
 }
 
 #custom-arch {
@@ -164,7 +172,7 @@ widget > * {
 }
 
 
-#pulseaudio-slider slider {
+slider {
     min-height: 0px;
     min-width: 0px;
     opacity: 0;
@@ -173,13 +181,16 @@ widget > * {
     box-shadow: none;
     background-color: mix(@theme_selected_bg_color, @theme_fg_color, 0.5);
 }
-#pulseaudio-slider trough {
+trough {
     min-height: 20px;
     min-width: 80px;
     border-radius: 10px;
     background-color: mix(@theme_selected_bg_color, @theme_bg_color, 0.8);
 }
-#pulseaudio-slider highlight {
+highlight {
     min-height: 10px;
     border-radius: 10px;
+}
+#light {
+  border-radius: 10px;
 }

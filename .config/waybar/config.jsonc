@@ -36,14 +36,14 @@
             "orientation": "inherit",
             "modules": [
                 "tray",
+                "group/light",
                 "battery",
-                "backlight",
                 "network",
                 "bluetooth"
             ]
         },
         "modules-left": [
-            "custom/arch",
+            "group/power",
             "clock",
             "hyprland/workspaces",
             "custom/cava"

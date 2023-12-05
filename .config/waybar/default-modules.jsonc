@@ -79,7 +79,7 @@
         "format": "{icon}",
         "tooltip-format": "{} | {volume}%",
         "tooltip": true,
-        "format-muted": "󰖁 Muted",
+        "format-muted": "󰖁",
         "on-click": "pamixer -t",
         "on-scroll-up": "pamixer -i 5",
         "on-scroll-down": "pamixer -d 5",
@@ -149,6 +149,23 @@
         "max": 100,
         "orientation": "horizontal"
     },
+    "backlight/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal",
+        "device": "intel_backlight"
+    },
+    "group/light": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "backlight",
+            "backlight/slider"
+        ]
+    },
     //FOR POWER GROUP
     "custom/arch": {
         "format": "󰣇",
@@ -205,7 +222,7 @@
         "orientation": "inherit",
         "drawer": {
             "transition-duration": 500,
-            "transition-left-to-right": false
+            "transition-left-to-right": true
         },
         "modules": [
             "custom/arch",
