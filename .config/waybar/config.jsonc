@@ -12,6 +12,7 @@
             "hyprland/window"
         ],
         "modules-right": [
+            "tray",
             "custom/playerctl",
             "pulseaudio",
             "pulseaudio#microphone",
@@ -36,6 +37,7 @@
             
         ],
         "modules-right": [
+            "tray",
             "custom/playerctl",
             "pulseaudio",
             "pulseaudio#microphone",
@@ -49,3 +51,4 @@
         ]
     }
 ]
+
