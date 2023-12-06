@@ -35,8 +35,8 @@
         "group/system": {
             "orientation": "inherit",
             "modules": [
-                "tray",
                 "group/light",
+                "tray",
                 "battery",
                 "network",
                 "bluetooth"
@@ -49,7 +49,7 @@
             "custom/cava"
         ],
         "modules-center": [
-            
+           
         ],
         "modules-right": [
             "custom/playerctl",
