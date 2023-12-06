@@ -1,7 +1,8 @@
 # Hyprccin
 
 ## Screenie
-![1700112805_grim](https://github.com/Jeffser/Hyprland-dotfiles/assets/69224322/26e1e34b-db50-41a5-9070-8030a334f4fd)
+![1701878337_grim](https://github.com/Jeffser/Hyprccin/assets/69224322/fb3c208c-4884-4e0b-bce5-471764a6ccd0)
+
 
 # Features
 - **GTK implementation!** Wofi, Waybar, Gtklock (duh) and more will follow your gtk theme
