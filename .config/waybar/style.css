@@ -185,7 +185,7 @@ trough {
     min-height: 20px;
     min-width: 80px;
     border-radius: 10px;
-    background-color: mix(@theme_selected_bg_color, @theme_bg_color, 0.8);
+    background: mix(@theme_bg_color, transparent, 0.1);
 }
 highlight {
     min-height: 10px;
