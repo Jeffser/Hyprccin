@@ -185,13 +185,13 @@
     "custom/reboot": {
         "format": "󰜉",
         "tooltip": false,
-        "on-click": "(sleep 10 && reboot) & (notify-send --urgency=critical --expire-time=20000 --wait 'System Reboot' 'The system will reboot in 10 seconds, click to cancel' && killall sleep)",
+        "on-click": "(sleep 10 && reboot) & (notify-send --urgency=critical --expire-time=20000 --wait 'System Reboot' 'The system will reboot in 10 seconds, click to cancel' && pkill sleep)",
         "on-click-right": "reboot"
     },
     "custom/shutdown": {
         "format": "󰐥",
         "tooltip": false,
-        "on-click": "(sleep 10 && shutdown now) & (notify-send --urgency=critical --expire-time=20000 --wait 'System Shutdown' 'The system will shutdown in 10 seconds, click to cancel' && killall sleep)",
+        "on-click": "(sleep 10 && shutdown now) & (notify-send --urgency=critical --expire-time=20000 --wait 'System Shutdown' 'The system will shutdown in 10 seconds, click to cancel' && pkill sleep)",
         "on-click-right": "shutdown now"
     },
     "custom/sleep": {
