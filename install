@@ -45,6 +45,11 @@ echo -e "${COLOR_INFO}Making scripts executable...${COLOR_RESET}"
 chmod u+rwx .config/waybar/scripts/* || { echo "${COLOR_ERROR}Failed to change permissions for .config/waybar/scripts/*${COLOR_RESET}"; }
 chmod u+rwx .config/hypr/xdg-portal-hyprland || { echo "${COLOR_ERROR}Failed to change permissions for .config/hypr/xdg-portal-hyprland${COLOR_RESET}"; }
 
+# Enabling Hyprland plugins using hyprpm
+echo -e "${COLOR_INFO}Enabling plugins using Hyprpm...${COLOR_RESET}"
+hyprpm add https://github.com/Duckonaut/split-monitor-workspaces || { echo "${COLOR_ERROR}Failed to add 'split-monitor-workspaces' plugin${COLOR_RESET}"; }
+hyprpm enable split-monitor-workspaces || { echo "${COLOR_ERROR}Failed to enable 'split-monitor-workspaces' plugin${COLOR_RESET}"; }
+
 # Removing desktop entries that I don't use
 echo -e "${COLOR_INFO}Removing desktop entries...${COLOR_RESET}"
 (cd /usr/share/applications && sudo rm avahi-discover.desktop bssh.desktop bvnc.desktop lstopo.desktop qv4l2.desktop qvidcap.desktop thunar-bulk-rename.desktop thunar-settings.desktop thunar-volman-settings.desktop) || { echo "${COLOR_ERROR}Failed to remove desktop unnecesary desktop entries${COLOR_RESET}"}
