@@ -9,7 +9,7 @@ ly
 waybar
 brightnessctl
 cliphist
-gtklock
+swaylock-effects-git
 swayidle
 wofi
 wlogout

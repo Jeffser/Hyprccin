@@ -181,7 +181,7 @@
   "custom/lock": {
     "format": "󰌾",
     "tooltip": false,
-    "on-click": "gtklock"
+    "on-click": "swaylock"
   },
   "custom/reboot": {
     "format": "󰜉",
