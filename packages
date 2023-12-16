@@ -33,7 +33,8 @@ gvfs
 bluez
 bluez-utils
 nwg-look-bin
-xdg-desktop-portal-hyprland
+xdg-desktop-portal-hyprland-git
+xdg-desktop-portal
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts
