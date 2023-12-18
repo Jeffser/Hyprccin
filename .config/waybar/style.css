@@ -43,8 +43,8 @@ tooltip {
 }
 
 #workspaces button.urgent {
-    color: @theme_fg_color;
-    background: @LIME;
+    color: @theme_bg_color;
+    background: @theme_selected_bg_color;
 }
 
 #workspaces button:hover {
