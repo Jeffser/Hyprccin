@@ -38,6 +38,26 @@
     "format": "{: %I:%M %p}",
     "tooltip-format": "<big> {:%Y/%m/%d}</big>\n<tt><small>{calendar}</small></tt>"
   },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
   "backlight": {
     "device": "intel_backlight",
     "format": "{icon} {percent}%",
@@ -186,13 +206,13 @@
   "custom/reboot": {
     "format": "󰜉",
     "tooltip": false,
-    "on-click": "(sleep 10 && reboot) & (notify-send --urgency=critical --expire-time=20000 --wait 'System Reboot' 'The system will reboot in 10 seconds, click to cancel' && pkill sleep)",
+    "on-click": "if [ $(notify-send -e -w -A 'Reboot' -A 'Cancel' -i ~/.config/neofetch/pfp.jpg 'Bye bye?' 'Are you sure you want to reboot the PC?') -eq 0 ]; then reboot; fi",
     "on-click-right": "reboot"
   },
   "custom/shutdown": {
     "format": "󰐥",
     "tooltip": false,
-    "on-click": "(sleep 10 && shutdown now) & (notify-send --urgency=critical --expire-time=20000 --wait 'System Shutdown' 'The system will shutdown in 10 seconds, click to cancel' && pkill sleep)",
+    "on-click": "if [ $(notify-send -e -w -A 'Power off' -A 'Cancel' -i ~/.config/neofetch/pfp.jpg 'Bye bye?' 'Are you sure you want to power off the PC?') -eq 0 ]; then shutdown now; fi",
     "on-click-right": "shutdown now"
   },
   "custom/sleep": {
