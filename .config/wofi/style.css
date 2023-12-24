@@ -3,6 +3,7 @@ window {
   font-family: "jetbrains mono nerd font";
   border-radius: 20px;
   background-color: @theme_bg_color;
+  border: solid 2px @theme_selected_bg_color;
 }
 #input {
   border-radius: 10px;
