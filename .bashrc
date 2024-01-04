@@ -26,4 +26,6 @@ echo -e "                  \e[1;37mDistro:   \e[32m${OS_NAME^}" | cut -c1-$COLUM
 echo -e "                  \e[1;37mTerminal: \e[33m${TERM^}" | cut -c1-$COLUMNS
 if [ "$(playerctl status 2>&1 | tr -d '\n')" != "No players found" ]; then
   echo -e "                  \e[1;37mPlaying:  \e[31m$(playerctl metadata title | sed -e 's/ - YouTube Music//; s/ - YouTube//; s/&/\&amp;/g; s/"/\\\"/g' | tr -d '\n')" | cut -c1-$(($COLUMNS + 12))
+else
+  echo
 fi
