@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+clear
+OS_NAME=$(cat /etc/*-release | grep PRETTY_NAME | cut -d '"' -f 2)
+
+if [ "$TERM" == "xterm-kitty" ]; then
+  kitten icat --clear
+  kitten icat --place 15x15@2x1 ~/.face
+  SPACES=16
+else
+  SPACES=0
+fi
+
+write_line () {
+  for i in $(seq $SPACES $END); do
+    echo -n -e " "
+  done
+  echo -e "\e[1;37m$LINE" | cut -c1-$(($COLUMNS + 12))
+}
+
+LINES=(
+  "Welcome   \e[34m${USER^}!"
+  "Hostname: \e[36m${HOSTNAME^}"
+  "Desktop:  \e[35m${XDG_CURRENT_DESKTOP^}"
+  "Distro:   \e[32m${OS_NAME^}"
+  "Terminal: \e[33m${TERM^}"
+)
+for LINE in "${LINES[@]}"; do
+  write_line
+  if [ "$SPACES" != 0 ]; then SPACES=18; fi
+  
+done
+
+if [ "$(playerctl status 2>&1 | tr -d '\n')" != "No players found" ]; then
+  LINE="Playing:  \e[31m$(playerctl metadata title | sed -e 's/ - YouTube Music//; s/ - YouTube//; s/&/\&amp;/g; s/"/\\\"/g' | tr -d '\n')"
+  write_line
+fi
