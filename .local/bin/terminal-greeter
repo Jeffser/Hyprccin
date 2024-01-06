@@ -1,9 +1,22 @@
 #!/usr/bin/env bash
+# CHECK ARGUMENTS
+arg_lines=false
+arg_no_image=false
+
+for arg in "$@"; do
+  if [ "$arg" = "--lines" ]; then
+    arg_lines=true #Add lines at bottom
+  fi
+  if [ "$arg" = "--no_image" ]; then
+    arg_no_image=true
+  fi
+done
+
 clear
+
 OS_NAME=$(cat /etc/*-release | grep PRETTY_NAME | cut -d '"' -f 2)
 
-if [ "$TERM" == "xterm-kitty" ]; then
-  kitten icat --clear
+if [ "$TERM" == "xterm-kitty" ] && [ "$arg_no_image" = false ]; then
   kitten icat --place 15x15@2x1 ~/.face
   SPACES=16
 else
@@ -14,7 +27,7 @@ write_line () {
   for i in $(seq $SPACES $END); do
     echo -n -e " "
   done
-  echo -e "\e[1;37m$LINE" | cut -c1-$(($COLUMNS + 12))
+  echo -e "\e[1;37m$LINE" | cut -c1-$(($COLUMNS - 3))
 }
 
 LINES=(
@@ -36,8 +49,10 @@ else
   echo
 fi
 
-LINE="-"
-for i in $(seq $(($COLUMNS - $SPACES - 1)) $END); do
-  LINE="${LINE}-"
-done
-#write_line
+if $arg_lines; then
+  LINE="-"
+  for i in $(seq $(($COLUMNS - $SPACES - 1)) $END); do
+    LINE="${LINE}-"
+  done
+  write_line
+fi
