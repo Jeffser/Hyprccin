@@ -7,6 +7,7 @@
 .control-center {
   background: mix(@theme_bg_color, transparent, 0.1);
   border-radius: 10px;
+  border: 2px solid @theme_selected_bg_color;
 }
 .text-button {
   border: none;
