@@ -28,8 +28,8 @@ echo -e "${COLOR_INFO}Enabling Flathub...${COLOR_RESET}"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || { echo "${COLOR_ERROR}Failed to enable Flathub${COLOR_RESET}"; }
 
 # Enable ly
-echo -e "${COLOR_INFO}Enabling lightdm...${COLOR_RESET}"
-sudo systemctl enable lightdm || { echo "${COLOR_ERROR}Failed to enable lightdm${COLOR_RESET}"; }
+echo -e "${COLOR_INFO}Enabling sddm...${COLOR_RESET}"
+sudo systemctl enable sddm || { echo "${COLOR_ERROR}Failed to enable sddm${COLOR_RESET}"; }
 
 # Enable bluetooth
 echo -e "${COLOR_INFO}Enabling bluetooth...${COLOR_RESET}"
