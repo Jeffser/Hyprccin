@@ -6,8 +6,8 @@ kitty
 cava
 neofetch
 uwufetch
-greetd
-greetd-gtkgreet
+lightdm
+lightdm-gtk-greeter
 waybar
 brightnessctl
 cliphist
