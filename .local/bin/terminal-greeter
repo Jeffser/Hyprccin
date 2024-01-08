@@ -42,7 +42,7 @@ for LINE in "${LINES[@]}"; do
   if [ "$SPACES" != 0 ]; then SPACES=18; fi 
 done
 
-if [ "$(playerctl status 2>&1 | tr -d '\n')" != "No players found" ]; then
+if [ "$(playerctl metadata 2>&1 | tr -d '\n')" != "No player could handle this command" ]; then
   LINE="󰝚 Playing:  \e[31m$(playerctl metadata title | sed -e 's/ - YouTube Music//; s/ - YouTube//; s/&/\&amp;/g; s/"/\\\"/g' | tr -d '\n')"
   write_line
 else
