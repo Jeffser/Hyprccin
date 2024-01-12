@@ -1,0 +1,160 @@
+#!/usr/bin/python3
+
+from colorthief import ColorThief
+import os, re, sys
+os.system(f"hyprctl hyprpaper preload {sys.argv[2]}")
+os.system(f"hyprctl hyprpaper wallpaper \"{sys.argv[1]},{sys.argv[2]}\"")
+color_thief = ColorThief(sys.argv[2])
+palette = color_thief.get_palette(color_count=6)
+
+def isDark(palette):
+    result=0
+    count=len(palette)
+    for color in palette:
+        result += (color[0] + color[1] + color[2]) / 3
+    result /= count
+    return result < 132
+
+# From https://stackoverflow.com/questions/61488790/how-can-i-proportionally-mix-colors-in-python
+def mix(d):
+  d_items = sorted(d.items())
+  tot_weight = sum(d.values())
+  red = int(sum([int(k[:2], 16)*v for k, v in d_items])/tot_weight)
+  green = int(sum([int(k[2:4], 16)*v for k, v in d_items])/tot_weight)
+  blue = int(sum([int(k[4:6], 16)*v for k, v in d_items])/tot_weight)
+  zpad = lambda x: x if len(x)==2 else '0' + x
+  return zpad(hex(red)[2:]) + zpad(hex(green)[2:]) + zpad(hex(blue)[2:])
+
+def rgb2hex(rgb): return '%02x%02x%02x' % rgb
+
+colors = {
+    "STRAWBERRY_100": "FF9262",
+    "STRAWBERRY_300": "FF793E",
+    "STRAWBERRY_500": "F15D22",
+    "STRAWBERRY_700": "CF3B00",
+    "STRAWBERRY_900": "AC1800",
+    "ORANGE_100": "FFDB91",
+    "ORANGE_300": "FFCA40",
+    "ORANGE_500": "FAA41A",
+    "ORANGE_700": "DE8800",
+    "ORANGE_900": "C26C00",
+    "BANANA_100": "FFFFA8",
+    "BANANA_300": "FFFA7D",
+    "BANANA_500": "FFCE51",
+    "BANANA_700": "D1A023",
+    "BANANA_900": "A27100",
+    "LIME_100": "A2F3BE",
+    "LIME_300": "8ADBA6",
+    "LIME_500": "73C48F",
+    "LIME_700": "479863",
+    "LIME_900": "1C6D38",
+    "BLUEBERRY_100": "94A6FF",
+    "BLUEBERRY_300": "6A7CE0",
+    "BLUEBERRY_500": "3F51B5",
+    "BLUEBERRY_700": "213397",
+    "BLUEBERRY_900": "031579",
+    "GRAPE_100": "D25DE6",
+    "GRAPE_300": "B84ACB",
+    "GRAPE_500": "9C27B0",
+    "GRAPE_700": "830E97",
+    "GRAPE_900": "6A007E",
+    "COCOA_100": "9F9792",
+    "COCOA_300": "7B736E",
+    "COCOA_500": "574F4A",
+    "COCOA_700": "463E39",
+    "COCOA_900": "342C27",
+    "SILVER_100": "EEEEEE",
+    "SILVER_300": "CCCCCC",
+    "SILVER_500": "AAAAAA",
+    "SILVER_700": "888888",
+    "SILVER_900": "666666",
+    "SLATE_100": "888888",
+    "SLATE_300": "666666",
+    "SLATE_500": "444444",
+    "SLATE_700": "222222",
+    "SLATE_900": "111111",
+    "BLACK_100": "474341",
+    "BLACK_300": "403C3A",
+    "BLACK_500": "393634",
+    "BLACK_700": "33302F",
+    "BLACK_900": "2B2928",
+    "blue_1": "99c1f1",
+    "blue_2": "62a0ea",
+    "blue_3": "3584e4",
+    "blue_4": "1c71d8",
+    "blue_5": "1a5fb4",
+    "green_1": "8ff0a4",
+    "green_2": "57e389",
+    "green_3": "33d17a",
+    "green_4": "2ec27e",
+    "green_5": "26a269",
+    "yellow_1": "f9f06b",
+    "yellow_2": "f8e45c",
+    "yellow_3": "f6d32d",
+    "yellow_4": "f5c211",
+    "yellow_5": "e5a50a",
+    "orange_1": "ffbe6f",
+    "orange_2": "ffa348",
+    "orange_3": "ff7800",
+    "orange_4": "e66100",
+    "orange_5": "c64600",
+    "red_1": "f66151",
+    "red_2": "ed333b",
+    "red_3": "e01b24",
+    "red_4": "c01c28",
+    "red_5": "a51d2d",
+    "purple_1": "dc8add",
+    "purple_2": "c061cb",
+    "purple_3": "9141ac",
+    "purple_4": "813d9c",
+    "purple_5": "613583",
+    "brown_1": "cdab8f",
+    "brown_2": "b5835a",
+    "brown_3": "986a44",
+    "brown_4": "865e3c",
+    "brown_5": "63452c",
+    "light_1": "ffffff",
+    "light_2": "f6f5f4",
+    "light_3": "deddda",
+    "light_4": "c0bfbc",
+    "light_5": "9a9996",
+    "dark_1": "77767b",
+    "dark_2": "5e5c64",
+    "dark_3": "3d3846",
+    "dark_4": "241f31",
+    "dark_5": "000000"
+}
+
+def modifyColors():
+   global colors, palette
+   for key, value in colors.items():
+      colors[key] = mix({value: .8, rgb2hex(palette[0]): .5})
+
+def modifyCSS():
+  files = [
+      "gtk-3.0/gtk.css",
+      "gtk-3.0/gtk-dark.css",
+      "gtk-4.0/gtk.css",
+      "gtk-4.0/gtk-dark.css"
+    ]
+  for file in files:
+    with open(os.path.expanduser("~/.local/share/themes/AutoColor/" + file), "r") as f:
+      text = f.read()
+    for key, value in colors.items():
+      pattern = re.escape(f"@define-color {key} ") + r"#[0-9A-Fa-f]+;"
+      replacement = f"@define-color {key} #{value};"
+      text = re.sub(pattern, replacement, text)
+    with open(os.path.expanduser("~/.local/share/themes/AutoColor/" + file), "w") as f:
+      f.write(text)
+
+modifyColors()
+
+colors["theme_fg_color"] = "ffffff" if isDark(palette) else "000000"
+colors["theme_bg_color"] = '%02x%02x%02x' % palette[0]
+colors["theme_base_color"] = '%02x%02x%02x' % palette[1]
+colors["theme_selected_bg_color"] = '%02x%02x%02x' % palette[2]
+
+modifyCSS()
+os.system("gsettings set org.gnome.desktop.interface color-scheme prefer-" + ("dark" if isDark(palette) else "light"))
+os.system("gsettings set org.gnome.desktop.interface gtk-theme ''")
+os.system("gsettings set org.gnome.desktop.interface gtk-theme 'AutoColor'")
