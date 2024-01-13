@@ -5,7 +5,7 @@ import os, re, sys
 os.system(f"hyprctl hyprpaper preload {sys.argv[2]}")
 os.system(f"hyprctl hyprpaper wallpaper \"{sys.argv[1]},{sys.argv[2]}\"")
 color_thief = ColorThief(sys.argv[2])
-palette = color_thief.get_palette(color_count=6)
+palette = color_thief.get_palette(color_count=3)
 
 def isDark(palette):
     result=0
@@ -13,7 +13,7 @@ def isDark(palette):
     for color in palette:
         result += (color[0] + color[1] + color[2]) / 3
     result /= count
-    return result < 132
+    return result < 164
 
 # From https://stackoverflow.com/questions/61488790/how-can-i-proportionally-mix-colors-in-python
 def mix(d):
