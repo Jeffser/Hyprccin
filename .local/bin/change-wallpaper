@@ -2,18 +2,27 @@
 
 from colorthief import ColorThief
 import os, re, sys
-os.system(f"hyprctl hyprpaper preload {sys.argv[2]}")
-os.system(f"hyprctl hyprpaper wallpaper \"{sys.argv[1]},{sys.argv[2]}\"")
-color_thief = ColorThief(sys.argv[2])
+display = sys.argv[1]
+background = os.path.expanduser(sys.argv[2])
+print("Preloading new wallpaper...")
+os.system(f"hyprctl hyprpaper preload {background}")
+print("Setting new wallpaper...")
+os.system(f"hyprctl hyprpaper wallpaper \"{display},{background}\"")
+print("Getting color palette from image...")
+color_thief = ColorThief(background)
 palette = color_thief.get_palette(color_count=3)
+print("ok")
 
 def isDark(palette):
+    print("Checking if theme should be dark or light...")
     result=0
     count=len(palette)
     for color in palette:
         result += (color[0] + color[1] + color[2]) / 3
     result /= count
-    return result < 164
+    result = result < 132
+    print("Dark!" if result else "Light!")
+    return result
 
 # From https://stackoverflow.com/questions/61488790/how-can-i-proportionally-mix-colors-in-python
 def mix(d):
@@ -126,35 +135,51 @@ colors = {
 }
 
 def modifyColors():
-   global colors, palette
-   for key, value in colors.items():
-      colors[key] = mix({value: .8, rgb2hex(palette[0]): .5})
+  print("Modifying colors...")
+  global colors, palette
+  for key, value in colors.items():
+    colors[key] = mix({value: .8, rgb2hex(palette[0]): .5})
+  print("ok")
 
 def modifyCSS():
+  print("Modifying css...")
   files = [
-      "gtk-3.0/gtk.css",
-      "gtk-3.0/gtk-dark.css",
-      "gtk-4.0/gtk.css",
-      "gtk-4.0/gtk-dark.css"
-    ]
+    "gtk-3.0/gtk.css",
+    "gtk-3.0/gtk-dark.css",
+    "gtk-4.0/gtk.css",
+    "gtk-4.0/gtk-dark.css"
+  ]
   for file in files:
+    print(f"* {file}...", end=" ")
     with open(os.path.expanduser("~/.local/share/themes/AutoColor/" + file), "r") as f:
       text = f.read()
     for key, value in colors.items():
       pattern = re.escape(f"@define-color {key} ") + r"#[0-9A-Fa-f]+;"
-      replacement = f"@define-color {key} #{value};"
+      if value[0] != "@":
+        value = f"#{value}"
+      replacement = f"@define-color {key} {value};"
       text = re.sub(pattern, replacement, text)
     with open(os.path.expanduser("~/.local/share/themes/AutoColor/" + file), "w") as f:
       f.write(text)
-
+    print("ok")
+  print("ok")
 modifyColors()
 
 colors["theme_fg_color"] = "ffffff" if isDark(palette) else "000000"
 colors["theme_bg_color"] = '%02x%02x%02x' % palette[0]
 colors["theme_base_color"] = '%02x%02x%02x' % palette[1]
 colors["theme_selected_bg_color"] = '%02x%02x%02x' % palette[2]
+colors["accent_bg_color"] = "@theme_bg_color"
+colors["accent_color"] = "@theme_selected_bg_color"
 
 modifyCSS()
+print("Saving changes...")
+os.system("cp ~/.local/share/themes/AutoColor/gtk-4.0/gtk.css ~/.config/gtk-4.0/")
+os.system("cp ~/.local/share/themes/AutoColor/gtk-4.0/gtk-dark.css ~/.config/gtk-4.0/")
+print("ok")
+print("Reloading themes...")
 os.system("gsettings set org.gnome.desktop.interface color-scheme prefer-" + ("dark" if isDark(palette) else "light"))
 os.system("gsettings set org.gnome.desktop.interface gtk-theme ''")
 os.system("gsettings set org.gnome.desktop.interface gtk-theme 'AutoColor'")
+print("ok")
+print("Everything is done, some Adwaita apps need a relogin to change their themes... yeah, thanks adwaita")
