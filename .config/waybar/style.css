@@ -1,8 +1,8 @@
-@define-color LIME #a6e3a1;
-@define-color STRAWBERRY #FF3040;
-@define-color BLUEBERRY #89b4fa;
-@define-color BANANA #f9e2af;
-@define-color ORANGE #fab387;
+@define-color LIME @LIME_900;
+@define-color STRAWBERRY @STRAWBERRY_900;
+@define-color BLUEBERRY @BLUEBERRY_900;
+@define-color BANANA @BANANA_900;
+@define-color ORANGE @ORANGE_900;
 
 * {
     border: none;
@@ -15,7 +15,7 @@
 window#waybar {
     background: mix(@theme_bg_color, transparent, 0.1);
     color: @theme_fg_color;
-    border-radius: 0 0 10px 10px;
+    border-radius: 10px 10px 10px 10px;
     padding: 0;
 }
 
@@ -96,7 +96,7 @@ tooltip {
 #workspaces,
 #light,
 #audio {
-  background: mix(@theme_selected_bg_color, @theme_bg_color, 0.8);
+  background: mix(@theme_selected_bg_color, @theme_bg_color, 0.5);
 }
 
 #custom-arch {
