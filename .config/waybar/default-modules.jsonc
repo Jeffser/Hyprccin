@@ -206,13 +206,13 @@
   "custom/reboot": {
     "format": "󰜉",
     "tooltip": false,
-    "on-click": "if [ $(notify-send -e -w -u critical -A 'Reboot' -A 'Cancel' -i $HOME/.face 'Bye bye?' 'Are you sure you want to reboot the PC?') -eq 0 ]; then reboot; fi",
+    "on-click": "if [ $(notify-send -e -w -u critical -A 'Reboot' -A 'Cancel' -i $(busctl get-property org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User IconFile | grep -o '\".*\"' | tr -d '\"') 'Bye bye?' 'Are you sure you want to reboot the PC?') -eq 0 ]; then reboot; fi",
     "on-click-right": "reboot"
   },
   "custom/shutdown": {
     "format": "󰐥",
     "tooltip": false,
-    "on-click": "if [ $(notify-send -e -w -u critical -A 'Power off' -A 'Cancel' -i $HOME/.face 'Bye bye?' 'Are you sure you want to power off the PC?') -eq 0 ]; then shutdown now; fi",
+    "on-click": "if [ $(notify-send -e -w -u critical -A 'Power off' -A 'Cancel' -i $(busctl get-property org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User IconFile | grep -o '\".*\"' | tr -d '\"') 'Bye bye?' 'Are you sure you want to power off the PC?') -eq 0 ]; then shutdown now; fi",
     "on-click-right": "shutdown now"
   },
   "custom/sleep": {
