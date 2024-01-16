@@ -17,7 +17,7 @@ clear
 OS_NAME=$(cat /etc/*-release | grep PRETTY_NAME | cut -d '"' -f 2)
 
 if [ "$TERM" == "xterm-kitty" ] && [ "$arg_no_image" = false ]; then
-  kitten icat --place 15x15@2x1 ~/.face
+  kitten icat --place 15x15@2x1 $(busctl get-property org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User IconFile | grep -o '".*"' | tr -d '"')
   SPACES=16
 else
   SPACES=0
