@@ -1,4 +1,4 @@
-timeout 300 'brightnessctl -s set 20%' resume 'brightnessctl -r'
+timeout 300 'brightnessctl -s set 20% & notify-send -e -w -u critical -i $(busctl get-property org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User IconFile | grep -o "\".*\"" | tr -d "\"") "Bye bye" "The system will be suspended shortly"' resume 'brightnessctl -r & swaync-client --close-latest'
 timeout 330 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'
 timeout 420 'systemctl suspend'
 before-sleep 'swaylock'
