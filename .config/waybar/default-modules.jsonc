@@ -126,18 +126,20 @@
     "on-click": "pamixer --default-source -t",
     "on-scroll-up": "pamixer --default-source -i 5",
     "on-scroll-down": "pamixer --default-source -d 5",
-    "scroll-step": 5
+    "scroll-step": 5,
+    "tooltip": false
   },
   "temperature": {
     "thermal-zone": 2,
     "format": " {temperatureC}°C",
     "critical-threshold": 80,
-    "format-critical": " {temperatureC}°C"
+    "format-critical": " {temperatureC}°C",
+    "tooltip": false
   },
   "network": {
     "format-wifi": " {signalStrength}%",
     "format-ethernet": "󰈀 {ipaddr}",
-    "tooltip-format": "{essid} - {ifname} via {gwaddr}",
+    "tooltip-format": "{ifname} via {gwaddr}",
     "format-linked": "{ifname} (No IP)",
     "format-disconnected": "⚠ Disconnected",
     "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}"
