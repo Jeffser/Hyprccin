@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import subprocess, json, os, sys, random, shutil
+import subprocess, json, os, sys, random
 if len(sys.argv) != 2: wallpaper_directory = os.path.expanduser("~/.config/hypr/wallpapers/")
 else: wallpaper_directory = os.path.expanduser(sys.argv[1])
 monitors = json.loads(subprocess.check_output("hyprctl -j monitors", shell=True).decode("utf-8"))
@@ -8,6 +8,6 @@ wallpapers = [os.path.join(wallpaper_directory, f) for f in os.listdir(wallpaper
 for monitor in monitors:
     wallpaper = random.choice(wallpapers)
     wallpapers.remove(wallpaper)
-    if monitor['id'] == 0 and shutil.which("update-theme") is not None: os.system("update-theme " + wallpaper)
+    if monitor['id'] == 0: os.system("~/.local/bin/update-theme " + wallpaper)
     os.system(f"hyprctl hyprpaper preload {wallpaper}")
     os.system(f"hyprctl hyprpaper wallpaper '{monitor['name']},{wallpaper}'")
