@@ -4,9 +4,9 @@
   "passthrough": false,
   "gtk-layer-shell": true,
   "height": 40,
-  "margin-top": 10,
-  "margin-left": 10,
-  "margin-right": 10,
+  "margin-top": 0,
+  "margin-left": 0,
+  "margin-right": 0,
   "hyprland/window": {
     "format": "{}",
     "on-click-right": "hyprctl dispatch killactive",

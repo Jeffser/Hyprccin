@@ -15,7 +15,7 @@
 window#waybar {
     background: mix(@theme_bg_color, transparent, 0.1);
     color: @theme_fg_color;
-    border-radius: 10px 10px 10px 10px;
+    /*border-radius: 10px 10px 10px 10px;*/
     padding: 0;
 }
 
