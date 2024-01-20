@@ -4,6 +4,7 @@ location=center
 show=drun
 prompt=Search...
 filter_rate=100
+single_click=true
 allow_markup=true
 no_actions=true
 halign=fill
