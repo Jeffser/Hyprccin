@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import subprocess, json, os, sys, random, shutil
-if len(sys.argv) != 2: wallpaper_directory = os.path.expanduser("~/.config/hypr/wallpapers/anime")
+if len(sys.argv) != 2: wallpaper_directory = os.path.expanduser("~/.config/hypr/wallpapers/")
 else: wallpaper_directory = os.path.expanduser(sys.argv[1])
 monitors = json.loads(subprocess.check_output("hyprctl -j monitors", shell=True).decode("utf-8"))
 wallpapers = [os.path.join(wallpaper_directory, f) for f in os.listdir(wallpaper_directory) if os.path.isfile(os.path.join(wallpaper_directory, f))]
