@@ -8,6 +8,6 @@ wallpapers = [os.path.join(wallpaper_directory, f) for f in os.listdir(wallpaper
 for monitor in monitors:
     wallpaper = random.choice(wallpapers)
     wallpapers.remove(wallpaper)
-    if monitor['id'] == 0: os.system("~/.local/bin/update-theme " + wallpaper)
     os.system(f"hyprctl hyprpaper preload {wallpaper}")
     os.system(f"hyprctl hyprpaper wallpaper '{monitor['name']},{wallpaper}'")
+    if monitor['id'] == 0: os.system("~/.local/bin/update-theme " + wallpaper)
