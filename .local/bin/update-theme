@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+#WARNING: this is trash code, I will recode it eventualy
+
 from colorthief import ColorThief
 import os, re, sys, random
 if len(sys.argv) < 2:
@@ -166,10 +168,23 @@ def modifyCSS():
   print("ok")
 modifyColors()
 
+def invert_hex_color(hex_color):
+
+    # Convert the hex color to its integer representation
+    color_int = int(hex_color, 16)
+
+    # Invert the color using bitwise XOR with 0xFFFFFF (white)
+    inverted_color_int = color_int ^ 0xFFFFFF
+
+    # Convert the inverted integer back to hex and format it with leading zeros
+    inverted_hex_color = "{:06X}".format(inverted_color_int)
+
+    return inverted_hex_color
+
 colors["theme_fg_color"] = "ffffff" if isDark(palette) else "000000"
 colors["theme_bg_color"] = '%02x%02x%02x' % palette[0]
-colors["theme_base_color"] = '%02x%02x%02x' % palette[1]
-colors["theme_selected_bg_color"] = '%02x%02x%02x' % palette[2]
+colors["theme_base_color"] = invert_hex_color('%02x%02x%02x' % palette[0])
+colors["theme_selected_bg_color"] =  invert_hex_color('%02x%02x%02x' % palette[0])
 colors["accent_bg_color"] = "@theme_bg_color"
 colors["accent_color"] = "@theme_selected_bg_color"
 
