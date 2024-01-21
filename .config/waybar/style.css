@@ -96,7 +96,7 @@ tooltip {
 #workspaces,
 #light,
 #audio {
-  background: mix(@theme_selected_bg_color, @theme_bg_color, 0.5);
+  background: mix(@theme_selected_bg_color, @theme_bg_color, 0.75);
 }
 
 #custom-arch {
