@@ -23,7 +23,7 @@ def isDark(palette):
     for color in palette:
         result += (color[0] + color[1] + color[2]) / 3
     result /= count
-    result = result < 164
+    result = result < 132
     print("Dark!" if result else "Light!")
     return result
 
