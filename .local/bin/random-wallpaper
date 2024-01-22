@@ -10,4 +10,4 @@ for monitor in monitors:
     wallpapers.remove(wallpaper)
     os.system(f"hyprctl hyprpaper preload {wallpaper}")
     os.system(f"hyprctl hyprpaper wallpaper '{monitor['name']},{wallpaper}'")
-    if monitor['id'] == 0: os.system(f"~/.local/bin/update-theme {wallpaper} random")
+    if monitor['id'] == 0: os.system(f"~/.local/bin/update-theme {wallpaper}")

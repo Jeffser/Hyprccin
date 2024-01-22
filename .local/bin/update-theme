@@ -1,148 +1,17 @@
 #!/usr/bin/python3
 
-#WARNING: this is trash code, I will recode it eventualy
-
 from colorthief import ColorThief
-import os, re, sys, random
-if len(sys.argv) < 2:
-    print("Usage: update-theme <path to image> random (optional)")
+import os, re, sys
+if len(sys.argv) != 2:
+    print("Usage: update-theme <path to image>")
     exit()
 image = os.path.expanduser(sys.argv[1])
 print("Getting color palette from image...")
 color_thief = ColorThief(image)
-palette = color_thief.get_palette(color_count=6)
-if len(sys.argv) > 2 and sys.argv[2] == "random": random.shuffle(palette)
+palette = color_thief.get_palette(color_count=2)
 print("Colors:")
 for color in palette: print(color)
 print("ok")
-
-def isDark(palette):
-    print("Checking if theme should be dark or light...")
-    result=0
-    count=len(palette)
-    for color in palette:
-        result += (color[0] + color[1] + color[2]) / 3
-    result /= count
-    result = result < 132
-    print("Dark!" if result else "Light!")
-    return result
-
-# From https://stackoverflow.com/questions/61488790/how-can-i-proportionally-mix-colors-in-python
-def mix(d):
-  d_items = sorted(d.items())
-  tot_weight = sum(d.values())
-  red = int(sum([int(k[:2], 16)*v for k, v in d_items])/tot_weight)
-  green = int(sum([int(k[2:4], 16)*v for k, v in d_items])/tot_weight)
-  blue = int(sum([int(k[4:6], 16)*v for k, v in d_items])/tot_weight)
-  zpad = lambda x: x if len(x)==2 else '0' + x
-  return zpad(hex(red)[2:]) + zpad(hex(green)[2:]) + zpad(hex(blue)[2:])
-
-def rgb2hex(rgb): return '%02x%02x%02x' % rgb
-
-colors = {
-    "STRAWBERRY_100": "FF9262",
-    "STRAWBERRY_300": "FF793E",
-    "STRAWBERRY_500": "F15D22",
-    "STRAWBERRY_700": "CF3B00",
-    "STRAWBERRY_900": "AC1800",
-    "ORANGE_100": "FFDB91",
-    "ORANGE_300": "FFCA40",
-    "ORANGE_500": "FAA41A",
-    "ORANGE_700": "DE8800",
-    "ORANGE_900": "C26C00",
-    "BANANA_100": "FFFFA8",
-    "BANANA_300": "FFFA7D",
-    "BANANA_500": "FFCE51",
-    "BANANA_700": "D1A023",
-    "BANANA_900": "A27100",
-    "LIME_100": "A2F3BE",
-    "LIME_300": "8ADBA6",
-    "LIME_500": "73C48F",
-    "LIME_700": "479863",
-    "LIME_900": "1C6D38",
-    "BLUEBERRY_100": "94A6FF",
-    "BLUEBERRY_300": "6A7CE0",
-    "BLUEBERRY_500": "3F51B5",
-    "BLUEBERRY_700": "213397",
-    "BLUEBERRY_900": "031579",
-    "GRAPE_100": "D25DE6",
-    "GRAPE_300": "B84ACB",
-    "GRAPE_500": "9C27B0",
-    "GRAPE_700": "830E97",
-    "GRAPE_900": "6A007E",
-    "COCOA_100": "9F9792",
-    "COCOA_300": "7B736E",
-    "COCOA_500": "574F4A",
-    "COCOA_700": "463E39",
-    "COCOA_900": "342C27",
-    "SILVER_100": "EEEEEE",
-    "SILVER_300": "CCCCCC",
-    "SILVER_500": "AAAAAA",
-    "SILVER_700": "888888",
-    "SILVER_900": "666666",
-    "SLATE_100": "888888",
-    "SLATE_300": "666666",
-    "SLATE_500": "444444",
-    "SLATE_700": "222222",
-    "SLATE_900": "111111",
-    "BLACK_100": "474341",
-    "BLACK_300": "403C3A",
-    "BLACK_500": "393634",
-    "BLACK_700": "33302F",
-    "BLACK_900": "2B2928",
-    "blue_1": "99c1f1",
-    "blue_2": "62a0ea",
-    "blue_3": "3584e4",
-    "blue_4": "1c71d8",
-    "blue_5": "1a5fb4",
-    "green_1": "8ff0a4",
-    "green_2": "57e389",
-    "green_3": "33d17a",
-    "green_4": "2ec27e",
-    "green_5": "26a269",
-    "yellow_1": "f9f06b",
-    "yellow_2": "f8e45c",
-    "yellow_3": "f6d32d",
-    "yellow_4": "f5c211",
-    "yellow_5": "e5a50a",
-    "orange_1": "ffbe6f",
-    "orange_2": "ffa348",
-    "orange_3": "ff7800",
-    "orange_4": "e66100",
-    "orange_5": "c64600",
-    "red_1": "f66151",
-    "red_2": "ed333b",
-    "red_3": "e01b24",
-    "red_4": "c01c28",
-    "red_5": "a51d2d",
-    "purple_1": "dc8add",
-    "purple_2": "c061cb",
-    "purple_3": "9141ac",
-    "purple_4": "813d9c",
-    "purple_5": "613583",
-    "brown_1": "cdab8f",
-    "brown_2": "b5835a",
-    "brown_3": "986a44",
-    "brown_4": "865e3c",
-    "brown_5": "63452c",
-    "light_1": "ffffff",
-    "light_2": "f6f5f4",
-    "light_3": "deddda",
-    "light_4": "c0bfbc",
-    "light_5": "9a9996",
-    "dark_1": "77767b",
-    "dark_2": "5e5c64",
-    "dark_3": "3d3846",
-    "dark_4": "241f31",
-    "dark_5": "000000"
-}
-
-def modifyColors():
-  print("Modifying colors...")
-  global colors, palette
-  for key, value in colors.items():
-    colors[key] = mix({value: 1, rgb2hex(palette[0]): .5})
-  print("ok")
 
 def modifyCSS():
   print("Modifying css...")
@@ -166,27 +35,15 @@ def modifyCSS():
       f.write(text)
     print("ok")
   print("ok")
-modifyColors()
 
-def invert_hex_color(hex_color):
-
-    # Convert the hex color to its integer representation
-    color_int = int(hex_color, 16)
-
-    # Invert the color using bitwise XOR with 0xFFFFFF (white)
-    inverted_color_int = color_int ^ 0xFFFFFF
-
-    # Convert the inverted integer back to hex and format it with leading zeros
-    inverted_hex_color = "{:06X}".format(inverted_color_int)
-
-    return inverted_hex_color
-
-colors["theme_fg_color"] = "ffffff" if isDark(palette) else "000000"
-colors["theme_bg_color"] = '%02x%02x%02x' % palette[0]
-colors["theme_base_color"] = invert_hex_color('%02x%02x%02x' % palette[0])
-colors["theme_selected_bg_color"] =  invert_hex_color('%02x%02x%02x' % palette[0])
-colors["accent_bg_color"] = "@theme_bg_color"
-colors["accent_color"] = "@theme_selected_bg_color"
+colors = {
+  "theme_fg_color": "ffffff" if (palette[0][0]+palette[0][1]+palette[0][2]) / 3 < 132 else "000000",
+  "theme_bg_color": '%02x%02x%02x' % palette[0],
+  "theme_base_color": '%02x%02x%02x' % palette[1],
+  "theme_selected_bg_color": '%02x%02x%02x' % palette[2],
+  "accent_bg_color": "@theme_bg_color",
+  "accent_color": "@theme_selected_bg_color"
+}
 
 modifyCSS()
 print("Saving changes...")
@@ -194,7 +51,7 @@ os.system("cp ~/.local/share/themes/AutoColor/gtk-4.0/gtk.css ~/.config/gtk-4.0/
 os.system("cp ~/.local/share/themes/AutoColor/gtk-4.0/gtk-dark.css ~/.config/gtk-4.0/")
 print("ok")
 print("Reloading themes...")
-os.system("gsettings set org.gnome.desktop.interface color-scheme prefer-" + ("dark" if isDark(palette) else "light"))
+os.system("gsettings set org.gnome.desktop.interface color-scheme prefer-" + ("dark" if (palette[0][0]+palette[0][1]+palette[0][2]) / 3 < 132 else "light"))
 os.system("gsettings set org.gnome.desktop.interface gtk-theme ''")
 os.system("gsettings set org.gnome.desktop.interface gtk-theme 'AutoColor'")
 print("ok")
