@@ -49,3 +49,8 @@
   border: none;
   background: transparent;
 }
+.widget-mpris-player {
+  background: mix(@theme_selected_bg_color, @theme_bg_color, 0.75);
+  margin: 10px;
+  border-radius: 10px;
+}
