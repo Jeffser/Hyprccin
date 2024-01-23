@@ -7,6 +7,7 @@
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+alias presentation-mode='hyprctl keyword monitor HDMI-A-1,1920x1080@60,0x0,1,mirror,eDP-1'
 
 PS1='[\u@\h \W]\$ '
 
