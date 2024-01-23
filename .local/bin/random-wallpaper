@@ -5,9 +5,12 @@ if len(sys.argv) != 2: wallpaper_directory = os.path.expanduser("~/.config/hypr/
 else: wallpaper_directory = os.path.expanduser(sys.argv[1])
 monitors = json.loads(subprocess.check_output("hyprctl -j monitors", shell=True).decode("utf-8"))
 wallpapers = [os.path.join(wallpaper_directory, f) for f in os.listdir(wallpaper_directory) if os.path.isfile(os.path.join(wallpaper_directory, f))]
+wallpaper_for_theme = None
 for monitor in monitors:
     wallpaper = random.choice(wallpapers)
     wallpapers.remove(wallpaper)
     os.system(f"hyprctl hyprpaper preload {wallpaper}")
     os.system(f"hyprctl hyprpaper wallpaper '{monitor['name']},{wallpaper}'")
-    if monitor['id'] == 0: os.system(f"~/.local/bin/update-theme {wallpaper}")
+    if monitor['id'] == 0: wallpaper_for_theme = wallpaper
+if wallpaper_for_theme is not None: os.system(f"~/.local/bin/update-theme {wallpaper_for_theme}")
+
