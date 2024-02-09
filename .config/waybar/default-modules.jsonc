@@ -198,7 +198,7 @@
   "custom/quit": {
     "format": "󰍃",
     "tooltip": false,
-    "on-click": "hyprctl dispatch exit"
+    "on-click": "killall -9 Hyprland"
   },
   "custom/lock": {
     "format": "󰌾",
