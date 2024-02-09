@@ -1906,7 +1906,7 @@ button.combo:only-child:disabled {
   padding: 6px;
   border-radius: 12px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 3px 3px 0 rgba(0, 0, 0, 0.18), 0 3px 6px 0 rgba(0, 0, 0, 0.12), inset 0 1px rgba(255, 255, 255, 0.1);
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   color: #FFFFFF;
 }
 
@@ -2628,7 +2628,7 @@ popover > arrow,
 popover > contents {
   transition: box-shadow 200ms ease-out;
   padding: 6px;
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   border-radius: 12px;
   color: #FFFFFF;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -2667,7 +2667,7 @@ popover > contents > box > button {
 
 popover .view:not(:selected),
 popover toolbar {
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
 }
 
 popover.menu button,
@@ -4978,7 +4978,7 @@ window.messagedialog .response-area button:only-child, window.dialog.message .di
 }
 
 window.dialog.message.background {
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
 }
 
 window.dialog.message box.dialog-vbox.vertical {
@@ -4999,12 +4999,12 @@ window.dialog.message .titlebar {
   min-height: 24px;
   border-style: none;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   color: #FFFFFF;
 }
 
 window.dialog.message .titlebar:backdrop {
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   color: rgba(255, 255, 255, 0.7);
 }
 
@@ -5038,7 +5038,7 @@ window.aboutdialog.background.csd scrolledwindow.frame, window.aboutdialog.backg
  * AdwMessageDialog *
  ********************/
 window.messagedialog {
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   color: #FFFFFF;
 }
 
@@ -5525,7 +5525,7 @@ colorchooser .popover.osd {
   transition: box-shadow 200ms ease-out;
   border-radius: 6px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 3px 3px 0 rgba(0, 0, 0, 0.18), 0 3px 6px 0 rgba(0, 0, 0, 0.12), inset 0 1px rgba(255, 255, 255, 0.1);
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
 }
 
 colorchooser .popover.osd:backdrop {
@@ -5715,7 +5715,7 @@ shortcut > .keycap {
   border: solid 1px rgba(255, 255, 255, 0.12);
   border-radius: 7px;
   box-shadow: inset 0 -2px rgba(255, 255, 255, 0.12);
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   color: #FFFFFF;
   font-size: smaller;
 }
@@ -7788,12 +7788,12 @@ toolbarview.undershoot-bottom scrolledwindow > undershoot.bottom {
 }
 
 .sidebar-pane banner > revealer > widget {
-  background-color: gtkmix(#8caaee, @theme_bg_color, 30%);
+  background-color: mix(#8caaee, @theme_bg_color, 30%);
   color: #FFFFFF;
 }
 
 .sidebar-pane banner > revealer > widget:backdrop {
-  background-color: gtkmix(#8caaee, @theme_bg_color, 30%);
+  background-color: mix(#8caaee, @theme_bg_color, 30%);
 }
 
 /* Middle pane in three-pane setups */
@@ -7811,13 +7811,13 @@ toolbarview.undershoot-bottom scrolledwindow > undershoot.bottom {
 
 .content-pane .sidebar-pane banner > revealer > widget,
 .sidebar-pane .content-pane banner > revealer > widget {
-  background-color: gtkmix(#8caaee, @theme_bg_color, 30%);
+  background-color: mix(#8caaee, @theme_bg_color, 30%);
   color: #FFFFFF;
 }
 
 .content-pane .sidebar-pane banner > revealer > widget:backdrop,
 .sidebar-pane .content-pane banner > revealer > widget:backdrop {
-  background-color: gtkmix(#8caaee, @theme_bg_color, 30%);
+  background-color: mix(#8caaee, @theme_bg_color, 30%);
 }
 
 .sidebar-pane:dir(ltr), .sidebar-pane:dir(ltr) banner > revealer > widget, .sidebar-pane.end:dir(rtl), .sidebar-pane.end:dir(rtl) banner > revealer > widget,
@@ -8251,13 +8251,13 @@ text color for entries, views and content in general */
 @define-color theme_text_color #FFFFFF;
 /*
 widget base background color */
-@define-color theme_bg_color #4e2245;
+@define-color theme_bg_color #2d2e35;
 /*
 text widgets and the like base background color */
-@define-color theme_base_color #e46993;
+@define-color theme_base_color #bc7569;
 /*
 base background color of selections */
-@define-color theme_selected_bg_color #983e69;
+@define-color theme_selected_bg_color #65ab8c;
 /*
 text/foreground color of selections */
 @define-color theme_selected_fg_color rgba(0, 0, 0, 0.87);
@@ -8426,9 +8426,9 @@ FIXME this is really an API */
 /* GTK NAMED COLORS
    ----------------
    use responsibly! */
-@define-color accent_bg_color #8caaee;
+@define-color accent_bg_color @theme_bg_color;
 @define-color accent_fg_color rgba(0, 0, 0, 0.87);
-@define-color accent_color #8caaee;
+@define-color accent_color @theme_selected_bg_color;
 @define-color destructive_bg_color #F44336;
 @define-color destructive_fg_color #FFFFFF;
 @define-color destructive_color #F44336;

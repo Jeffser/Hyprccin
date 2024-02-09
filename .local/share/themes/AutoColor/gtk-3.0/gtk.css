@@ -1260,7 +1260,7 @@ frame.documents-dropdown, .app-notification, toolbar.osd {
   padding: 6px;
   border-radius: 12px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 3px 3px 0 rgba(0, 0, 0, 0.18), 0 3px 6px 0 rgba(0, 0, 0, 0.12), inset 0 1px rgba(255, 255, 255, 0.1);
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
 }
 
 frame.documents-dropdown:backdrop, .app-notification:backdrop, toolbar.osd:backdrop {
@@ -1954,7 +1954,7 @@ menubar > menuitem > window.popup.background > menu menuitem,
 menu {
   margin: 6px;
   padding: 6px;
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   background-clip: border-box;
   border-radius: 12px;
   border: 1px solid #494c5c;
@@ -2023,7 +2023,7 @@ menu > arrow {
   min-height: 16px;
   min-width: 16px;
   padding: 4px;
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   color: rgba(255, 255, 255, 0.7);
 }
 
@@ -2061,7 +2061,7 @@ menu separator {
 popover.background {
   transition: box-shadow 200ms ease-out;
   padding: 0;
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   border-radius: 12px;
 }
 
@@ -2103,7 +2103,7 @@ popover.background > scrolledwindow > viewport.frame > list > row {
 
 popover.background .view:not(:selected),
 popover.background toolbar {
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
 }
 
 popover.background .linked > button:not(.radio) {
@@ -4017,7 +4017,7 @@ colorchooser .popover.osd {
   transition: box-shadow 200ms ease-out;
   border-radius: 6px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 3px 3px 0 rgba(0, 0, 0, 0.18), 0 3px 6px 0 rgba(0, 0, 0, 0.12), inset 0 1px rgba(255, 255, 255, 0.1);
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
 }
 
 colorchooser .popover.osd:backdrop {
@@ -4093,7 +4093,7 @@ tooltip.csd decoration {
 messagedialog.background.csd decoration {
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   background-clip: border-box;
 }
 
@@ -4234,7 +4234,7 @@ cursor-handle.insertion-cursor:dir(ltr), cursor-handle.insertion-cursor:dir(rtl)
   border: solid 1px rgba(255, 255, 255, 0.12);
   border-radius: 7px;
   box-shadow: inset 0 -2px rgba(255, 255, 255, 0.12);
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   color: #FFFFFF;
   font-size: smaller;
 }
@@ -4673,7 +4673,7 @@ window.org-gnome-gedit > overlay > box.vertical > paned.gedit-side-panel-paned s
 .gedit-search-slider {
   margin: 0 6px 10px;
   padding: 6px;
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   border-radius: 0 0 12px 12px;
   box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.05), 0 4px 6px 0 rgba(0, 0, 0, 0.06), 0 1px 10px 0 rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.75);
 }
@@ -4700,7 +4700,7 @@ window.org-gnome-gedit > overlay > box.vertical > paned.gedit-side-panel-paned s
 }
 
 .gedit-search-slider .linked:not(.vertical) > entry:not(.error) {
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
 }
 
 .gedit-search-slider .linked:not(.vertical) > entry.error ~ button {
@@ -6068,7 +6068,7 @@ overlay > revealer.right > scrolledwindow.frame {
 
 .terminix-session-sidebar,
 .tilix-session-sidebar {
-  background-image: image(#414559);
+  background-image: image(mix(@theme_bg_color, #FFFFFF, 0.8));
 }
 
 .terminal-titlebar button {
@@ -6144,7 +6144,7 @@ window.background > box.vertical > scrolledwindow > widget toolbar button {
  * Chromium *
  ************/
 window.background.chromium {
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
 }
 
 window.background.chromium entry,
@@ -6211,7 +6211,7 @@ tooltip.background.chromium {
 }
 
 #MozillaGtkWidget > widget text {
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
 }
 
 #MozillaGtkWidget > widget text:selected {
@@ -6671,7 +6671,7 @@ PanelApplet.wnck-applet .wnck-pager:selected {
   border: 1px solid rgba(0, 0, 0, 0.25);
   border-radius: 7px;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
 }
 
 #MatePanelPopupWindow frame > border {
@@ -6717,7 +6717,7 @@ na-tray-applet {
   border: 1px solid rgba(0, 0, 0, 0.25);
   border-radius: 7px;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
 }
 
 .mate-panel-applet-slider frame > border {
@@ -6735,7 +6735,7 @@ na-tray-applet {
 
 #mate-menu {
   border: 1px solid rgba(0, 0, 0, 0.25);
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
 }
 
 #mate-menu button {
@@ -6770,7 +6770,7 @@ na-tray-applet {
 
 .brisk-menu {
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
 }
 
 .brisk-menu entry {
@@ -6972,7 +6972,7 @@ na-tray-applet {
   border: 1px solid rgba(0, 0, 0, 0.25);
   border-radius: 7px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 3px 3px 0 rgba(0, 0, 0, 0.18), 0 3px 6px 0 rgba(0, 0, 0, 0.12), inset 0 1px rgba(255, 255, 255, 0.1);
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
 }
 
 .lock-dialog frame > border {
@@ -7559,7 +7559,7 @@ frame.raven-frame > border {
 }
 
 .raven {
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 15px 16px 2px rgba(0, 0, 0, 0.14), 0 6px 18px 5px rgba(0, 0, 0, 0.12);
 }
 
@@ -7762,14 +7762,14 @@ image.raven-mpris {
   margin: 36px;
   padding: 6px;
   border-radius: 12px;
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 15px 16px 2px rgba(0, 0, 0, 0.14), 0 6px 18px 5px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.75);
 }
 
 .budgie-session-dialog,
 .budgie-polkit-dialog,
 .budgie-run-dialog {
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   border: none;
   box-shadow: none;
   padding: 0;
@@ -8152,7 +8152,7 @@ menubar.-vala-panel-background > menuitem:disabled {
 #restart_dialog {
   border-radius: 6px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15), 0 3px 3px 0 rgba(0, 0, 0, 0.18), 0 3px 6px 0 rgba(0, 0, 0, 0.12), inset 0 1px rgba(255, 255, 255, 0.1);
-  background-color: #414559;
+  background-color: mix(@theme_bg_color, #FFFFFF, 0.8);
   color: #FFFFFF;
 }
 
@@ -8320,13 +8320,13 @@ text color for entries, views and content in general */
 @define-color theme_text_color #FFFFFF;
 /*
 widget base background color */
-@define-color theme_bg_color #4e2245;
+@define-color theme_bg_color #2d2e35;
 /*
 text widgets and the like base background color */
-@define-color theme_base_color #e46993;
+@define-color theme_base_color #bc7569;
 /*
 base background color of selections */
-@define-color theme_selected_bg_color #983e69;
+@define-color theme_selected_bg_color #65ab8c;
 /*
 text/foreground color of selections */
 @define-color theme_selected_fg_color rgba(0, 0, 0, 0.87);
