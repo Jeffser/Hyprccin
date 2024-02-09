@@ -5,13 +5,10 @@
 
 
 # Features
-- **GTK implementation!** Wofi, Waybar and more will follow your gtk theme
-- **Easily modifiable** I didn't do anything too crazy, you can figure out the config files easily
-- **Install script avaible** There's a script meant to be run once you install Arch, that way you can have a nice Hyprland session as soon as you install Arch
-
-## Requirements for Script
-- `git`
-- `base-devel`
+- **GTK implementation!:** Wofi, Waybar and more will follow your gtk theme
+- **Easily modifiable:** I didn't do anything too crazy, you can figure out the config files easily
+- **Install script avaible:** There's a script meant to be run once you install Arch, that way you can have a nice Hyprland session as soon as you install Arch
+- **AutoColor GTK theme:** Automatically changes the colors of most applications from an image (like Android's 'Material You')
 
 ## Install Script
 
