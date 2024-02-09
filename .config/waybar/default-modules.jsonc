@@ -198,7 +198,7 @@
   "custom/quit": {
     "format": "󰍃",
     "tooltip": false,
-    "on-click": "killall -9 Hyprland"
+    "on-click": "if [ $(notify-send -e -w -u critical -A 'Logout' -A 'Cancel' -i $(busctl get-property org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User IconFile | grep -o '\".*\"' | tr -d '\"') 'Bye bye?' 'Are you sure you want to logout?') -eq 0 ]; then killall -9 Hyprland; fi"
   },
   "custom/lock": {
     "format": "󰌾",
