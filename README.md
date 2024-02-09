@@ -19,13 +19,13 @@ This script is meant to be run once you installed Arch, if you already have Hypr
 
 This script does the following:
 
-1) Install `yay`
+1) Install `yay` if needed
 2) Install [packages](packages)
-3) Enable `Flathub`
+3) Enable `Flathub` repository
 4) Enable `sddm`
 5) Enable `bluetooth`
-6) Copy [.config](.config) and [.bashrc](.bashrc)
-7) Make `waybar` scripts and `.config/hypr/xdg-portal-hyprland` executable
-8) Remove desktop entries I don't use
-9) Creates default directories `xdg-user-dirs-update`
-10) Applies a GTK Catppuccin theme
+6) Copy [.config](.config), [.bashrc](.bashrc) and [.local](.local)
+7) Make `waybar` scripts and `.local/bin/*` executable
+8) Creates default directories `xdg-user-dirs-update`
+9) Applies AutoColor GTK theme
+10) Removes minimize maximize and close buttons from apps
