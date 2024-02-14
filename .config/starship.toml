@@ -3,6 +3,10 @@ show_always = true
 
 [cmd_duration]
 show_milliseconds = false
+disabled = true
 
 [hostname]
 ssh_only = false
+
+[[battery.display]]
+threshold = 15
