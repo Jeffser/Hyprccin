@@ -34,12 +34,6 @@
     "format-en": "en",
     "format-es": "es"
   },
-  "custom/cava": {
-    "format": "{}",
-    "tooltip": false,
-    "exec": "cava -p ~/.config/cava/config-waybar | while read -r line; do echo \"${line//;/}\" | sed 'y/012345678/'\" ▁▂▃▄▅▆▇█\"'/'; done",
-    "return-type": "text"
-  },
   "tray": {
     "icon-size": 18,
     "spacing": 0

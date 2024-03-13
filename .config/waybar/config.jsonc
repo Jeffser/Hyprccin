@@ -17,13 +17,12 @@
       "group/power",
       "clock",
       "hyprland/workspaces",
-      "custom/cava"
+      "custom/playerctl"
     ],
     "modules-center": [
       "hyprland/window"
     ],
     "modules-right": [
-      "custom/playerctl",
       "group/audio",
       "group/system",
       "custom/notification"
@@ -51,13 +50,12 @@
       "group/power",
       "clock",
       "hyprland/workspaces",
-      "custom/cava"
+      "custom/playerctl"
     ],
     "modules-center": [
       "hyprland/window"
     ],
     "modules-right": [
-      "custom/playerctl",
       "group/audio",
       "group/system",
       "custom/notification"
