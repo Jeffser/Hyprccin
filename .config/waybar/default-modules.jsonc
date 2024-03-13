@@ -3,7 +3,7 @@
   "exclusive": true,
   "passthrough": false,
   "gtk-layer-shell": true,
-  "height": 40,
+  "height": 20,
   "margin-top": 0,
   "margin-left": 0,
   "margin-right": 0,
@@ -54,9 +54,9 @@
     "return-type": "json",
     "exec-if": "which swaync-client",
     "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
+    "on-click": "swaync-client -t",
     "on-click-right": "swaync-client -d -sw",
-    "escape": true
+    "escape": false
   },
   "backlight": {
     "device": "intel_backlight",
@@ -160,7 +160,7 @@
     "on-click": "playerctl play-pause",
     "on-scroll-up": "playerctl next",
     "on-scroll-down": "playerctl previous",
-    "scroll-step": 10,
+    "smooth-scrolling-threshold": 10,
     "return-type": "json",
     "format-icons": {
       "Playing": "󰎈",
