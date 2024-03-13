@@ -1,0 +1,15 @@
+#!/bin/bash
+
+title=$(playerctl metadata title | sed -e 's/ - YouTube Music//; s/ - YouTube//; s/&/\&amp;/g; s/"/\\\"/g' | tr -d '\n')
+status=$(playerctl status | tr -d '\n')
+
+if [ ! -z "$title" ]; then
+    if [[ "$1" == "-json" ]]
+    then
+        echo "{\"alt\": \"$status\", \"tooltip\": \"$title\", \"text\": \"$title\"}" 
+    else
+        icon="󰏤"
+        if [[ $status == Playing ]]; then icon="󰎈"; fi
+        echo "$icon $title"
+    fi
+fi

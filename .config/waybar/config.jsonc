@@ -53,7 +53,9 @@
       "hyprland/workspaces",
       "custom/cava"
     ],
-    "modules-center": [],
+    "modules-center": [
+      "hyprland/window"
+    ],
     "modules-right": [
       "custom/playerctl",
       "group/audio",

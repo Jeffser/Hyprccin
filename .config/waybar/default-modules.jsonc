@@ -9,8 +9,18 @@
   "margin-right": 0,
   "hyprland/window": {
     "format": "{}",
+    "rewrite": {
+      "(.*) - YouTube Music — Mozilla Firefox": "🦊 $1 🎶",
+      "(.*) — Mozilla Firefox": "🦊 $1",
+      "Cisco Packet Tracer - (.*)": "💾 $1",
+      "nvim (.*)": "🗒️ $1",
+      "~(.*)": "🐱 🏠$1",
+      "(.*) - Thunar": "📁 $1",
+      "(.*) - Visual Studio Code": "💻 $1",
+      "(.*) - Discord": "🗨️ $1"
+    },
     "on-click-right": "hyprctl dispatch killactive",
-    "max-length": 200
+    "max-length": 100
   },
   "hyprland/workspaces": {
     "disable-scroll": false,
@@ -27,7 +37,7 @@
   "custom/cava": {
     "format": "{}",
     "tooltip": false,
-    "exec": "~/.config/waybar/scripts/waybar-cava.sh",
+    "exec": "cava -p ~/.config/cava/config-waybar | while read -r line; do echo \"${line//;/}\" | sed 'y/012345678/'\" ▁▂▃▄▅▆▇█\"'/'; done",
     "return-type": "text"
   },
   "tray": {
@@ -156,7 +166,7 @@
     "interval": 1,
     "format": "{icon} {}",
     "max-length": 40,
-    "exec": "~/.config/waybar/scripts/playerctl.sh",
+    "exec": "~/.local/bin/getsong -json",
     "on-click": "playerctl play-pause",
     "on-scroll-up": "playerctl next",
     "on-scroll-down": "playerctl previous",
@@ -208,14 +218,14 @@
   "custom/reboot": {
     "format": "󰜉",
     "tooltip": false,
-    "on-click": "if [ $(notify-send -e -w -u critical -A 'Reboot' -A 'Cancel' -i $(busctl get-property org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User IconFile | grep -o '\".*\"' | tr -d '\"') 'Bye bye?' 'Are you sure you want to reboot the PC?') -eq 0 ]; then reboot; fi",
-    "on-click-right": "reboot"
+    "on-click": "if [ $(notify-send -e -w -u critical -A 'Reboot' -A 'Cancel' -i $(busctl get-property org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User IconFile | grep -o '\".*\"' | tr -d '\"') 'Bye bye?' 'Are you sure you want to reboot the PC?') -eq 0 ]; then systemctl reboot; fi",
+    "on-click-right": "systemctl reboot"
   },
   "custom/shutdown": {
     "format": "󰐥",
     "tooltip": false,
-    "on-click": "if [ $(notify-send -e -w -u critical -A 'Power off' -A 'Cancel' -i $(busctl get-property org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User IconFile | grep -o '\".*\"' | tr -d '\"') 'Bye bye?' 'Are you sure you want to power off the PC?') -eq 0 ]; then shutdown now; fi",
-    "on-click-right": "shutdown now"
+    "on-click": "if [ $(notify-send -e -w -u critical -A 'Power off' -A 'Cancel' -i $(busctl get-property org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User IconFile | grep -o '\".*\"' | tr -d '\"') 'Bye bye?' 'Are you sure you want to power off the PC?') -eq 0 ]; then systemctl poweroff; fi",
+    "on-click-right": "systemctl poweroff"
   },
   "custom/sleep": {
     "format": "󰒲",
@@ -245,7 +255,7 @@
     "orientation": "inherit",
     "drawer": {
       "transition-duration": 500,
-      "transition-left-to-right": true
+      "transition-left-to-right": false
     },
     "modules": [
       "custom/arch",
