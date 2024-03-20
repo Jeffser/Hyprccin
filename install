@@ -62,7 +62,7 @@ chmod u+rwx .config/waybar/scripts/* || { echo "${COLOR_ERROR}Failed to change p
 
 # Creating default directories
 echo -e "${COLOR_INFO}Creating default user directories...${COLOR_RESET}"
-sudo xdg-user-dirs-update --force || { echo "${COLOR_ERROR}Failed to create default user directories${COLOR_RESET}"; }
+xdg-user-dirs-update --force || { echo "${COLOR_ERROR}Failed to create default user directories${COLOR_RESET}"; }
 
 # Applying default auto color theme
 echo -e "${COLOR_INFO}Applying GTK theme for auto color change...${COLOR_RESET}"
