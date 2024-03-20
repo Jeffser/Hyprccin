@@ -10,31 +10,40 @@ COLOR_ERROR="\e[47;31m"
 
 # Check if running as root
 if [ "$(id -u)" -eq "0" ]; then
-    echo -e "${COLOR_ERROR}Do not run this as root${COLOR_RESET}"
-    exit
+	echo -e "${COLOR_ERROR}Do not run this as root${COLOR_RESET}"
+	exit
 fi
 
 # Check if yay is not installed
-if ! command -v yay &> /dev/null
-then
-  # Install yay
-  echo -e "${COLOR_INFO}Installing yay...${COLOR_RESET}"
-  sudo pacman --needed --noconfirm -S git base-devel
-  git clone https://aur.archlinux.org/yay-git.git ~/yay-git || { echo "${COLOR_ERROR}Failed to clone yay${COLOR_RESET}"; exit 1; }
-  (cd ~/yay-git && makepkg -si) || { echo "${COLOR_ERROR}Failed to install yay${COLOR_RESET}"; exit 1; }
+if ! command -v yay &>/dev/null; then
+	# Install yay
+	echo -e "${COLOR_INFO}Installing yay...${COLOR_RESET}"
+	sudo pacman --needed --noconfirm -S git base-devel
+	git clone https://aur.archlinux.org/yay-git.git ~/.cache/yay-git || {
+		echo "${COLOR_ERROR}Failed to clone yay${COLOR_RESET}"
+		exit 1
+	}
+	(cd ~/.cache/yay-git && makepkg -si --noconfirm) || {
+		echo "${COLOR_ERROR}Failed to install yay${COLOR_RESET}"
+		exit 1
+	}
 fi
 
 # Install required packages
 echo -e "${COLOR_INFO}Installing required packages...${COLOR_RESET}"
-yay --needed --noconfirm -S - < ./packages || { echo "${COLOR_ERROR}Failed to install required packages${COLOR_RESET}"; exit 1; }
+yay --needed --noconfirm -S - <./packages || {
+	echo "${COLOR_ERROR}Failed to install required packages${COLOR_RESET}"
+	exit 1
+}
 
 # Enable Flathub
 echo -e "${COLOR_INFO}Enabling Flathub...${COLOR_RESET}"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || { echo "${COLOR_ERROR}Failed to enable Flathub${COLOR_RESET}"; }
 
-# Enable sddm
-echo -e "${COLOR_INFO}Enabling sddm...${COLOR_RESET}"
-sudo systemctl enable sddm || { echo "${COLOR_ERROR}Failed to enable sddm${COLOR_RESET}"; }
+# Enable "autologin"
+echo -e "${COLOR_INFO}Enabling autologin...${COLOR_RESET}"
+sudo mkdir /etc/systemd/system/getty@tty1.service.d/
+sudo echo -e "[Service]\nExecStart=\nExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin $USER %I $TERM" | sudo tee /etc/systemd/system/getty@tty1.service.d/autostart.conf || { echo "${COLOR_ERROR}Failed to enable autologin${COLOR_RESET}"; }
 
 # Enable bluetooth
 echo -e "${COLOR_INFO}Enabling bluetooth...${COLOR_RESET}"
@@ -53,11 +62,17 @@ chmod u+rwx .config/waybar/scripts/* || { echo "${COLOR_ERROR}Failed to change p
 
 # Creating default directories
 echo -e "${COLOR_INFO}Creating default user directories...${COLOR_RESET}"
-xdg-user-dirs-update --force || { echo "${COLOR_ERROR}Failed to create default user directories${COLOR_RESET}"; }
+sudo xdg-user-dirs-update --force || { echo "${COLOR_ERROR}Failed to create default user directories${COLOR_RESET}"; }
 
 # Applying default auto color theme
 echo -e "${COLOR_INFO}Applying GTK theme for auto color change...${COLOR_RESET}"
 gsettings set org.gnome.desktop.interface gtk-theme "AutoColor" || { echo "${COLOR_ERROR}Failed to apply default theme${COLOR_RESET}"; }
+
+#Giving Flatpak permissions to use theme
+echo -e "${COLOR_INFO}Giving Flatpak permissions to use theme...${COLOR_RESET}"
+sudo flatpak override --filesystem=xdg-config/gtk-3.0:ro || { echo "${COLOR_ERROR}Failed to give flatpak access to xdg-config/gtk-3.0:ro${COLOR_RESET}"; }
+sudo flatpak override --filesystem=xdg-config/gtk-4.0:ro || { echo "${COLOR_ERROR}Failed to give flatpak access to xdg-config/gtk-4.0:ro${COLOR_RESET}"; }
+sudo flatpak override --filesystem=xdg-data/themes:ro || { echo "${COLOR_ERROR}Failed to give flatpak access to xdg-data/themes:ro${COLOR_RESET}"; }
 
 # Removing window buttons (minimize, maximize, close)
 echo -e "${COLOR_INFO}Removing window buttons (minimize, maximize, close)...${COLOR_RESET}"

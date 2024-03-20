@@ -17,7 +17,10 @@
       "~(.*)": "🐱 🏠$1",
       "(.*) - Thunar": "📁 $1",
       "(.*) - Visual Studio Code": "💻 $1",
-      "(.*) - Discord": "🗨️ $1"
+      "(.*) - Discord": "🗨️ $1",
+      "(.*) - Image Viewer(.*)": "🖼️ $1$2",
+      "(.*) - Azure Data Studio": "🗄️ $1",
+      "(.*) - Oracle VM VirtualBox": "💽 $1"
     },
     "on-click-right": "hyprctl dispatch killactive",
     "max-length": 100
