@@ -1,0 +1,285 @@
+/*IMPORTS*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+/*TEMP CSS*/
+body {
+    background-color: gray;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+.gradient-text {
+    font-size: 150%;
+    background: -webkit-linear-gradient(10deg, #0AA3EB, #0BDACA);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#modal-widget {
+    position: fixed;
+    z-index: 10000;
+    inset: 0 0 0 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+#modal-widget #window-background {
+    position: fixed;
+    inset: 0 0 0 0;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+#modal-widget #window {
+    max-width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+}
+#modal-widget #window > #content {
+    height: 100%;
+}
+#welcome-widget {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+#welcome-widget > * {
+    height: 100px;
+}
+#welcome-widget #user {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+#welcome-widget #user #pfp{
+    height: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+}
+#welcome-widget #user #username {
+    font-size: 400%;
+}
+#welcome-widget #user small {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+#welcome-widget #user small #hostname {
+    flex-grow: 1;
+}
+#welcome-widget #user small #info {
+    text-decoration: underline;
+    cursor: pointer;
+}
+#welcome-widget #menu {
+    flex-grow: 1;
+}
+/*FORM WIDGET*/
+.widget,
+.form-widget {
+    background-color: white;
+    filter: drop-shadow(rgba(0, 0, 0, 0.35) 0px 5px 15px);
+    border-radius: 30px;
+    padding: 20px;
+}
+.form-widget {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 20px;
+
+    width: fit-content;
+}
+.widget #text,
+.form-widget #text {
+    width: 100%;
+    flex-grow: 1;
+}
+.widget #text h1,
+.form-widget #text h1 {
+    margin: 0;
+}
+
+
+/*FORM RANGE*/
+.form-widget.range .slider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+input[type=range] + input[type=text] {
+    border: none;
+    text-align: center;
+    width:30px;
+}
+input[type=range] {
+    -webkit-appearance: none;
+    background: #ccc;
+    border-radius: 10px;
+    height: 10px;
+    cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb,
+input[type=range]::-moz-range-thumb {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: #2196F3;
+    border: none;
+    transition: .4s;
+}
+
+
+/*FORM BOOL*/
+/*SWITCH (BOOL) STYLE*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+.switch-slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    border-radius: 50%;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+input:checked + .switch-slider {
+    background-color: #2196F3;
+}
+
+input:checked:hover + .switch-slider {
+    filter: drop-shadow(#2196F380 0px 5px 15px);
+}
+
+input:checked + .switch-slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+
+/*FORM SELECTION*/
+.form-widget.select .selection select {
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    background: #ccc;
+    transition: .4s;
+    filter: drop-shadow(rgba(0, 0, 0, 0.24) 0px 3px 3px);
+}
+.form-widget.select .selection select:hover {
+    filter: drop-shadow(#2196F380 0px 5px 15px);
+}
+
+/*FORM COLOR*/
+.form-widget.color .color-picker {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+.form-widget.color .color-picker input[type=color] {
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
+    transition: .4s;
+    cursor: pointer;
+    filter: drop-shadow(rgba(0, 0, 0, 0.24) 0px 3px 3px);
+}
+.form-widget.color .color-picker input[type="color"]::-moz-color-swatch {
+    border: none;
+}
+.form-widget.color .color-picker .transparency-slider {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: -100px;
+    width: 210px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+    filter: drop-shadow(#2196F380 0px 5px 15px);
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+    z-index: 100;
+}
+.form-widget.color .color-picker:hover .transparency-slider {
+    display: unset;
+}
+.form-widget.color .color-picker:hover .transparency-slider input[type=button] {
+    border: none;
+    border-radius: 10px;
+    background-color: #D1202A;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    margin-top: 10px;
+    width: 100%;
+}
+.form-widget.color div#action,
+.form-widget.color div#action div#colors-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.form-widget.color div#action div#colors-container {
+    border: #ccc solid;
+    padding: 5px;
+    border-radius: 20px;
+}
+.form-widget.color div#action .add-color button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: #ccc;
+    color: black;
+    cursor: pointer;
+}
+
+input[type=range]:hover::-webkit-slider-thumb,
+input[type=range]:hover::-moz-range-thumb,
+input[type=button]:hover,
+input[type=color]:hover {
+    filter: drop-shadow(#2196F380 0px 5px 15px);
+}
+button {
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    background: #ccc;
+    cursor: pointer;
+    transition: .4s;
+    filter: drop-shadow(rgba(0, 0, 0, 0.24) 0px 3px 3px);
+}
+button:hover {
+    filter: drop-shadow(#2196F380 0px 5px 15px);
+}

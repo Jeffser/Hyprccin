@@ -20,7 +20,8 @@
       "(.*) - Discord": "🗨️ $1",
       "(.*) - Image Viewer(.*)": "🖼️ $1$2",
       "(.*) - Azure Data Studio": "🗄️ $1",
-      "(.*) - Oracle VM VirtualBox": "💽 $1"
+      "(.*) - Oracle VM VirtualBox": "💽 $1",
+      "(.*) - Beekeeper Studio": "🐝 $1"
     },
     "on-click-right": "hyprctl dispatch killactive",
     "max-length": 100

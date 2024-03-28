@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <section id="widget-container">
+        <div id="modal-widget">
+            <div id="window-background"></div>
+            <div class="widget" id="window"><div id="content"></div></div>
+        </div>
+        <div class="widget" id="welcome-widget">
+            <div id="user">
+                <img src="/request/pfp" alt="" id="pfp">
+                <div id="text">
+                    <h1 class="gradient-text" id="username"></h1>
+                    <small><span class="material-symbols-outlined">computer</span><span id="hostname"></span><a id="info">System info</a></small>
+                </div>
+            </div>
+            <div id="menu">
+                <button>funny</button>
+            </div>
+        </div>
+        <div class="bool form-widget" id="decoration:drop_shadow">
+            <div id="text">
+                <h1>Window drop shadow</h1>
+                <small>decoration:drop_shadow</small>
+            </div>
+        </div>
+        <div class="range form-widget" id="general:gaps_in" data="0,20,1">
+            <div id="text">
+                <h1>Gaps in</h1>
+                <small>general:gaps_in</small>
+            </div>
+        </div>
+        <div class="select form-widget" id="general:layout" data="Dwindle|dwindle,Master|master">
+            <div id="text">
+                <h1>Layout</h1>
+                <small>general:layout</small>
+            </div>
+        </div>
+        <div class="color form-widget" id="decoration:col.shadow">
+            <div id="text">
+                <h1>Shadow color</h1>
+                <small>decoration:col.shadow</small>
+            </div>
+        </div>
+        <div class="widget">
+            <button id="save-button">Save</button>
+        </div>
+    </section>
+</body>
+</html>
