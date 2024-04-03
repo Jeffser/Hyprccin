@@ -1,6 +1,8 @@
-import os, json, re
+import os, json, re, subprocess, sys
 from flask import Flask, render_template, jsonify, send_file, request
 app = Flask(__name__)
+
+os.chdir(sys.path[0])
 
 data = {}
 def loadFile():
@@ -11,6 +13,7 @@ def loadFile():
     data["version"] = json.load(os.popen("/usr/bin/hyprctl version -j"))
     data["system-info"] = os.popen("/usr/bin/hyprctl systeminfo").read()
     data["binds"] = json.load(os.popen("/usr/bin/hyprctl binds -j"))
+
     data["config"] = json.load(open("defaults.json"))
     with open(os.path.expanduser("~/.config/hypr/hyprland.conf"), "r") as f:
         lines = f.read().splitlines()
@@ -126,7 +129,7 @@ def saveFile():
         elif b['modmask']==72: line+="SUPER_ALT"
         elif b['modmask']==8: line+="ALT"
         if b['key'] == '': b['key'] = f"code:{b['keycode']}"
-        line+=f",{b['key']},{b['dispatcher']},{b['arg']}"
+        line+=f",{b['key']},{b['dispatcher']},{b['arg']}" if b['dispatcher'] != "mouse" else f",{b['key']},{b['arg']}"
         lines.append(line)
 
     with open(os.path.expanduser("~/.config/hypr/hyprland.conf"), "w+") as f:
@@ -148,7 +151,7 @@ def getData():
 def getPfp():
     return send_file(os.popen("busctl get-property org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User IconFile | grep -o '\".*\"' | tr -d '\"'").read().replace("\n", ""), mimetype='image/png')
 
-@app.route("/receive/test", methods=["POST"])
+@app.route("/send/test", methods=["POST"])
 def test():
     for change in request.json['config'].items():
         data['config'][change[0]] = change[1]
@@ -156,7 +159,19 @@ def test():
     os.popen("hyprctl reload")
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
 
+@app.route("/send/pfp", methods=["POST"])
+def sendPfp():
+    pfp = request.files['pfp']
+    pfp.save("pfp")
+    try:
+        process = subprocess.Popen('/usr/bin/pkexec cp $(pwd)/pfp /var/lib/AccountsService/icons/$USER && busctl call org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User SetIconFile s "/var/lib/AccountsService/icons/$USER" && rm ./pfp', shell=True, stdout=subprocess.PIPE)
+        process.wait()
+    except:
+        return json.dumps({'success':False}), 500, {'ContentType':'application/json'} 
+    return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
+
 if __name__ == "__main__":
     loadFile()
     #saveFile()
+    #os.popen("xdg-open http://localhost:5000")
     app.run()

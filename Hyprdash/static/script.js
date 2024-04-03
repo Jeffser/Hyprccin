@@ -111,17 +111,36 @@ $(document).ready(function() {
         return rangeLabel;
     }
 
-    function createSelect(defaultValue, optionList) {
+    function createSelect(defaultValue, optionList, monitors) {
         var selectLabel = $("<label>").addClass("selection");
         var select = $("<select>");
         optionList.forEach(element => {
             if (typeof element === 'string' || element instanceof String) element = element.split("|");
-            var option = $("<option>").text(element[0]).val(element[1]);
-            select.append(option);
+            var option = $("<option>")
+            if (element[0] == '{MONITORS}') {
+                monitors.forEach(monitor => {
+                    var opt = option.text(monitor['make'] + " (" + monitor['name'] + ")").val(monitor['name']);
+                    select.append(opt);
+                });
+            }
+            else {
+                option.text(element[0]).val(element[1]);
+                select.append(option);
+            }
         });
         selectLabel.append(select);
         if (defaultValue) select.find("option[value='" + defaultValue + "']").prop("selected", true);
         return selectLabel;
+    }
+
+    function createEntry(defaultValue) {
+        var entryLabel = $("<label>").addClass("entry");
+        var entry = $("<input>").attr({
+            "type": "text",
+            "value": defaultValue
+        });
+        entryLabel.append(entry);
+        return entryLabel;
     }
 
     function convertToColor(colors) {
@@ -147,7 +166,7 @@ $(document).ready(function() {
 
     //RUN AT LOAD
     $.getJSON("/request/data", function(data){
-        console.log(data)
+        console.log(data['monitors'])
         $("#modal-widget > #window-background").on("click", function() {
             $(this).parent().css("display", "none");
         });
@@ -155,6 +174,37 @@ $(document).ready(function() {
         $("#welcome-widget > #user small > #hostname").text(data['system-info'].split("\nNode name: ")[1].split("\n")[0]);
         $("#welcome-widget > #user small > #info").on("click", function() {
             showModal(data['system-info'].replaceAll("\n", "<br>"));
+        });
+        $("#pfp").on("click", function() {
+            var input = $("<input />");
+            input.attr("type",'file');
+
+            input.on("change", function(e) {
+                $("#pfp").prop("disabled", true);
+                var file = e.target.files[0]; 
+                var formData = new FormData();
+                formData.append("pfp", file, file.name);
+                formData.append("upload_file", true);
+                $.ajax({
+                    type: "POST",
+                    url: "/send/pfp",
+                    success: function (data) {
+                        $("#pfp").prop("disabled", false);
+                        $("#pfp").css("background-image", "url(/request/pfp?" + new Date().getTime() + ")");
+                    },
+                    error: function (error) {
+                        $("#pfp").prop("disabled", false);
+                    },
+                    async: false,
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    timeout: 60000
+                });
+            })
+
+            input.click();
         });
         $("#save-button").on("click", function() {
             $("#save-button").prop('disabled', true);
@@ -175,10 +225,23 @@ $(document).ready(function() {
                     id = $(this).attr("id");
                     if (data['config'][id] != value) changes['config'][id] = value;
                 }
+                else if ($(this).hasClass("color")) {
+                    value = "";
+                    id = $(this).attr("id");
+                    $(this).find("input[type=color]").each(function(i, element) {
+                        value += "rgba(" + element.value.replace("#", "") + parseInt($(element).parent().find("input[type=range]")[0].value).toString(16).padStart(2, "0") + ") ";
+                    });
+                    value = value.toLowerCase();
+                    if (data['config'][id] != value) changes['config'][id] = value;
+                }
+                else if ($(this).hasClass("entry")) {
+                    value = $($(this).find("input[type=text]")).val();
+                    id = $(this).attr("id");
+                    if (data['config'][id] != value) changes['config'][id] = value;
+                }
             });
-            console.log(changes)
             $.ajax({
-                url: "/receive/test",
+                url: "/send/test",
                 type: "POST",
                 async: false,
                 cache: false,
@@ -197,10 +260,15 @@ $(document).ready(function() {
             
         });
 
+        
+        $(".form-widget").each(function() {
+            $(this).append($("<div id='text'><h1>" + $(this).attr("title") + "</h1><small>" + $(this).attr("id") + "</small></div>"));
+
+        });
         $(".form-widget.bool").each(function() {
             if ($(this).children("div#action").length > 0) return;
             $(this).append($("<div id='action'></div>"));
-            $($(this).find("div#action")).append(createBoolSwitch(data['config'][$(this).attr("id")]));
+            $($(this).find("div#action")).append(createBoolSwitch(data['config'][$(this).attr("id")] == "true"));
         });
         $(".form-widget.range").each(function() {
             if ($(this).children("div#action").length > 0) return;
@@ -214,13 +282,13 @@ $(document).ready(function() {
             const options = $(this).attr("data").split(",");
             $(this).removeAttr("data");
             $(this).append($("<div id='action'></div>"));
-            $($(this).find("div#action")).append(createSelect(data['config'][$(this).attr("id")], options));
+            $($(this).find("div#action")).append(createSelect(data['config'][$(this).attr("id")], options, data['monitors']));
         });
         $(".form-widget.color").each(function() {
             let colors = convertToColor(data['config'][$(this).attr("id")]);
             if (colors.length == 0) return;
             $(this).append($("<div id='action'></div>"));
-            if (colors.length == 1) {
+            if (colors.length == 1 && $(this).attr("data") != "multiple") {
                 $($(this).find("div#action")).append(createColorPicker(false, colors[0][0], colors[0][1]));
             }
             else {
@@ -235,6 +303,11 @@ $(document).ready(function() {
                     $($(this).find("div#colors-container")).append(createColorPicker(true, color[0], color[1]))
                 });
             }
+        });
+        $(".form-widget.entry").each(function() {
+            if ($(this).children("div#action").length > 0) return;
+            $(this).append($("<div id='action'></div>"));
+            $($(this).find("div#action")).append(createEntry(data['config'][$(this).attr("id")]));
         });
     })
 });

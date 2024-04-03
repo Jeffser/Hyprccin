@@ -79,7 +79,7 @@
     "input:touchpad:natural_scroll": false,
     "input:touchpad:scroll_factor": 1.0,
     "input:touchpad:middle_button_emulation": false,
-    "input:touchpad:tap_button_map": "",
+    "input:touchpad:tap_button_map": "lrm",
     "input:touchpad:clickfinger_behavior": false,
     "input:touchpad:tap-to-click": true,
     "input:touchpad:drag_lock": false,
