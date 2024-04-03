@@ -54,6 +54,7 @@ echo -e "${COLOR_INFO}Copying config files and bashrc...${COLOR_RESET}"
 cp -f -r .config/* ~/.config/ || { echo "${COLOR_ERROR}Failed to copy config files${COLOR_RESET}"; }
 cp -f -r .local/* ~/.local/ || { echo "${COLOR_ERROR}Failed to copy local files${COLOR_RESET}"; }
 cp -f .bashrc ~/.bashrc || { echo "${COLOR_ERROR}Failed to copy bashrc${COLOR_RESET}"; }
+cp -f .bash_profile ~/.bash_profile || { echo "${COLOR_ERROR}Failed to copy bash_profile${COLOR_RESET}"; }
 
 # Making scripts executable
 echo -e "${COLOR_INFO}Making scripts executable...${COLOR_RESET}"
