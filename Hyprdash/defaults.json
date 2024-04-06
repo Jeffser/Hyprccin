@@ -164,8 +164,6 @@
     "binds:movefocus_cycles_fullscreen": false,
     "xwayland:use_nearest_neighbor": true,
     "xwayland:force_zero_scaling": false,
-    "opengl:nvidia_anti_flicker": true,
-    "opengl:force_introspection": 2,
     "dwindle:pseudotile": false,
     "dwindle:force_split": 0,
     "dwindle:preserve_split": false,

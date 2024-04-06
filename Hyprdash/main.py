@@ -15,14 +15,14 @@ def loadFile():
     data["binds"] = json.load(os.popen("/usr/bin/hyprctl binds -j"))
 
     data["config"] = json.load(open("defaults.json"))
+    for item in data["config"].items():
+        data["config"][item[0]] = {"default": item[1], "value": item[1]}
     with open(os.path.expanduser("~/.config/hypr/hyprland.conf"), "r") as f:
         lines = f.read().splitlines()
         for c in data["config"].items():
             rawlines = lines.copy()
             c=list(c)
             c[0]=c[0].split(":")
-            if len(c[0]) == 3:
-                print()
             i = [i for i, item in enumerate(rawlines) if re.search(r'\b{}\s*{{'.format(re.escape(c[0][0])), item)]
             if len(i) == 0:
                 continue
@@ -33,7 +33,7 @@ def loadFile():
             result = [item for i, item in enumerate(rawlines) if re.search(r'\b{}\s*='.format(re.escape(c[0][-1])), item)]
             if len(result) > 0:
                 result = '='.join(result[0].split('=')[1:]).strip()
-                data['config'][':'.join(c[0])] = result
+                data['config'][':'.join(c[0])]["value"] = result
     data["animations"] = []
     with open(os.path.expanduser("~/.config/hypr/hyprland.conf"), "r") as f:
         lines = f.read().splitlines()
@@ -100,8 +100,8 @@ def saveFile():
                     session_stack.pop()
                 session_stack.append(c[0][1])
                 lines.append(f"\t{c[0][1]} {'{'}")
-        if type(c[1]) is bool: c[1] = "true" if c[1] else "false"
-        lines.append(("\t\t" if len(c[0]) == 3 else "\t") + f"{c[0][-1]}={c[1] if c[1] != 'None' else ''}")
+        if type(c[1]["value"]) is bool: c[1]["value"] = "true" if c[1]["value"] else "false"
+        lines.append(("\t\t" if len(c[0]) == 3 else "\t") + f"{c[0][-1]}={c[1]['value'] if c[1]['value'] != 'None' else ''}")
         previous_size = len(c[0])
     lines.append("}")
 
@@ -153,8 +153,9 @@ def getPfp():
 
 @app.route("/send/test", methods=["POST"])
 def test():
+    a = request.json["config"]
     for change in request.json['config'].items():
-        data['config'][change[0]] = change[1]
+        data['config'][change[0]]["value"] = change[1]
     saveFile()
     os.popen("hyprctl reload")
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 

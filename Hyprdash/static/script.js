@@ -111,6 +111,69 @@ $(document).ready(function() {
         return rangeLabel;
     }
 
+    function createVectorRange(defaultValue, min, max, step) {
+        var rangeLabel = $("<label>").addClass("slider");
+        var rangeInput1 = $("<input>").attr({
+            "type": "range",
+            "min": min,
+            "max": max,
+            "step": step,
+            "value": defaultValue.split(" ")[0]
+        }).on("input", function() {
+            $(this).next().val($(this).val());
+        });
+        var numberInput1 = $("<input>").attr({
+            "type": "text",
+            "value": defaultValue.split(" ")[0]
+        }).on("focusout", function() {version
+            if (!$(this).val()) {
+                $(this).val(0);
+                $(this).prev().val(0);
+            }
+        }).on("keypress", function() {
+            return isNumberKey(event);
+        }).on("input", function() {
+            var min = parseFloat($(this).prev().attr("min"));
+            var max = parseFloat($(this).prev().attr("max"));
+            if (min <= $(this).val() && $(this).val() <= max)
+                $(this).prev().val($(this).val());
+            else
+                $(this).val($(this).prev().val());
+        });
+        var rangeInput2 = $("<input>").attr({
+            "type": "range",
+            "min": min,
+            "max": max,
+            "step": step,
+            "value": defaultValue.split(" ")[1]
+        }).on("input", function() {
+            $(this).next().val($(this).val());
+        });
+        var numberInput2 = $("<input>").attr({
+            "type": "text",
+            "value": defaultValue.split(" ")[1]
+        }).on("focusout", function() {version
+            if (!$(this).val()) {
+                $(this).val(0);
+                $(this).prev().val(0);
+            }
+        }).on("keypress", function() {
+            return isNumberKey(event);
+        }).on("input", function() {
+            var min = parseFloat($(this).prev().attr("min"));
+            var max = parseFloat($(this).prev().attr("max"));
+            if (min <= $(this).val() && $(this).val() <= max)
+                $(this).prev().val($(this).val());
+            else
+                $(this).val($(this).prev().val());
+        });
+        rangeLabel.append(rangeInput1);
+        rangeLabel.append(numberInput1);
+        rangeLabel.append(rangeInput2);
+        rangeLabel.append(numberInput2);
+        return rangeLabel;
+    }
+
     function createSelect(defaultValue, optionList, monitors) {
         var selectLabel = $("<label>").addClass("selection");
         var select = $("<select>");
@@ -166,7 +229,7 @@ $(document).ready(function() {
 
     //RUN AT LOAD
     $.getJSON("/request/data", function(data){
-        console.log(data['monitors'])
+        console.log(data['config'])
         $("#modal-widget > #window-background").on("click", function() {
             $(this).parent().css("display", "none");
         });
@@ -209,21 +272,27 @@ $(document).ready(function() {
         $("#save-button").on("click", function() {
             $("#save-button").prop('disabled', true);
             let changes = {'config': {}};
-            $(".form-widget").each(function() {
+            $(".form-widget-container > div").each(function() {
                 if ($(this).hasClass("bool")) {
                     isChecked = $($(this).find("input[type=checkbox]")).is(":checked");
                     id = $(this).attr("id");
-                    if (data['config'][id] != isChecked) changes['config'][id] = isChecked;
+                    if (data['config'][id]["value"] != isChecked) changes['config'][id] = isChecked;
                 }
                 else if ($(this).hasClass("range")) {
                     value = $($(this).find("input[type=range]")).val();
                     id = $(this).attr("id");
-                    if (data['config'][id] != value) changes['config'][id] = value;
+                    if (data['config'][id]["value"] != value) changes['config'][id] = value;
+                }
+                else if ($(this).hasClass("vectorRange")) {
+                    value1 = $($(this).find("input[type=range]")[0]).val();
+                    value2 = $($(this).find("input[type=range]")[1]).val();
+                    id = $(this).attr("id");
+                    if (data['config'][id]["value"] != value1 + " " + value2) changes['config'][id] = value1 + " " + value2;
                 }
                 else if ($(this).hasClass("select")) {
                     value = $($(this).find(":selected")).val();
                     id = $(this).attr("id");
-                    if (data['config'][id] != value) changes['config'][id] = value;
+                    if (data['config'][id]["value"] != value) changes['config'][id] = value;
                 }
                 else if ($(this).hasClass("color")) {
                     value = "";
@@ -232,14 +301,15 @@ $(document).ready(function() {
                         value += "rgba(" + element.value.replace("#", "") + parseInt($(element).parent().find("input[type=range]")[0].value).toString(16).padStart(2, "0") + ") ";
                     });
                     value = value.toLowerCase();
-                    if (data['config'][id] != value) changes['config'][id] = value;
+                    if (data['config'][id]["value"] != value) changes['config'][id] = value;
                 }
                 else if ($(this).hasClass("entry")) {
                     value = $($(this).find("input[type=text]")).val();
                     id = $(this).attr("id");
-                    if (data['config'][id] != value) changes['config'][id] = value;
+                    if (data['config'][id]["value"] != value) changes['config'][id] = value;
                 }
             });
+            console.log(changes)
             $.ajax({
                 url: "/send/test",
                 type: "POST",
@@ -261,31 +331,38 @@ $(document).ready(function() {
         });
 
         
-        $(".form-widget").each(function() {
+        $(".form-widget-container > div").each(function() {
             $(this).append($("<div id='text'><h1>" + $(this).attr("title") + "</h1><small>" + $(this).attr("id") + "</small></div>"));
 
         });
-        $(".form-widget.bool").each(function() {
+        $(".form-widget-container > div.bool").each(function() {
             if ($(this).children("div#action").length > 0) return;
             $(this).append($("<div id='action'></div>"));
-            $($(this).find("div#action")).append(createBoolSwitch(data['config'][$(this).attr("id")] == "true"));
+            $($(this).find("div#action")).append(createBoolSwitch(data['config'][$(this).attr("id")]["value"] == "true"));
         });
-        $(".form-widget.range").each(function() {
+        $(".form-widget-container > div.range").each(function() {
             if ($(this).children("div#action").length > 0) return;
             const properties = $(this).attr("data").split(",");
             $(this).removeAttr("data");
             $(this).append($("<div id='action'></div>"));
-            $($(this).find("div#action")).append(createRange(data['config'][$(this).attr("id")], properties[0], properties[1], properties[2]));
+            $($(this).find("div#action")).append(createRange(data['config'][$(this).attr("id")]["value"], properties[0], properties[1], properties[2]));
         });
-        $(".form-widget.select").each(function() {
+        $(".form-widget-container > div.vectorRange").each(function() {
+            if ($(this).children("div#action").length > 0) return;
+            const properties = $(this).attr("data").split(",");
+            $(this).removeAttr("data");
+            $(this).append($("<div id='action'></div>"));
+            $($(this).find("div#action")).append(createVectorRange(data['config'][$(this).attr("id")]["value"], properties[0], properties[1], properties[2]));
+        });
+        $(".form-widget-container > div.select").each(function() {
             if ($(this).children("div#action").length > 0) return;
             const options = $(this).attr("data").split(",");
             $(this).removeAttr("data");
             $(this).append($("<div id='action'></div>"));
-            $($(this).find("div#action")).append(createSelect(data['config'][$(this).attr("id")], options, data['monitors']));
+            $($(this).find("div#action")).append(createSelect(data['config'][$(this).attr("id")]["value"], options, data['monitors']));
         });
-        $(".form-widget.color").each(function() {
-            let colors = convertToColor(data['config'][$(this).attr("id")]);
+        $(".form-widget-container > div.color").each(function() {
+            let colors = convertToColor(data['config'][$(this).attr("id")]["value"]);
             if (colors.length == 0) return;
             $(this).append($("<div id='action'></div>"));
             if (colors.length == 1 && $(this).attr("data") != "multiple") {
@@ -304,10 +381,10 @@ $(document).ready(function() {
                 });
             }
         });
-        $(".form-widget.entry").each(function() {
+        $(".form-widget-container > div.entry").each(function() {
             if ($(this).children("div#action").length > 0) return;
             $(this).append($("<div id='action'></div>"));
-            $($(this).find("div#action")).append(createEntry(data['config'][$(this).attr("id")]));
+            $($(this).find("div#action")).append(createEntry(data['config'][$(this).attr("id")]["value"]));
         });
     })
 });

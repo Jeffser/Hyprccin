@@ -15,7 +15,7 @@ body {
 }
 #modal-widget {
     position: fixed;
-    z-index: 10000;
+    z-index: 30;
     inset: 0 0 0 0;
     display: none;
     align-items: center;
@@ -37,7 +37,7 @@ body {
 #welcome-widget {
     position: sticky;
     top: 10px;
-    z-index: 100000;
+    z-index: 20;
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -93,7 +93,7 @@ body {
 }
 .form,
 .widget,
-.form-widget {
+.form-widget-container > div {
     background-color: white;
     filter: drop-shadow(rgba(0, 0, 0, 0.35) 0px 5px 15px);
     border-radius: 30px;
@@ -102,9 +102,6 @@ body {
 #welcome-widget {
     background-color: rgba(255,255,255,0.75);
     backdrop-filter: blur(5px);
-}
-.form-widget {
-    flex-grow: 1;
 }
 #widget-container {
     display: flex;
@@ -118,26 +115,31 @@ body {
     gap: 20px;
     
 }
-.form-widget {
+.form-widget-container > div {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 20px;
     width: fit-content;
+    flex-grow: 1;
+    z-index: 1;
+}
+.form-widget-container > div:hover {
+    z-index: 5;
 }
 .widget #text,
-.form-widget #text {
+.form-widget-container > div #text {
     width: 100%;
     flex-grow: 1;
 }
 .widget #text h1,
-.form-widget #text h1 {
+.form-widget-container > div #text h1 {
     margin: 0;
 }
 
 
 /*FORM RANGE*/
-.form-widget.range .slider {
+.form-widget-container > div.range .slider {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -146,7 +148,7 @@ body {
 input[type=range] + input[type=text] {
     border: none;
     text-align: center;
-    width: fit-content;
+    width: auto;
 }
 input[type=range] {
     -webkit-appearance: none;
@@ -219,7 +221,7 @@ input:checked + .switch-slider:before {
 
 
 /*FORM SELECTION*/
-.form-widget.select .selection select {
+.form-widget-container > div.select .selection select {
     border: none;
     padding: 10px;
     border-radius: 10px;
@@ -227,17 +229,17 @@ input:checked + .switch-slider:before {
     transition: .4s;
     filter: drop-shadow(rgba(0, 0, 0, 0.24) 0px 3px 3px);
 }
-.form-widget.select .selection select:hover {
+.form-widget-container > div.select .selection select:hover {
     filter: drop-shadow(#2196F380 0px 5px 15px);
 }
 
 /*FORM COLOR*/
-.form-widget.color .color-picker {
+.form-widget-container > div.color .color-picker {
     position: relative;
     width: 40px;
     height: 40px;
 }
-.form-widget.color .color-picker input[type=color] {
+.form-widget-container > div.color .color-picker input[type=color] {
     border: none;
     width: 40px;
     height: 40px;
@@ -247,28 +249,28 @@ input:checked + .switch-slider:before {
     cursor: pointer;
     filter: drop-shadow(rgba(0, 0, 0, 0.24) 0px 3px 3px);
 }
-.form-widget.color .color-picker input[type="color"]::-moz-color-swatch {
+.form-widget-container > div.color .color-picker input[type="color"]::-moz-color-swatch {
     border: none;
 }
-.form-widget.color .color-picker .transparency-slider {
+.form-widget-container > div.color .color-picker .transparency-slider {
     display: none;
     position: absolute;
     top: 20px;
     left: -100px;
-    width: 210px;
+    width: fit-content;
     background-color: white;
     padding: 10px;
     border-radius: 15px;
     filter: drop-shadow(#2196F380 0px 5px 15px);
     align-items: center;
+    justify-content: center;
     gap: 10px;
     flex-direction: column;
-    z-index: 100;
 }
-.form-widget.color .color-picker:hover .transparency-slider {
+.form-widget-container > div.color .color-picker:hover .transparency-slider {
     display: unset;
 }
-.form-widget.color .color-picker:hover .transparency-slider input[type=button] {
+.form-widget-container > div.color .color-picker:hover .transparency-slider input[type=button] {
     border: none;
     border-radius: 10px;
     background-color: #D1202A;
@@ -278,18 +280,18 @@ input:checked + .switch-slider:before {
     margin-top: 10px;
     width: 100%;
 }
-.form-widget.color div#action,
-.form-widget.color div#action div#colors-container {
+.form-widget-container > div.color div#action,
+.form-widget-container > div.color div#action div#colors-container {
     display: flex;
     align-items: center;
     gap: 10px;
 }
-.form-widget.color div#action div#colors-container {
+.form-widget-container > div.color div#action div#colors-container {
     border: #ccc solid;
     padding: 5px;
     border-radius: 20px;
 }
-.form-widget.color div#action .add-color button {
+.form-widget-container > div.color div#action .add-color button {
     width: 40px;
     height: 40px;
     border: none;
@@ -305,13 +307,13 @@ input:checked + .switch-slider:before {
 input[type=range]:hover::-webkit-slider-thumb,
 input[type=range]:hover::-moz-range-thumb,
 input[type=button]:hover,
-.form-widget.entry div#action input[type=text]:hover,
+.form-widget-container > div.entry div#action input[type=text]:hover,
 input[type=color]:hover {
     filter: drop-shadow(#2196F380 0px 5px 15px);
 }
 
 /*FORM ENTRY*/
-.form-widget.entry div#action input[type=text] {
+.form-widget-container > div.entry div#action input[type=text] {
     height: 34px;
     border-radius: 34px;
     border: none;
