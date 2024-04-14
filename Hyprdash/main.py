@@ -1,6 +1,7 @@
 import os, json, re, subprocess, sys
 from flask import Flask, render_template, jsonify, send_file, request
 app = Flask(__name__)
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 os.chdir(sys.path[0])
 
@@ -141,7 +142,11 @@ def saveFile():
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("config.html")
+
+@app.route("/monitors")
+def monitors():
+    return render_template("monitors.html")
 
 @app.route("/request/data")
 def getData():
@@ -171,8 +176,12 @@ def sendPfp():
         return json.dumps({'success':False}), 500, {'ContentType':'application/json'} 
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
 
+@app.route("/close")
+def quitServer():
+    print("Shutting down server...")
+
 if __name__ == "__main__":
     loadFile()
     #saveFile()
-    #os.popen("xdg-open http://localhost:5000")
+    os.popen("xdg-open http://localhost:5000")
     app.run()

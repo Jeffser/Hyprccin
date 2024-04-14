@@ -1,0 +1,19 @@
+#monitor-container {
+    width: 500px;
+    height: 500px;
+    background-color: black;
+    border-radius: 20px;
+    filter: drop-shadow(rgba(0, 0, 0, 0.35) 0px 5px 15px);
+}
+.monitor {
+    width: fit-content;
+    height: fit-content;
+    resize: both;
+    overflow: auto;
+    text-align: center;
+    border: 1px solid grey;
+    background-color: cyan;
+}
+.monitor-grab {
+    background: lightgray;
+}
