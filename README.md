@@ -1,7 +1,4 @@
-# Hyprccin
-
-## Screenie
-![swappy-20240208-225201](https://github.com/Jeffser/Hyprccin/assets/69224322/95cced44-a484-4c95-bc94-ca431014571b)
+# HyprColor
 
 # Features
 - **GTK implementation!:** Wofi, Waybar and more will follow your gtk theme
