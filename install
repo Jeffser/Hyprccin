@@ -40,14 +40,14 @@ yay --needed --noconfirm -S - <./packages || {
 echo -e "${COLOR_INFO}Enabling Flathub...${COLOR_RESET}"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || { echo "${COLOR_ERROR}Failed to enable Flathub${COLOR_RESET}"; }
 
-# Enable "autologin"
-echo -e "${COLOR_INFO}Enabling autologin...${COLOR_RESET}"
-sudo mkdir /etc/systemd/system/getty@tty1.service.d/
-sudo echo -e "[Service]\nExecStart=\nExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin $USER %I $TERM" | sudo tee /etc/systemd/system/getty@tty1.service.d/autostart.conf || { echo "${COLOR_ERROR}Failed to enable autologin${COLOR_RESET}"; }
-
 # Enable bluetooth
-echo -e "${COLOR_INFO}Enabling bluetooth...${COLOR_RESET}"
-sudo systemctl enable bluetooth || { echo "${COLOR_ERROR}Failed to enable bluetooth${COLOR_RESET}"; }
+echo -e "${COLOR_INFO}Enabling services...${COLOR_RESET}"
+sudo systemctl enable bluetooth
+sudo systemctl enable ly
+systemctl --user enable hypridle
+systemctl --user enable hyprpaper
+systemctl --user enable hyprpolkitagent
+systemctl --user enable waybar
 
 # Copy config files and bashrc
 echo -e "${COLOR_INFO}Copying config files and bashrc...${COLOR_RESET}"
@@ -59,7 +59,6 @@ cp -f .bash_profile ~/.bash_profile || { echo "${COLOR_ERROR}Failed to copy bash
 # Making scripts executable
 echo -e "${COLOR_INFO}Making scripts executable...${COLOR_RESET}"
 chmod u+rwx .local/bin/* || { echo "${COLOR_ERROR}Failed to change permissions for .local/bin/*${COLOR_RESET}"; }
-chmod u+rwx .config/waybar/scripts/* || { echo "${COLOR_ERROR}Failed to change permissions for .config/waybar/scripts/*${COLOR_RESET}"; }
 
 # Creating default directories
 echo -e "${COLOR_INFO}Creating default user directories...${COLOR_RESET}"
@@ -71,9 +70,8 @@ gsettings set org.gnome.desktop.interface gtk-theme "AutoColor" || { echo "${COL
 
 #Giving Flatpak permissions to use theme
 echo -e "${COLOR_INFO}Giving Flatpak permissions to use theme...${COLOR_RESET}"
-sudo flatpak override --filesystem=xdg-config/gtk-3.0:ro || { echo "${COLOR_ERROR}Failed to give flatpak access to xdg-config/gtk-3.0:ro${COLOR_RESET}"; }
-sudo flatpak override --filesystem=xdg-config/gtk-4.0:ro || { echo "${COLOR_ERROR}Failed to give flatpak access to xdg-config/gtk-4.0:ro${COLOR_RESET}"; }
-sudo flatpak override --filesystem=xdg-data/themes:ro || { echo "${COLOR_ERROR}Failed to give flatpak access to xdg-data/themes:ro${COLOR_RESET}"; }
+sudo flatpak override --filesystem=xdg-data/themes:ro || { echo "${COLOR_ERROR}Failed to give Flatpak access to xdg-data/themes:ro${COLOR_RESET}"; }
+sudo flatpak override --env=GTK_THEME=AutoColor || { echo "${COLOR_ERROR}Failed to set env variable GTK_THEME to Flatpak${COLOR_RESET}"; }
 
 # Removing window buttons (minimize, maximize, close)
 echo -e "${COLOR_INFO}Removing window buttons (minimize, maximize, close)...${COLOR_RESET}"

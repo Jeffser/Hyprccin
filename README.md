@@ -18,10 +18,10 @@ This script does the following:
 1) Install `yay` if needed
 2) Install [packages](packages)
 3) Enable `Flathub` repository
-4) Enable `sddm`
-5) Enable `bluetooth`
-6) Copy [.config](.config), [.bashrc](.bashrc) and [.local](.local)
-7) Make `waybar` scripts and `.local/bin/*` executable
+4) Enable `ly` and `uwsm`
+5) Enable services related to `hyprland`
+6) Copy [.config](.config), [.bashrc](.bashrc), [.bash_profile](.bash_profile) and [.local](.local)
+7) Make `.local/bin/*` executable
 8) Creates default directories `xdg-user-dirs-update`
 9) Applies AutoColor GTK theme
-10) Removes minimize maximize and close buttons from apps
+10) Removes minimize maximize and close buttons from GTK apps

@@ -9,8 +9,7 @@
       "modules": [
         "tray",
         "temperature",
-        "network",
-        "bluetooth"
+        "network"
       ]
     },
     "modules-left": [
@@ -24,8 +23,7 @@
     ],
     "modules-right": [
       "group/audio",
-      "group/system",
-      "custom/notification"
+      "group/system"
     ],
     "include": [
       "~/.config/waybar/default-modules.jsonc"
@@ -42,8 +40,7 @@
         "group/light",
         "tray",
         "battery",
-        "network",
-        "bluetooth"
+        "network"
       ]
     },
     "modules-left": [
@@ -57,8 +54,7 @@
     ],
     "modules-right": [
       "group/audio",
-      "group/system",
-      "custom/notification"
+      "group/system"
     ],
     "include": [
       "~/.config/waybar/default-modules.jsonc"

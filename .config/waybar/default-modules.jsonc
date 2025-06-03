@@ -10,8 +10,8 @@
   "hyprland/window": {
     "format": "{}",
     "rewrite": {
-      "(.*) - YouTube Music — Mozilla Firefox": "🦊 $1 🎶",
-      "(.*) — Mozilla Firefox": "🦊 $1",
+      "(.*) - YouTube Music — LibreWolf": "🐺 $1 🎶",
+      "(.*) — LibreWolf": "🐺 $1",
       "Cisco Packet Tracer - (.*)": "💾 $1",
       "nvim (.*)": "🗒️ $1",
       "~(.*)": "🐱 🏠$1",
@@ -128,7 +128,7 @@
   },
   "pulseaudio#microphone": {
     "format": "{format_source}",
-    "tooltip-format": "{format_source}",
+    "tooltip-format": "{format_source} | {volume} %",
     "format-source": "",
     "format-source-muted": "",
     "on-click": "pamixer --default-source -t",
@@ -145,12 +145,12 @@
     "tooltip": false
   },
   "network": {
-    "format-wifi": " {signalStrength}%",
+    "format-wifi": "  {signalStrength}%",
     "format-ethernet": "󰈀 {ipaddr}",
     "tooltip-format": "{ifname} via {gwaddr}",
     "format-linked": "{ifname} (No IP)",
     "format-disconnected": "⚠ Disconnected",
-    "format-alt": "{ifname}:{essid} {ipaddr}/{cidr}"
+    "format-alt": "{essid} {gwaddr}"
   },
   "bluetooth": {
     "format": " on",
@@ -162,7 +162,7 @@
   },
   "custom/playerctl": {
     "interval": 1,
-    "format": "{icon} {}",
+    "format": "{icon} {text}",
     "max-length": 40,
     "exec": "~/.local/bin/getsong -json",
     "on-click": "playerctl play-pause",
@@ -201,29 +201,27 @@
   "custom/arch": {
     "format": "󰣇",
     "tooltip": false,
-    "on-click": "wofi"
+    "on-click": "pkill -x wofi || wofi --normal-window"
   },
   "custom/quit": {
     "format": "󰍃",
     "tooltip": false,
-    "on-click": "if [ $(notify-send -e -w -u critical -A 'Logout' -A 'Cancel' -i $(busctl get-property org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User IconFile | grep -o '\".*\"' | tr -d '\"') 'Bye bye?' 'Are you sure you want to logout?') -eq 0 ]; then killall -9 Hyprland; fi"
+    "on-click": "zenity --title \"Bye Bye?\" --text \"Are you sure you want to logout?\" --question && hyprctl dispatch exit"
   },
   "custom/lock": {
     "format": "󰌾",
     "tooltip": false,
-    "on-click": "swaylock"
+    "on-click": "hyprlock"
   },
   "custom/reboot": {
     "format": "󰜉",
     "tooltip": false,
-    "on-click": "if [ $(notify-send -e -w -u critical -A 'Reboot' -A 'Cancel' -i $(busctl get-property org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User IconFile | grep -o '\".*\"' | tr -d '\"') 'Bye bye?' 'Are you sure you want to reboot the PC?') -eq 0 ]; then systemctl reboot; fi",
-    "on-click-right": "systemctl reboot"
+    "on-click": "zenity --title \"Bye Bye?\" --text \"Are you sure you want to reboot?\" --question && systemctl reboot"
   },
   "custom/shutdown": {
     "format": "󰐥",
     "tooltip": false,
-    "on-click": "if [ $(notify-send -e -w -u critical -A 'Power off' -A 'Cancel' -i $(busctl get-property org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User IconFile | grep -o '\".*\"' | tr -d '\"') 'Bye bye?' 'Are you sure you want to power off the PC?') -eq 0 ]; then systemctl poweroff; fi",
-    "on-click-right": "systemctl poweroff"
+    "on-click": "zenity --title \"Bye Bye?\" --text \"Are you sure you want to poweroff?\" --question && systemctl poweroff"
   },
   "custom/sleep": {
     "format": "󰒲",

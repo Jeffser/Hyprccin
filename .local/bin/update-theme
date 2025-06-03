@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/home/tentri/.local/bin/PythonEnv/bin/python3
 
 from colorthief import ColorThief
 import os, re, sys
@@ -13,46 +13,220 @@ print("Colors:")
 for color in palette: print(color)
 print("ok")
 
-def modifyCSS():
-  print("Modifying css...")
-  files = [
-    "gtk-3.0/gtk.css",
-    "gtk-3.0/gtk-dark.css",
-    "gtk-4.0/gtk.css",
-    "gtk-4.0/gtk-dark.css"
-  ]
-  for file in files:
-    print(f"* {file}...", end=" ")
-    with open(os.path.expanduser("~/.local/share/themes/AutoColor/" + file), "r") as f:
-      text = f.read()
-    for key, value in colors.items():
-      pattern = re.escape(f"@define-color {key} ") + r"#[0-9A-Fa-f]+;"
-      if value[0] != "@":
-        value = f"#{value}"
-      replacement = f"@define-color {key} {value};"
-      text = re.sub(pattern, replacement, text)
-    with open(os.path.expanduser("~/.local/share/themes/AutoColor/" + file), "w") as f:
-      f.write(text)
-    print("ok")
-  print("ok")
+is_dark=(palette[0][0]+palette[0][1]+palette[0][2]) / 3 < 132
+is_dark=True
 
-colors = {
-  "theme_fg_color": "ffffff" if (palette[0][0]+palette[0][1]+palette[0][2]) / 3 < 132 else "000000",
-  "theme_bg_color": '%02x%02x%02x' % palette[0],
-  "theme_base_color": '%02x%02x%02x' % palette[1],
-  "theme_selected_bg_color": '%02x%02x%02x' % palette[2],
-  "accent_bg_color": "@theme_bg_color",
-  "accent_color": "@theme_selected_bg_color"
-}
+def hex_to_rgba(hex_color):
+  hex_color = hex_color.lstrip('#')
+  if len(hex_color) == 6:
+      r, g, b = int(hex_color[0:2], 16), int(hex_color[2:4], 16), int(hex_color[4:6], 16)
+      a = 255
+  elif len(hex_color) == 8:
+      r, g, b = int(hex_color[0:2], 16), int(hex_color[2:4], 16), int(hex_color[4:6], 16)
+      a = int(hex_color[6:8], 16)
+  else:
+      print(hex_color)
+      raise ValueError("Hex color must be in format #RRGGBB or #RRGGBBAA")
+  return r, g, b, a
 
-modifyCSS()
-print("Saving changes...")
-os.system("cp ~/.local/share/themes/AutoColor/gtk-4.0/gtk.css ~/.config/gtk-4.0/")
-os.system("cp ~/.local/share/themes/AutoColor/gtk-4.0/gtk-dark.css ~/.config/gtk-4.0/")
-print("ok")
-print("Reloading themes...")
-os.system("gsettings set org.gnome.desktop.interface color-scheme prefer-" + ("dark" if (palette[0][0]+palette[0][1]+palette[0][2]) / 3 < 132 else "light"))
+def mix_colors(color1, color2, ratio):
+    if len(color1) == 4:
+      r1, g1, b1, a1 = color1
+    else:
+      r1, g1, b1 = color1
+      a1 = 255
+
+    if len(color2) == 4:
+      r2, g2, b2, a2 = color2
+    else:
+      r2, g2, b2 = color2
+      a2 =255
+
+    r_mixed = round(r1 * (1 - ratio) + r2 * ratio)
+    g_mixed = round(g1 * (1 - ratio) + g2 * ratio)
+    b_mixed = round(b1 * (1 - ratio) + b2 * ratio)
+    
+    a_mixed = round(a1 * (1 - ratio) + a2 * ratio)
+
+    if ratio == 1:
+      print(color1)
+      return r1, g1, b1
+    else:
+      return r_mixed, g_mixed, b_mixed
+
+class CSSVariable:
+
+  def __init__(self, name:str, light_default:str, dark_default:str, theme_color:tuple, modifier:float):
+      
+      light_result = '#%02x%02x%02x' % mix_colors(hex_to_rgba(light_default.upper().strip()), theme_color, 1-modifier)
+      dark_result = '#%02x%02x%02x' % mix_colors(hex_to_rgba(dark_default.upper().strip()), theme_color, 1-modifier)
+      
+      self.dark = '--{}: {};'.format(name, dark_result)
+      self.light = '--{}: {};'.format(name, light_result)
+      self.dark_old = '@define-color {} {};'.format(name.replace('-', '_'), dark_result)
+      self.light_old = '@define-color {} {};'.format(name.replace('-', '_'), light_result)
+
+def list_to_css_content(css_list:list) -> str:
+  content = []
+
+  for var in css_list:
+    content.append(var)
+
+  return '\n'.join(content)
+
+CSS_COLORS = [
+  "@define-color STRAWBERRY_100 #ba6656;",
+  "@define-color STRAWBERRY_300 #ba5740;",
+  "@define-color STRAWBERRY_500 #b2462f;",
+  "@define-color STRAWBERRY_700 #9d311a;",
+  "@define-color STRAWBERRY_900 #871b1a;",
+  "@define-color ORANGE_100 #ba9373;",
+  "@define-color ORANGE_300 #ba8941;",
+  "@define-color ORANGE_500 #b7722a;",
+  "@define-color ORANGE_700 #a6601a;",
+  "@define-color ORANGE_900 #954f1a;",
+  "@define-color BANANA_100 #baaa81;",
+  "@define-color BANANA_300 #baa667;",
+  "@define-color BANANA_500 #ba8b4c;",
+  "@define-color BANANA_700 #9e6f30;",
+  "@define-color BANANA_900 #81521a;",
+  "@define-color LIME_100 #81a28f;",
+  "@define-color LIME_300 #729380;",
+  "@define-color LIME_500 #648572;",
+  "@define-color LIME_700 #496a57;",
+  "@define-color LIME_900 #2f503d;",
+  "@define-color BLUEBERRY_100 #7973b7;",
+  "@define-color BLUEBERRY_300 #5f59a4;",
+  "@define-color BLUEBERRY_500 #443e89;",
+  "@define-color BLUEBERRY_700 #322c77;",
+  "@define-color BLUEBERRY_900 #1f1965;",
+  "@define-color GRAPE_100 #9f46a8;",
+  "@define-color GRAPE_300 #8f3a97;",
+  "@define-color GRAPE_500 #7e2586;",
+  "@define-color GRAPE_700 #6e1577;",
+  "@define-color GRAPE_900 #5f0d68;",
+  "@define-color COCOA_100 #7f6a74;",
+  "@define-color COCOA_300 #69535e;",
+  "@define-color COCOA_500 #533d48;",
+  "@define-color COCOA_700 #49333d;",
+  "@define-color COCOA_900 #3d2832;",
+  "@define-color SILVER_100 #b09fad;",
+  "@define-color SILVER_300 #9b8a98;",
+  "@define-color SILVER_500 #867583;",
+  "@define-color SILVER_700 #71606e;",
+  "@define-color SILVER_900 #5c4b59;",
+  "@define-color SLATE_100 #71606e;",
+  "@define-color SLATE_300 #5c4b59;",
+  "@define-color SLATE_500 #473644;",
+  "@define-color SLATE_700 #32222f;",
+  "@define-color SLATE_900 #281725;",
+  "@define-color BLACK_100 #493642;",
+  "@define-color BLACK_300 #45323e;",
+  "@define-color BLACK_500 #412e3a;",
+  "@define-color BLACK_700 #3d2a37;",
+  "@define-color BLACK_900 #382633;"
+]
+
+css = [
+  CSSVariable('theme-selected-bg-color', '#fafafb', '#222226', palette[0], 0.2),
+  CSSVariable('accent-color', '#ffffff', '#000000', palette[1], 0.4),
+
+  CSSVariable('theme-bg-color', '#fafafb', '#222226', palette[0], 0.2),
+  CSSVariable('theme-fg-color', '#000006', '#ffffff', palette[2], 0),
+  CSSVariable('theme-base-color', '#fafafb', '#222226', palette[0], 0.2),
+  CSSVariable('theme-text-color', '#000006', '#ffffff', palette[1], 0),
+
+  CSSVariable('theme-selected-bg-color', '#ffffff', '#000000', palette[1], 0.4),
+  #CSSVariable('theme-selected-fg-color', '#000000', '#ffffff', palette[2], 0),
+
+  CSSVariable('window-bg-color', '#fafafb', '#222226', palette[0], 0.2),
+  CSSVariable('window-fg-color', '#000006', '#ffffff', palette[2], 0),
+  CSSVariable('view-bg-color', '#ffffff', '#1d1d20', palette[0], 0.3),
+  #CSSVariable('view-fg-color', '#000006', '#ffffff', palette[2], 0),
+  
+  CSSVariable('headerbar-bg-color', '#ffffff', '#2e2e32', palette[0], 0.2),
+  #CSSVariable('headerbar-fg-color', '#000006', '#ffffff', palette[2], 0),
+  CSSVariable('headerbar-border-color', '#000006CC', '#ffffff', palette[1], 0.1),
+  CSSVariable('headerbar-backdrop-color', '#fafafb', '#222226', palette[0], 0.2),
+  CSSVariable('headerbar-shade-color', '#0000061F', '#0000065C', palette[0], 0.3),
+  CSSVariable('headerbar-darker-shade-color', '#0000061F', '#000006E6', palette[0], 0.3),
+
+  CSSVariable('sidebar-bg-color', '#ebebed', '#2e2e32', palette[0], 0.3),
+  #CSSVariable('sidebar-fg-color', '#000006', ' 	#ffffff', palette[2], 0),
+  CSSVariable('sidebar-backdrop-color', '#f2f2f4', '#28282c', palette[0], 0.3),
+  CSSVariable('sidebar-border-color', '#00000611', '#0000065C', palette[0], 0.3),
+  CSSVariable('sidebar-shade-color', '#00000611', '#00000640', palette[0], 0.3),
+
+  CSSVariable('secondary-sidebar-bg-color', '#f3f3f5', '#28282c', palette[0], 0.3),
+  #CSSVariable('secondary-sidebar-fg-color', '#000006', ' 	#ffffff', palette[2], 0),
+  CSSVariable('secondary-sidebar-backdrop-color', '#f6f6fa', '#252529', palette[0], 0.3),
+  CSSVariable('secondary-sidebar-border-color', '#00000611', '#0000065C', palette[0], 0.3),
+  CSSVariable('secondary-sidebar-shade-color', '#00000611', '#00000640', palette[0], 0.3),
+
+  CSSVariable('card-bg-color', '#ffffff', '#000000', palette[0], 0.3),
+  #CSSVariable('card-fg-color', '#000006', '#ffffff', palette[2], 0),
+  CSSVariable('card-shade-color', '#00000611', '#0000065C', palette[0], 0.3),
+
+  CSSVariable('overview-bg-color', '#f3f3f5', '#28282c', palette[0], 0.2),
+  #CSSVariable('overview-fg-color', '#000006', '#ffffff', palette[2], 0),
+
+  CSSVariable('thumbnail-bg-color', '#ffffff', '#39393d', palette[0], 0.2),
+  #CSSVariable('thumbnail-fg-color', '#000006', '#ffffff', palette[2], 0),
+
+  CSSVariable('active-toggle-bg-color', '#ffffff', '#FFFFFF33', palette[0], 0.3),
+  #CSSVariable('active-toggle-fg-color', '#000006', '#ffffff', palette[2], 0),
+
+  CSSVariable('dialog-bg-color', '#fafafb', '#36363a', palette[0], 0.3),
+  #CSSVariable('dialog-fg-color', '#000006', '#ffffff', palette[2], 0),
+
+  CSSVariable('popover-bg-color', '#ffffff', '#36363a', palette[0], 0.3),
+  #CSSVariable('card-fg-color', '#000006', '#ffffff', palette[2], 0),
+  CSSVariable('card-shade-color', '#00000611', '#00000640', palette[0], 0.3),
+
+  CSSVariable('shade-color', '#00000611', '#00000640', palette[0], 0.3),
+  CSSVariable('scrollbar-outline-color', '#ffffff', '#00000680', palette[0], 0.2),
+
+  CSSVariable('accent-bg-color', '#ffffff', '#000000', palette[1], 0.4),
+  #CSSVariable('accent-fg-color', '#000000', '#ffffff', palette[2], 0),
+]
+
+GTK4_CSS = []
+if is_dark:
+  GTK4_CSS.append(':root{\n' + list_to_css_content([v.dark for v in css]) + '\n}')
+  GTK4_CSS.append(list_to_css_content([v.dark_old for v in css]))
+else:
+  GTK4_CSS.append(':root{\n' + list_to_css_content([v.light for v in css]) + '\n}')
+  GTK4_CSS.append(list_to_css_content([v.light_old for v in css]))
+GTK4_CSS.append('\n'.join(CSS_COLORS))
+
+GTK3_CSS = []
+if is_dark:
+  GTK3_CSS.append(list_to_css_content([v.dark_old for v in css]))
+else:
+  GTK3_CSS.append(list_to_css_content([v.light_old for v in css]))
+GTK3_CSS.append('\n'.join(CSS_COLORS))
+
+CONFIG_DIR = '/home/tentri/.config'
+THEME_DIR = '/home/tentri/.local/share/themes/AutoColor'
+
+for file_name in ('gtk.css', 'gtk-dark.css'):
+  with open(os.path.join(THEME_DIR, 'gtk-4.0', file_name), 'w+') as f:
+    GTK4_CSS.insert(0, '@import url("resource:///org/gnome/Adwaita/styles/base.css");')
+    f.write('\n'.join(GTK4_CSS))
+
+  with open(os.path.join(THEME_DIR, 'gtk-3.0', file_name), 'w+') as f:
+    with open('/home/tentri/.local/bin/baseGTK3.css', 'r') as c:
+      f.write(c.read() + '\n'.join(GTK3_CSS))
+
+  #with open(os.path.join(CONFIG_DIR, 'gtk-4.0', file_name), 'w+') as f:
+    #f.write('\n'.join(GTK4_CSS))
+
+  #with open(os.path.join(CONFIG_DIR, 'gtk-3.0', file_name), 'w+') as f:
+    #f.write('\n'.join(GTK3_CSS))
+
+os.system("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
 os.system("gsettings set org.gnome.desktop.interface gtk-theme ''")
 os.system("gsettings set org.gnome.desktop.interface gtk-theme 'AutoColor'")
+os.system("killall waybar; waybar & exit")
+os.system("hyprctl reload")
 print("ok")
-print("Everything is done, some Adwaita apps need a relogin to change their themes... yeah, thanks adwaita")

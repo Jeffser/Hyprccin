@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-if ! test -z $1 && test -f $1; then
-  sudo rm /var/lib/AccountsService/icons/$USER
-  sudo cp $1 /var/lib/AccountsService/icons/$USER
-  busctl call org.freedesktop.Accounts /org/freedesktop/Accounts/User$UID org.freedesktop.Accounts.User SetIconFile s "/var/lib/AccountsService/icons/$USER"
-else
-  echo File doesn\'t exist
-fi
